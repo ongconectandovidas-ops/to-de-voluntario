@@ -1,0 +1,463 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #F5ECD7;
+    font-family: Georgia, serif;
+    color: #156E78;
+}
+
+.menu{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px;
+    flex-wrap: wrap;
+}
+
+.menu a{
+    text-decoration: none;
+    color: #156E78;
+    border: 2px solid #156E78;
+    padding: 12px 25px;
+    border-radius: 30px;
+    transition: 0.3s;
+}
+
+.menu a:hover{
+    background-color: #156E78;
+    color: white;
+}
+
+.inicio{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.texto-inicio{
+    flex: 1;
+}
+
+.texto-inicio h1{
+    font-size: 55px;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.texto-inicio p{
+    font-size: 20px;
+    line-height: 35px;
+    margin-bottom: 40px;
+}
+
+.botoes{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.botoes button{
+    background-color: #1F9AAA;
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+.botoes button:hover{
+    transform: scale(1.05);
+}
+
+.botao-secundario{
+    background-color: transparent !important;
+    border: 2px solid #156E78 !important;
+    color: #156E78 !important;
+}
+
+.botao-secundario:hover{
+    background-color: #156E78 !important;
+    color: white !important;
+}
+
+.imagem-inicio{
+    flex: 1;
+}
+
+.imagem-inicio img{
+    width: 100%;
+    border-radius: 30px;
+}
+
+@media(max-width: 900px){
+
+    .inicio{
+        flex-direction: column;
+        padding: 40px;
+    }
+
+    .texto-inicio h1{
+        font-size: 40px;
+    }
+
+
+}
+
+/* VANTAGENS */
+
+.vantagens{
+    padding: 80px;
+    text-align: center;
+}
+
+.vantagens h2{
+    font-size: 40px;
+    margin-bottom: 60px;
+    font-style: italic;
+}
+
+.cards-vantagens{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.card{
+    background-color: #1F9AAA;
+    color: white;
+    width: 250px;
+    padding: 40px 25px;
+    border-radius: 25px;
+    transition: 0.3s;
+}
+
+.card:hover{
+    transform: translateY(-10px);
+}
+
+.icone{
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.card h3{
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.card p{
+    line-height: 28px;
+}
+
+/* OPORTUNIDADES */
+
+.oportunidades{
+    padding: 80px;
+}
+
+.titulo-oportunidades{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.titulo-oportunidades h2{
+    font-size: 40px;
+    font-style: italic;
+}
+
+.titulo-oportunidades a{
+    color: #156E78;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.conteudo-oportunidades{
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.lista-oportunidades{
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.vaga{
+    background-color: white;
+    padding: 30px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.texto-vaga h3{
+    margin-bottom: 15px;
+    font-size: 25px;
+}
+
+.local{
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.vaga button{
+    background-color: #1F9AAA;
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.vaga button:hover{
+    transform: scale(1.05);
+}
+
+.ong-card{
+    flex: 1;
+    background-color: #CDE8E5;
+    padding: 40px 30px;
+    border-radius: 30px;
+    text-align: center;
+}
+
+.icone-ong{
+    font-size: 60px;
+    margin-bottom: 25px;
+}
+
+.ong-card h3{
+    font-size: 32px;
+    margin-bottom: 25px;
+}
+
+.ong-card p{
+    line-height: 32px;
+    margin-bottom: 35px;
+}
+
+.ong-card button{
+    background-color: #1F9AAA;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.ong-card button:hover{
+    transform: scale(1.05);
+}
+
+/* IMPACTO */
+
+.impacto{
+    background-color: #1F9AAA;
+    color: white;
+    padding: 90px 80px;
+    text-align: center;
+}
+
+.impacto h2{
+    font-size: 42px;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.texto-impacto{
+    max-width: 900px;
+    margin: 0 auto 70px auto;
+    line-height: 35px;
+    font-size: 20px;
+}
+
+.numeros-impacto{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.item-impacto{
+    width: 220px;
+}
+
+.icone-impacto{
+    font-size: 55px;
+    margin-bottom: 20px;
+}
+
+.item-impacto h3{
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.item-impacto p{
+    line-height: 28px;
+}
+
+/* RELATOS */
+
+.relatos{
+    padding: 90px 80px;
+    text-align: center;
+}
+
+.relatos h2{
+    font-size: 42px;
+    margin-bottom: 70px;
+    font-style: italic;
+}
+
+.cards-relatos{
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    flex-wrap: wrap;
+}
+
+.relato{
+    background-color: #DDEFE9;
+    width: 320px;
+    padding: 40px 30px;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.relato img{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 25px;
+}
+
+.relato h3{
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.relato p{
+    line-height: 32px;
+}
+
+/* CHAMADA FINAL */
+
+.chamada-final{
+    padding: 90px 80px;
+    text-align: center;
+}
+
+.chamada-final h2{
+    font-size: 45px;
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+.chamada-final p{
+    font-size: 20px;
+    margin-bottom: 45px;
+}
+
+.botoes-final{
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.botoes-final button{
+    background-color: #1F9AAA;
+    color: white;
+    border: none;
+    padding: 16px 35px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+.botoes-final button:hover{
+    transform: scale(1.05);
+}
+
+.botao-final-secundario{
+    background-color: transparent !important;
+    border: 2px solid #156E78 !important;
+    color: #156E78 !important;
+}
+
+.botao-final-secundario:hover{
+    background-color: #156E78 !important;
+    color: white !important;
+}
+
+/* RODAPÉ */
+
+.rodape{
+    background-color: #0E5961;
+    color: white;
+    padding: 70px 80px 30px;
+}
+
+.conteudo-rodape{
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.rodape-coluna{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 250px;
+}
+
+.rodape-coluna h3{
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.rodape-coluna h4{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.rodape-coluna a{
+    color: white;
+    text-decoration: none;
+}
+
+.rodape-coluna a:hover{
+    text-decoration: underline;
+}
+
+.direitos{
+    border-top: 1px solid rgba(255,255,255,0.2);
+    margin-top: 50px;
+    padding-top: 25px;
+    text-align: center;
+}
