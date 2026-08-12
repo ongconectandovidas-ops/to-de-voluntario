@@ -94,3 +94,6 @@ python3 -m http.server 8935
 | `f983469` | Prepara o ambiente do Supabase: `.env.example`, `.gitignore` e `assets/js/supabase-client.js`. |
 | `d87108d` | Cria o schema completo do banco de dados (11 tabelas, RLS, trigger de cadastro automático). Testado ponta a ponta via API, incluindo casos que devem falhar. |
 | `f718ab6` | Adiciona os relatórios de documentação (técnico e não técnico) em PDF. |
+| `0ac8ac2` | Adiciona papéis de usuário (voluntário/ONG/admin), painéis de gestão (`painel-ong.html`, `painel-admin.html`), cadastro de ONG e liga oportunidades/busca ao Supabase de verdade. |
+| `0eb0782` | Adiciona página de detalhes da oportunidade, aba de contatos no painel admin e preferências de notificação. |
+| `f1a90bd` | Adiciona formulário de doações, edição de perfil do voluntário e ajustes de estilo. |

@@ -89,6 +89,10 @@
             <i class="bi bi-envelope-fill" aria-hidden="true"></i> Contatos
         </button>
 
+        <button class="aba-btn" data-aba="doacoes-admin">
+            <i class="bi bi-heart-fill" aria-hidden="true"></i> Doações
+        </button>
+
     </div>
 
 
@@ -274,6 +278,35 @@
                         </tr>
                     </thead>
                     <tbody id="tabelaAgendamentos">
+                        <tr><td colspan="6">Carregando...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+        <!-- DOAÇÕES -->
+
+        <div class="aba-conteudo" id="doacoes-admin">
+
+            <h2>
+                Doações registradas
+            </h2>
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Contato</th>
+                            <th>Tipo</th>
+                            <th>Valor / Item</th>
+                            <th>Organização</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaDoacoes">
                         <tr><td colspan="6">Carregando...</td></tr>
                     </tbody>
                 </table>
@@ -559,6 +592,46 @@ async function carregarAgendamentos() {
     });
 }
 
+const rotulosStatusDoacao = {
+    pendente: "Pendente",
+    confirmada: "Confirmada",
+    cancelada: "Cancelada"
+};
+
+async function carregarDoacoesAdmin() {
+    const corpo = document.getElementById("tabelaDoacoes");
+
+    const { data, error } = await supabaseClient
+        .from("doacoes")
+        .select("id, nome, email, telefone, tipo, valor, descricao_item, status, organizacoes(nome_fantasia)")
+        .order("criado_em", { ascending: false });
+
+    corpo.innerHTML = "";
+
+    if (error || !data || data.length === 0) {
+        corpo.innerHTML = '<tr><td colspan="6">Nenhuma doação registrada.</td></tr>';
+        return;
+    }
+
+    data.forEach(function (doacao) {
+        const linha = document.createElement("tr");
+        const contato = doacao.email + (doacao.telefone ? " - " + doacao.telefone : "");
+        const valorOuItem = doacao.tipo === "financeira"
+            ? "R$ " + Number(doacao.valor).toFixed(2)
+            : (doacao.descricao_item || "-");
+
+        linha.append(
+            celula(doacao.nome),
+            celula(contato),
+            celula(doacao.tipo === "financeira" ? "Financeira" : "Item"),
+            celula(valorOuItem),
+            celula(doacao.organizacoes ? doacao.organizacoes.nome_fantasia : "Geral"),
+            celula(rotulosStatusDoacao[doacao.status] || doacao.status)
+        );
+        corpo.appendChild(linha);
+    });
+}
+
 async function sairDoPainelAdmin(evento) {
     evento.preventDefault();
     await supabaseClient.auth.signOut();
@@ -598,12 +671,40 @@ document.getElementById("botaoSairMenu").addEventListener("click", sairDoPainelA
     }
 
     carregarResumoAdmin();
-    carregarUsuarios();
-    carregarOrganizacoesAdmin();
-    carregarMensagensContato();
-    carregarAgendamentos();
-    carregarOportunidadesAdmin();
+    configurarCarregamentoPorAba();
 })();
+
+// ========================================
+// CARREGAMENTO SOB DEMANDA (só busca os dados
+// de uma aba quando ela é aberta, não tudo de uma vez)
+// ========================================
+
+function configurarCarregamentoPorAba() {
+    const carregadoresPorAba = {
+        usuarios: carregarUsuarios,
+        organizacoes: carregarOrganizacoesAdmin,
+        "vagas-admin": carregarOportunidadesAdmin,
+        "contatos-admin": function () {
+            carregarMensagensContato();
+            carregarAgendamentos();
+        },
+        "doacoes-admin": carregarDoacoesAdmin
+    };
+
+    const abasJaCarregadas = {};
+
+    document.querySelectorAll(".aba-btn").forEach(function (botao) {
+        botao.addEventListener("click", function () {
+            const aba = botao.dataset.aba;
+            const carregador = carregadoresPorAba[aba];
+
+            if (carregador && !abasJaCarregadas[aba]) {
+                abasJaCarregadas[aba] = true;
+                carregador();
+            }
+        });
+    });
+}
 
 </script>
 

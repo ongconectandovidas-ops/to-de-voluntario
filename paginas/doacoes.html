@@ -150,6 +150,21 @@
                 <div class="grid-formulario">
 
                     <div class="input-group">
+                        <label for="doacaoNome">Nome *</label>
+                        <input type="text" id="doacaoNome" placeholder="Seu nome">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="doacaoEmail">E-mail *</label>
+                        <input type="email" id="doacaoEmail" placeholder="Seu e-mail">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="doacaoTelefone">Telefone</label>
+                        <input type="text" id="doacaoTelefone" placeholder="(00) 00000-0000">
+                    </div>
+
+                    <div class="input-group">
                         <label for="doacaoTipo">Tipo de doação *</label>
                         <select id="doacaoTipo">
                             <option value="financeira">Financeira</option>
@@ -588,14 +603,46 @@ alt="Ponto de arrecadação">
         mensagemDoacao.className = "alert alert-" + tipo;
     }
 
+    (async function preencherContatoDoacao() {
+        if (!supabaseClient) {
+            return;
+        }
+
+        const { data: sessaoData } = await supabaseClient.auth.getSession();
+
+        if (!sessaoData.session) {
+            return;
+        }
+
+        const { data: perfil } = await supabaseClient
+            .from("perfis")
+            .select("nome, sobrenome, email, telefone")
+            .eq("id", sessaoData.session.user.id)
+            .single();
+
+        if (perfil) {
+            document.getElementById("doacaoNome").value = [perfil.nome, perfil.sobrenome].filter(Boolean).join(" ");
+            document.getElementById("doacaoEmail").value = perfil.email;
+            document.getElementById("doacaoTelefone").value = perfil.telefone || "";
+        }
+    })();
+
     formDoacao.addEventListener("submit", async function (evento) {
         evento.preventDefault();
 
+        const nome = document.getElementById("doacaoNome").value.trim();
+        const email = document.getElementById("doacaoEmail").value.trim();
+        const telefone = document.getElementById("doacaoTelefone").value.trim();
         const tipo = doacaoTipo.value;
         const valor = document.getElementById("doacaoValor").value;
         const item = document.getElementById("doacaoItem").value.trim();
         const organizacaoId = document.getElementById("doacaoOrganizacao").value || null;
         const metodoPagamento = document.getElementById("doacaoMetodo").value;
+
+        if (!nome || !email) {
+            mostrarMensagemDoacao("Informe nome e e-mail para contato.", "danger");
+            return;
+        }
 
         if (tipo === "financeira" && !valor) {
             mostrarMensagemDoacao("Informe o valor da doação.", "danger");
@@ -617,6 +664,9 @@ alt="Ponto de arrecadação">
         const { error } = await supabaseClient.from("doacoes").insert({
             doador_id: sessaoData.session ? sessaoData.session.user.id : null,
             organizacao_id: organizacaoId,
+            nome: nome,
+            email: email,
+            telefone: telefone || null,
             tipo: tipo,
             valor: tipo === "financeira" ? Number(valor) : null,
             descricao_item: tipo === "item" ? item : null,
