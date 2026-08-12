@@ -104,7 +104,7 @@
                 de pessoas.
             </p>
 
-            <button>
+            <button id="botaoQueroAjudar">
                 Quero ajudar
             </button>
 
@@ -112,11 +112,89 @@
 
         <div class="imagem-hero-doacoes">
 
-            <img 
+            <img
             src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=1200&auto=format&fit=crop"
             alt="Doações sociais">
 
         </div>
+
+    </section>
+
+
+    <!-- FORMULÁRIO DE DOAÇÃO -->
+
+    <section class="formulario-voluntario" id="formularioDoacao">
+
+        <div class="topo-formulario">
+
+            <span>
+                Registre sua doação
+            </span>
+
+            <h1>
+                Como você quer ajudar?
+            </h1>
+
+            <p>
+                Este formulário registra sua intenção de doação - nossa equipe entra em
+                contato para combinar a forma de pagamento ou a entrega dos itens.
+                Nenhum valor é cobrado automaticamente aqui.
+            </p>
+
+        </div>
+
+        <form class="form-voluntario" id="formDoacao">
+
+            <div class="secao-formulario">
+
+                <div class="grid-formulario">
+
+                    <div class="input-group">
+                        <label for="doacaoTipo">Tipo de doação *</label>
+                        <select id="doacaoTipo">
+                            <option value="financeira">Financeira</option>
+                            <option value="item">Itens (roupas, alimentos, etc.)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="doacaoOrganizacao">Destino</label>
+                        <select id="doacaoOrganizacao">
+                            <option value="">Doação geral (sem organização específica)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group" id="campoValorDoacao">
+                        <label for="doacaoValor">Valor (R$) *</label>
+                        <input type="number" id="doacaoValor" min="1" step="0.01" placeholder="0,00">
+                    </div>
+
+                    <div class="input-group" id="campoItemDoacao" style="display: none;">
+                        <label for="doacaoItem">Descrição do item *</label>
+                        <input type="text" id="doacaoItem" placeholder="Ex.: 5 cobertores, 10kg de alimentos...">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="doacaoMetodo">Forma de pagamento pretendida</label>
+                        <select id="doacaoMetodo">
+                            <option value="pix">Pix</option>
+                            <option value="cartao">Cartão</option>
+                            <option value="transferencia">Transferência</option>
+                            <option value="boleto">Boleto</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div id="mensagemDoacao" class="alert d-none" role="status" aria-live="polite"></div>
+
+            <button class="botao-formulario" type="submit">
+                Registrar doação
+            </button>
+
+        </form>
 
     </section>
 
@@ -271,7 +349,7 @@
 
             </div>
 
-            <button>
+            <button id="botaoVerLocalizacao">
                 Ver localização
             </button>
 
@@ -390,7 +468,7 @@ alt="Ponto de arrecadação">
             Toda ajuda importa. Toda atitude gera transformação.
         </h2>
 
-        <button>
+        <button id="botaoFazerDoacao">
             Fazer uma doação
         </button>
 
@@ -451,5 +529,114 @@ alt="Ponto de arrecadação">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
     <script src="../assets/js/supabase-client.js"></script>
     <script src="../assets/js/acessibilidade.js"></script>
+
+    <script>
+
+    // ========================================
+    // BOTÕES DA PÁGINA DE DOAÇÕES
+    // ========================================
+
+    function rolarAteFormularioDoacao() {
+        document.getElementById("formularioDoacao").scrollIntoView({ behavior: "smooth" });
+    }
+
+    document.getElementById("botaoQueroAjudar").addEventListener("click", rolarAteFormularioDoacao);
+    document.getElementById("botaoFazerDoacao").addEventListener("click", rolarAteFormularioDoacao);
+
+    document.getElementById("botaoVerLocalizacao").addEventListener("click", function () {
+        window.open("https://www.google.com/maps/search/" + encodeURIComponent("Rua exemplo, 120, São Paulo, SP"), "_blank");
+    });
+
+    // ========================================
+    // FORMULÁRIO DE DOAÇÃO -> tabela doacoes
+    // ========================================
+
+    const doacaoTipo = document.getElementById("doacaoTipo");
+    const campoValorDoacao = document.getElementById("campoValorDoacao");
+    const campoItemDoacao = document.getElementById("campoItemDoacao");
+
+    doacaoTipo.addEventListener("change", function () {
+        const isItem = doacaoTipo.value === "item";
+        campoValorDoacao.style.display = isItem ? "none" : "";
+        campoItemDoacao.style.display = isItem ? "" : "none";
+    });
+
+    async function carregarOrganizacoesDoacao() {
+        const select = document.getElementById("doacaoOrganizacao");
+
+        if (!supabaseClient) {
+            return;
+        }
+
+        const { data } = await supabaseClient.from("organizacoes").select("id, nome_fantasia").order("nome_fantasia");
+
+        (data || []).forEach(function (organizacao) {
+            const opcao = document.createElement("option");
+            opcao.value = organizacao.id;
+            opcao.textContent = organizacao.nome_fantasia;
+            select.appendChild(opcao);
+        });
+    }
+
+    carregarOrganizacoesDoacao();
+
+    const formDoacao = document.getElementById("formDoacao");
+    const mensagemDoacao = document.getElementById("mensagemDoacao");
+
+    function mostrarMensagemDoacao(texto, tipo) {
+        mensagemDoacao.textContent = texto;
+        mensagemDoacao.className = "alert alert-" + tipo;
+    }
+
+    formDoacao.addEventListener("submit", async function (evento) {
+        evento.preventDefault();
+
+        const tipo = doacaoTipo.value;
+        const valor = document.getElementById("doacaoValor").value;
+        const item = document.getElementById("doacaoItem").value.trim();
+        const organizacaoId = document.getElementById("doacaoOrganizacao").value || null;
+        const metodoPagamento = document.getElementById("doacaoMetodo").value;
+
+        if (tipo === "financeira" && !valor) {
+            mostrarMensagemDoacao("Informe o valor da doação.", "danger");
+            return;
+        }
+
+        if (tipo === "item" && !item) {
+            mostrarMensagemDoacao("Descreva o item que você quer doar.", "danger");
+            return;
+        }
+
+        if (!supabaseClient) {
+            mostrarMensagemDoacao("Registro indisponível no momento.", "danger");
+            return;
+        }
+
+        const { data: sessaoData } = await supabaseClient.auth.getSession();
+
+        const { error } = await supabaseClient.from("doacoes").insert({
+            doador_id: sessaoData.session ? sessaoData.session.user.id : null,
+            organizacao_id: organizacaoId,
+            tipo: tipo,
+            valor: tipo === "financeira" ? Number(valor) : null,
+            descricao_item: tipo === "item" ? item : null,
+            metodo_pagamento: metodoPagamento
+        });
+
+        if (error) {
+            mostrarMensagemDoacao("Não foi possível registrar: " + error.message, "danger");
+            return;
+        }
+
+        mostrarMensagemDoacao(
+            "Doação registrada! Nenhum valor foi cobrado agora - nossa equipe vai entrar em contato para combinar o pagamento ou a entrega dos itens.",
+            "success"
+        );
+        formDoacao.reset();
+        campoValorDoacao.style.display = "";
+        campoItemDoacao.style.display = "none";
+    });
+
+    </script>
 </body>
 </html>

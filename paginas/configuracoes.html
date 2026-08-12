@@ -172,7 +172,7 @@
                         Nome completo
                     </label>
 
-                    <input type="text" id="perfilNome" readonly>
+                    <input type="text" id="perfilNome">
 
                 </div>
 
@@ -194,7 +194,7 @@
                         Telefone
                     </label>
 
-                    <input type="text" id="perfilTelefone" readonly>
+                    <input type="text" id="perfilTelefone">
 
                 </div>
 
@@ -205,11 +205,17 @@
                         Cidade de atuação
                     </label>
 
-                    <input type="text" id="perfilCidade" readonly>
+                    <input type="text" id="perfilCidade">
 
                 </div>
 
             </div>
+
+            <div id="mensagemPerfil" class="alert d-none" role="status" aria-live="polite"></div>
+
+            <button class="salvar-btn" id="botaoSalvarPerfil">
+                Salvar alterações
+            </button>
 
         </div>
 
@@ -512,7 +518,9 @@
             </div>
 
 
-            <button class="salvar-btn">
+            <div id="mensagemSenha" class="alert d-none" role="status" aria-live="polite"></div>
+
+            <button class="salvar-btn" id="botaoAlterarSenha">
                 Alterar senha
             </button>
 
@@ -531,7 +539,7 @@
                 Precisa de suporte? Entre em contato com nossa equipe.
             </p>
 
-            <button class="salvar-btn">
+            <button class="salvar-btn" id="botaoFalarComSuporte">
                 Falar com suporte
             </button>
 
@@ -553,6 +561,8 @@
 // ========================================
 // PAINEL DO VOLUNTÁRIO
 // ========================================
+
+let perfilIdAtual = null;
 
 const rotulosStatusCandidatura = {
     pendente: "Pendente",
@@ -623,10 +633,11 @@ async function carregarMinhasOportunidades(voluntarioId) {
     }
 
     const usuarioId = sessaoData.session.user.id;
+    perfilIdAtual = usuarioId;
 
     const { data: perfil } = await supabaseClient
         .from("perfis")
-        .select("nome, sobrenome, email, telefone, tipo_conta, ativo, voluntarios(cidade_atuacao)")
+        .select("nome, sobrenome, email, telefone, tipo_conta, ativo, notificacoes, voluntarios(cidade_atuacao)")
         .eq("id", usuarioId)
         .single();
 
@@ -661,6 +672,23 @@ async function carregarMinhasOportunidades(voluntarioId) {
     document.getElementById("perfilTelefone").value = perfil.telefone || "";
     document.getElementById("perfilCidade").value = cidade || "";
 
+    const notificacoes = perfil.notificacoes || {};
+    document.getElementById("notifOportunidades").checked = notificacoes.oportunidades !== false;
+    document.getElementById("notifCampanhas").checked = notificacoes.campanhas !== false;
+    document.getElementById("notifEmergenciais").checked = notificacoes.emergenciais === true;
+
+    ["notifOportunidades", "notifCampanhas", "notifEmergenciais"].forEach(function (id) {
+        document.getElementById(id).addEventListener("change", async function () {
+            await supabaseClient.from("perfis").update({
+                notificacoes: {
+                    oportunidades: document.getElementById("notifOportunidades").checked,
+                    campanhas: document.getElementById("notifCampanhas").checked,
+                    emergenciais: document.getElementById("notifEmergenciais").checked
+                }
+            }).eq("id", usuarioId);
+        });
+    });
+
     carregarMinhasOportunidades(usuarioId);
 })();
 
@@ -671,6 +699,88 @@ if (botaoSairSidebar) {
         evento.preventDefault();
         await supabaseClient.auth.signOut();
         window.location.href = "../index.html";
+    });
+}
+
+const botaoSalvarPerfil = document.getElementById("botaoSalvarPerfil");
+const mensagemPerfil = document.getElementById("mensagemPerfil");
+
+if (botaoSalvarPerfil) {
+    botaoSalvarPerfil.addEventListener("click", async function () {
+        const usuarioId = perfilIdAtual;
+        const nome = document.getElementById("perfilNome").value.trim();
+        const telefone = document.getElementById("perfilTelefone").value.trim();
+        const cidade = document.getElementById("perfilCidade").value.trim();
+
+        mensagemPerfil.classList.remove("d-none");
+
+        if (!nome) {
+            mensagemPerfil.textContent = "O nome não pode ficar em branco.";
+            mensagemPerfil.className = "alert alert-danger";
+            return;
+        }
+
+        const [{ error: erroPerfil }, { error: erroVoluntario }] = await Promise.all([
+            supabaseClient.from("perfis").update({ nome: nome, telefone: telefone || null }).eq("id", usuarioId),
+            supabaseClient.from("voluntarios").update({ cidade_atuacao: cidade }).eq("id", usuarioId)
+        ]);
+
+        if (erroPerfil || erroVoluntario) {
+            mensagemPerfil.textContent = "Não foi possível salvar: " + (erroPerfil || erroVoluntario).message;
+            mensagemPerfil.className = "alert alert-danger";
+            return;
+        }
+
+        mensagemPerfil.textContent = "Perfil atualizado com sucesso!";
+        mensagemPerfil.className = "alert alert-success";
+        document.getElementById("perfilNomeTopo").textContent = nome;
+        document.getElementById("perfilSubtitulo").textContent = "Voluntário(a)" + (cidade ? " - " + cidade : "");
+        document.getElementById("perfilInicial").textContent = nome.charAt(0).toUpperCase();
+    });
+}
+
+const botaoFalarComSuporte = document.getElementById("botaoFalarComSuporte");
+
+if (botaoFalarComSuporte) {
+    botaoFalarComSuporte.addEventListener("click", function () {
+        window.location.href = "contato.html";
+    });
+}
+
+const botaoAlterarSenha = document.getElementById("botaoAlterarSenha");
+const mensagemSenha = document.getElementById("mensagemSenha");
+
+if (botaoAlterarSenha) {
+    botaoAlterarSenha.addEventListener("click", async function () {
+        const novaSenha = document.getElementById("novaSenha").value;
+        const confirmarSenha = document.getElementById("confirmarSenha").value;
+
+        mensagemSenha.classList.remove("d-none");
+
+        if (!novaSenha || novaSenha.length < 6) {
+            mensagemSenha.textContent = "A senha precisa ter pelo menos 6 caracteres.";
+            mensagemSenha.className = "alert alert-danger";
+            return;
+        }
+
+        if (novaSenha !== confirmarSenha) {
+            mensagemSenha.textContent = "As senhas não coincidem.";
+            mensagemSenha.className = "alert alert-danger";
+            return;
+        }
+
+        const { error } = await supabaseClient.auth.updateUser({ password: novaSenha });
+
+        if (error) {
+            mensagemSenha.textContent = "Não foi possível alterar a senha: " + error.message;
+            mensagemSenha.className = "alert alert-danger";
+            return;
+        }
+
+        mensagemSenha.textContent = "Senha alterada com sucesso!";
+        mensagemSenha.className = "alert alert-success";
+        document.getElementById("novaSenha").value = "";
+        document.getElementById("confirmarSenha").value = "";
     });
 }
 

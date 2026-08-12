@@ -432,6 +432,26 @@ async function carregarCausasFormulario() {
     });
 }
 
+async function carregarHabilidadesFormulario() {
+    const container = document.getElementById("vagaHabilidades");
+    const { data } = await supabaseClient.from("habilidades").select("id, nome").order("nome");
+
+    (data || []).forEach(function (habilidade) {
+        const label = document.createElement("label");
+        label.style.display = "flex";
+        label.style.alignItems = "center";
+        label.style.gap = "8px";
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.value = habilidade.id;
+        checkbox.className = "vaga-habilidade-checkbox";
+
+        label.append(checkbox, habilidade.nome);
+        container.appendChild(label);
+    });
+}
+
 const formNovaVaga = document.getElementById("formNovaVaga");
 const mensagemNovaVaga = document.getElementById("mensagemNovaVaga");
 
@@ -454,22 +474,35 @@ formNovaVaga.addEventListener("submit", async function (evento) {
 
     mostrarMensagemNovaVaga("Publicando...", "info");
 
-    const { error } = await supabaseClient.from("oportunidades").insert({
-        organizacao_id: organizacaoAtualId,
-        causa_id: causaId,
-        titulo: titulo,
-        descricao: descricao,
-        cidade: document.getElementById("vagaCidade").value.trim() || null,
-        estado: document.getElementById("vagaEstado").value.trim() || null,
-        modalidade: document.getElementById("vagaModalidade").value,
-        periodo: document.getElementById("vagaPeriodo").value || null,
-        dias_atuacao: document.getElementById("vagaDias").value || null,
-        vagas_disponiveis: Number(document.getElementById("vagaVagas").value) || 1
-    });
+    const { data: novaVaga, error } = await supabaseClient
+        .from("oportunidades")
+        .insert({
+            organizacao_id: organizacaoAtualId,
+            causa_id: causaId,
+            titulo: titulo,
+            descricao: descricao,
+            cidade: document.getElementById("vagaCidade").value.trim() || null,
+            estado: document.getElementById("vagaEstado").value.trim() || null,
+            modalidade: document.getElementById("vagaModalidade").value,
+            periodo: document.getElementById("vagaPeriodo").value || null,
+            dias_atuacao: document.getElementById("vagaDias").value || null,
+            vagas_disponiveis: Number(document.getElementById("vagaVagas").value) || 1
+        })
+        .select("id")
+        .single();
 
     if (error) {
         mostrarMensagemNovaVaga("Não foi possível publicar: " + error.message, "danger");
         return;
+    }
+
+    const habilidadesEscolhidas = Array.from(document.querySelectorAll(".vaga-habilidade-checkbox:checked"))
+        .map(function (checkbox) {
+            return { oportunidade_id: novaVaga.id, habilidade_id: checkbox.value };
+        });
+
+    if (habilidadesEscolhidas.length > 0) {
+        await supabaseClient.from("oportunidade_habilidades").insert(habilidadesEscolhidas);
     }
 
     mostrarMensagemNovaVaga("Oportunidade publicada com sucesso!", "success");
@@ -536,6 +569,7 @@ document.getElementById("botaoSairMenu").addEventListener("click", sairDoPainel)
     document.getElementById("nomeOrganizacao").textContent = organizacao.nome_fantasia;
 
     carregarCausasFormulario();
+    carregarHabilidadesFormulario();
     carregarMinhasVagas();
     carregarCandidaturas();
 })();

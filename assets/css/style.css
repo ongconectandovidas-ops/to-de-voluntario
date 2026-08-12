@@ -587,8 +587,13 @@ body{
 }
 
 .status-recusada,
-.status-cancelada{
+.status-cancelada,
+.status-cancelado{
     background-color: #8B1E1E;
+}
+
+.status-confirmado{
+    background-color: #2E7D32;
 }
 
 .status-pausada{

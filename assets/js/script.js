@@ -16,6 +16,20 @@ irPara("botaoHeroVoluntario", "paginas/cadastro-voluntario.html");
 irPara("botaoHeroOng", "paginas/cadastro-ong.html");
 irPara("botaoFinalVoluntario", "paginas/cadastro-voluntario.html");
 irPara("botaoFinalOng", "paginas/cadastro-ong.html");
+irPara("botaoCtaSobre", "cadastro.html");
+
+const botaoParceriaContato = document.getElementById("botaoParceriaContato");
+
+if (botaoParceriaContato) {
+    botaoParceriaContato.addEventListener("click", function () {
+        const formulario = document.querySelector(".formulario-contato");
+
+        if (formulario) {
+            formulario.scrollIntoView({ behavior: "smooth" });
+            document.getElementById("contatoNome").focus();
+        }
+    });
+}
 
 
 // ========================================
@@ -68,7 +82,7 @@ if (botaoSairSidebar && !botaoSairSidebar.dataset.sairConfigurado) {
         }
 
         await supabaseClient.auth.signOut();
-        window.location.href = caminhoPagina("").replace(/paginas\/$/, "") || "index.html";
+        window.location.href = window.location.pathname.includes("/paginas/") ? "../index.html" : "index.html";
     });
 }
 
@@ -298,9 +312,16 @@ function criarCardOportunidade(op) {
     cidade.innerHTML = '<i class="bi bi-geo-alt-fill" aria-hidden="true"></i> ';
     cidade.append(textoLocalOportunidade(op));
 
+    const botaoDetalhes = document.createElement("button");
+    botaoDetalhes.className = "detalhes";
+    botaoDetalhes.textContent = "Ver detalhes";
+    botaoDetalhes.addEventListener("click", function () {
+        window.location.href = caminhoPagina("oportunidade-detalhes.html?id=" + op.id);
+    });
+
     const botoes = document.createElement("div");
     botoes.className = "botoes-card";
-    botoes.append(criarBotaoParticipar(op.id));
+    botoes.append(botaoDetalhes, criarBotaoParticipar(op.id));
 
     card.append(tipo, titulo, ong, descricao, cidade, botoes);
 
