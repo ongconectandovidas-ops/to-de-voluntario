@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <title>Cadastro de Voluntário | Tô de Voluntário</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo-principal">Pular para o conteúdo principal</a>
+
+<!-- MENU LATERAL -->
+
+<div class="sidebar-lateral">
+
+    <div class="top-sidebar">
+
+        <h2>
+            Configurações
+        </h2>
+
+        <span class="fechar-sidebar" role="button" tabindex="0" aria-label="Fechar menu de configurações">
+            <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </span>
+
+    </div>
+
+
+    <div class="links-sidebar">
+
+        <a href="#">
+            <i class="bi bi-person-fill" aria-hidden="true"></i> Meu perfil
+        </a>
+
+        <a href="#">
+            <i class="bi bi-gear-fill" aria-hidden="true"></i> Aparência
+        </a>
+
+        <a href="#">
+            <i class="bi bi-universal-access-circle" aria-hidden="true"></i> Acessibilidade
+        </a>
+
+        <a href="#">
+            <i class="bi bi-bell-fill" aria-hidden="true"></i> Notificações
+        </a>
+
+        <a href="#">
+            <i class="bi bi-question-circle-fill" aria-hidden="true"></i> Central de ajuda
+        </a>
+
+        <a href="#">
+            <i class="bi bi-box-arrow-right" aria-hidden="true"></i> Sair
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <nav class="menu" aria-label="Navegação principal">
+
+        <div class="menu-toggle" role="button" tabindex="0" aria-label="Abrir menu de configurações">
+            <i class="bi bi-list" aria-hidden="true"></i>
+        </div>
+
+        <a href="../index.html">Home</a>
+        <a href="oportunidades.html">Oportunidades</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="doacoes.html">Doações</a>
+        <a href="contato.html">Contato</a>
+        <a href="entrar.html">Entrar</a>
+
+    </nav>
+
+</header>
+
+
+<!-- FORMULÁRIO -->
+
+<section class="formulario-voluntario" id="conteudo-principal" tabindex="-1">
+
+    <div class="topo-formulario">
+
+        <span>
+            Faça parte da transformação social
+        </span>
+
+        <h1>
+            Cadastro de Voluntário
+        </h1>
+
+        <p>
+            Preencha suas informações para começar
+            sua jornada no Tô de Voluntário.
+        </p>
+
+    </div>
+
+
+    <form class="form-voluntario">
+
+        <!-- DADOS PESSOAIS -->
+
+        <div class="secao-formulario">
+
+            <h2>
+                Dados Pessoais
+            </h2>
+
+            <div class="grid-formulario">
+
+                <div class="input-group">
+
+                    <label for="nome">
+                        Nome *
+                    </label>
+
+                    <input type="text" id="nome" placeholder="Digite seu nome">
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="sobrenome">
+                        Sobrenome *
+                    </label>
+
+                    <input type="text" id="sobrenome" placeholder="Digite seu sobrenome">
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="nome-social">
+                        Nome social
+                    </label>
+
+                    <input type="text" id="nome-social" placeholder="Digite seu nome social">
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="data-nascimento">
+                        Data de nascimento *
+                    </label>
+
+                    <input type="date" id="data-nascimento">
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="email">
+                        E-mail *
+                    </label>
+
+                    <input type="email" id="email" placeholder="Digite seu e-mail">
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="telefone">
+                        Telefone *
+                    </label>
+
+                    <input type="text" id="telefone" placeholder="(00) 00000-0000">
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="genero">
+                        Identidade de gênero
+                    </label>
+
+                    <select id="genero">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        <option value="cisgenero">
+                            Cisgênero
+                        </option>
+
+                        <option value="transgenero">
+                            Transgênero
+                        </option>
+
+                        <option value="nao_binario">
+                            Não Binário
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="deficiencia">
+                        Pessoa com deficiência?
+                    </label>
+
+                    <select id="deficiencia">
+
+                        <option>
+                            Selecione
+                        </option>
+
+                        <option>
+                            Sim
+                        </option>
+
+                        <option>
+                            Não
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- DISPONIBILIDADE -->
+
+        <div class="secao-formulario">
+
+            <h2>
+                Disponibilidade
+            </h2>
+
+            <div class="grid-formulario">
+
+                <div class="input-group">
+
+                    <label for="dias-disponiveis">
+                        Dias disponíveis *
+                    </label>
+
+                    <select id="dias-disponiveis">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        <option value="segunda_a_sexta">
+                            Segunda a sexta
+                        </option>
+
+                        <option value="fins_de_semana">
+                            Finais de semana
+                        </option>
+
+                        <option value="todos_os_dias">
+                            Todos os dias
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="periodo-atuacao">
+                        Período de atuação
+                    </label>
+
+                    <select id="periodo-atuacao">
+
+                        <option value="manha">
+                            Manhã
+                        </option>
+
+                        <option value="tarde">
+                            Tarde
+                        </option>
+
+                        <option value="noite">
+                            Noite
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="formato-execucao">
+                        Formato de execução
+                    </label>
+
+                    <select id="formato-execucao">
+
+                        <option value="presencial">
+                            Presencial
+                        </option>
+
+                        <option value="virtual">
+                            Virtual
+                        </option>
+
+                        <option value="hibrido">
+                            Híbrido
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="cidade-atuacao">
+                        Cidade de atuação *
+                    </label>
+
+                    <input type="text" id="cidade-atuacao" placeholder="Digite sua cidade">
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ACADÊMICO -->
+
+        <div class="secao-formulario">
+
+            <h2>
+                Dados Acadêmicos e Profissionais
+            </h2>
+
+            <div class="grid-formulario">
+
+                <div class="input-group">
+
+                    <label for="escolaridade">
+                        Escolaridade *
+                    </label>
+
+                    <select id="escolaridade">
+
+                        <option value="fundamental">
+                            Ensino Fundamental
+                        </option>
+
+                        <option value="medio">
+                            Ensino Médio
+                        </option>
+
+                        <option value="superior">
+                            Ensino Superior
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="profissao">
+                        Profissão
+                    </label>
+
+                    <input type="text" id="profissao" placeholder="Digite sua profissão">
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="formacao-academica">
+                        Formação acadêmica
+                    </label>
+
+                    <input type="text" id="formacao-academica" placeholder="Digite sua formação">
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SEGURANÇA -->
+
+        <div class="secao-formulario">
+
+            <h2>
+                Segurança da Conta
+            </h2>
+
+            <div class="grid-formulario">
+
+                <div class="input-group">
+
+                    <label for="senha">
+                        Criar senha *
+                    </label>
+
+                    <input type="password" id="senha" placeholder="Digite sua senha">
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="confirmar-senha">
+                        Confirmar senha *
+                    </label>
+
+                    <input type="password" id="confirmar-senha" placeholder="Confirme sua senha">
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TERMOS -->
+
+        <div class="termos-formulario">
+
+            <input type="checkbox" id="aceite-termos">
+
+            <p>
+
+                Li e concordo com os
+
+                <span class="abrir-termos">
+                    Termos de Privacidade
+                </span>
+
+                do Tô de Voluntário.
+
+            </p>
+
+        </div>
+
+
+        <!-- BOTÃO -->
+
+        <div id="mensagemCadastro" class="alert d-none" role="status" aria-live="polite"></div>
+
+        <button class="botao-formulario" type="submit">
+
+            Criar conta
+
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- MODAL TERMOS -->
+
+<div class="modal-termos" role="dialog" aria-modal="true">
+
+    <div class="conteudo-termos">
+
+        <span class="fechar-termos" role="button" tabindex="0" aria-label="Fechar termos de uso">
+            <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </span>
+
+        <h2>
+            Termos de Privacidade — Tô de Voluntário
+        </h2>
+
+        <div class="texto-termos">
+
+            <p>
+                O Tô de Voluntário respeita sua privacidade e protege todos os dados pessoais compartilhados em nossa plataforma.
+            </p>
+
+            <p>
+                As informações fornecidas durante o cadastro serão utilizadas exclusivamente para conexão entre voluntários, instituições, empresas parceiras e oportunidades sociais disponíveis na plataforma.
+            </p>
+
+            <p>
+                Não compartilhamos dados pessoais com terceiros sem autorização prévia do usuário, exceto quando necessário para cumprimento legal.
+            </p>
+
+            <p>
+                O usuário poderá solicitar atualização ou exclusão de seus dados a qualquer momento, conforme previsto pela Lei Geral de Proteção de Dados (LGPD).
+            </p>
+
+            <p>
+                O Tô de Voluntário utiliza medidas de segurança para proteger informações pessoais contra acessos não autorizados, alterações ou divulgações indevidas.
+            </p>
+
+            <p>
+                Ao utilizar nossa plataforma, o usuário declara estar ciente e de acordo com os termos apresentados.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- RODAPÉ -->
+
+<footer class="rodape">
+
+    <div class="rodape-coluna">
+
+        <h3>
+            Tô de Voluntário
+        </h3>
+
+        <p>
+            Conectando pessoas e oportunidades para transformar vidas.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script>
+
+// MODAL TERMOS
+
+const abrirTermos = document.querySelector(".abrir-termos");
+const modalTermos = document.querySelector(".modal-termos");
+const fecharTermos = document.querySelector(".fechar-termos");
+
+abrirTermos.addEventListener("click", () => {
+
+    modalTermos.classList.add("ativo");
+
+});
+
+fecharTermos.addEventListener("click", () => {
+
+    modalTermos.classList.remove("ativo");
+
+});
+
+</script>
+
+<script src="../assets/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="../assets/js/supabase-client.js"></script>
+<script src="../assets/js/acessibilidade.js"></script>
+
+<script>
+
+// ========================================
+// ENVIO DO CADASTRO PARA O SUPABASE
+// ========================================
+
+const formVoluntario = document.querySelector(".form-voluntario");
+const mensagemCadastro = document.getElementById("mensagemCadastro");
+
+function valorOuNulo(id) {
+    const valor = document.getElementById(id).value.trim();
+    return (!valor || valor === "Selecione") ? null : valor;
+}
+
+function mostrarMensagem(texto, tipo) {
+    mensagemCadastro.textContent = texto;
+    mensagemCadastro.className = "alert alert-" + tipo;
+}
+
+formVoluntario.addEventListener("submit", async function (evento) {
+    evento.preventDefault();
+
+    const senha = document.getElementById("senha").value;
+    const confirmarSenha = document.getElementById("confirmar-senha").value;
+    const aceiteTermos = document.getElementById("aceite-termos").checked;
+    const nome = valorOuNulo("nome");
+    const email = valorOuNulo("email");
+    const diasDisponiveis = valorOuNulo("dias-disponiveis");
+    const cidadeAtuacao = valorOuNulo("cidade-atuacao");
+
+    if (!nome || !email || !senha || !diasDisponiveis || !cidadeAtuacao) {
+        mostrarMensagem("Preencha ao menos nome, e-mail, senha, dias disponíveis e cidade de atuação.", "danger");
+        return;
+    }
+
+    if (senha !== confirmarSenha) {
+        mostrarMensagem("As senhas não coincidem.", "danger");
+        return;
+    }
+
+    if (!aceiteTermos) {
+        mostrarMensagem("É preciso aceitar os Termos de Privacidade para continuar.", "danger");
+        return;
+    }
+
+    if (!supabaseClient) {
+        mostrarMensagem("O cadastro está indisponível no momento (Supabase não configurado).", "danger");
+        return;
+    }
+
+    mostrarMensagem("Enviando cadastro...", "info");
+
+    // Os dados vão em "options.data" (metadata do usuário no Supabase Auth).
+    // Um trigger no banco (ver supabase/migrations) lê essa metadata e cria
+    // as linhas em "perfis"/"voluntarios" automaticamente - assim funciona
+    // mesmo quando ainda não existe sessão ativa (confirmação de e-mail pendente).
+    const { data, error } = await supabaseClient.auth.signUp({
+        email,
+        password: senha,
+        options: {
+            data: {
+                tipo_conta: "voluntario",
+                nome: nome,
+                sobrenome: valorOuNulo("sobrenome"),
+                nome_social: valorOuNulo("nome-social"),
+                telefone: valorOuNulo("telefone"),
+                data_nascimento: valorOuNulo("data-nascimento"),
+                genero: valorOuNulo("genero"),
+                pessoa_com_deficiencia: valorOuNulo("deficiencia") === "Sim",
+                dias_disponiveis: diasDisponiveis,
+                periodo_atuacao: valorOuNulo("periodo-atuacao"),
+                formato_execucao: valorOuNulo("formato-execucao"),
+                cidade_atuacao: cidadeAtuacao,
+                escolaridade: valorOuNulo("escolaridade"),
+                profissao: valorOuNulo("profissao"),
+                formacao_academica: valorOuNulo("formacao-academica")
+            }
+        }
+    });
+
+    if (error) {
+        mostrarMensagem("Não foi possível criar a conta: " + error.message, "danger");
+        return;
+    }
+
+    const sessaoAtiva = !!data.session;
+
+    mostrarMensagem(
+        sessaoAtiva
+            ? "Cadastro realizado com sucesso! Bem-vindo(a) ao Tô de Voluntário."
+            : "Cadastro recebido! Confirme seu e-mail para concluir o acesso.",
+        "success"
+    );
+    formVoluntario.reset();
+});
+
+</script>
+
+</body>
+</html>

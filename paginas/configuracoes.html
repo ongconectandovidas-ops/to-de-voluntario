@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Configurações | Tô de Voluntário</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo-principal">Pular para o conteúdo principal</a>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar-lateral">
+
+    <div class="top-sidebar">
+
+        <h2>
+            Configurações
+        </h2>
+
+        <span class="fechar-sidebar" role="button" tabindex="0" aria-label="Fechar menu de configurações">
+            <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </span>
+
+    </div>
+
+
+    <div class="links-sidebar">
+
+        <a href="configuracoes.html">
+    <i class="bi bi-person-fill" aria-hidden="true"></i> Meu perfil
+</a>
+
+<a href="configuracoes.html?aba=aparencia">
+    <i class="bi bi-gear-fill" aria-hidden="true"></i> Aparência
+</a>
+
+<a href="configuracoes.html?aba=acessibilidade">
+    <i class="bi bi-universal-access-circle" aria-hidden="true"></i> Acessibilidade
+</a>
+
+<a href="configuracoes.html?aba=notificacoes">
+    <i class="bi bi-bell-fill" aria-hidden="true"></i> Notificações
+</a>
+
+<a href="configuracoes.html?aba=privacidade">
+    <i class="bi bi-lock-fill" aria-hidden="true"></i> Privacidade
+</a>
+
+<a href="configuracoes.html?aba=ajuda">
+    <i class="bi bi-question-circle-fill" aria-hidden="true"></i> Central de ajuda
+</a>
+
+<a href="#">
+    <i class="bi bi-box-arrow-right" aria-hidden="true"></i> Sair
+</a>
+
+    </div>
+
+</div>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <nav class="menu" aria-label="Navegação principal">
+
+        <div class="menu-toggle" role="button" tabindex="0" aria-label="Abrir menu de configurações">
+            <i class="bi bi-list" aria-hidden="true"></i>
+        </div>
+
+       <a href="../index.html">Home</a>
+<a href="oportunidades.html">Oportunidades</a>
+<a href="sobre.html">Sobre</a>
+<a href="doacoes.html">Doações</a>
+<a href="contato.html">Contato</a>
+<a href="entrar.html">Entrar</a>
+
+    </nav>
+
+</header>
+
+
+<!-- CONFIGURAÇÕES -->
+
+<section class="pagina-configuracoes" id="conteudo-principal" tabindex="-1">
+
+
+    <!-- MENU INTERNO -->
+
+    <div class="menu-configuracoes">
+
+        <button class="aba-btn ativo" data-aba="perfil">
+            <i class="bi bi-person-fill" aria-hidden="true"></i> Perfil
+        </button>
+
+        <button class="aba-btn" data-aba="aparencia">
+            <i class="bi bi-gear-fill" aria-hidden="true"></i> Aparência
+        </button>
+
+        <button class="aba-btn" data-aba="acessibilidade">
+            <i class="bi bi-universal-access-circle" aria-hidden="true"></i> Acessibilidade
+        </button>
+
+        <button class="aba-btn" data-aba="notificacoes">
+            <i class="bi bi-bell-fill" aria-hidden="true"></i> Notificações
+        </button>
+
+        <button class="aba-btn" data-aba="privacidade">
+            <i class="bi bi-lock-fill" aria-hidden="true"></i> Privacidade
+        </button>
+
+        <button class="aba-btn" data-aba="ajuda">
+            <i class="bi bi-question-circle-fill" aria-hidden="true"></i> Ajuda
+        </button>
+
+    </div>
+
+
+    <!-- CONTEÚDO -->
+
+    <div class="conteudo-configuracoes">
+
+
+        <!-- PERFIL -->
+
+        <div class="aba-conteudo ativo" id="perfil">
+
+            <span class="modo-demo">
+                Modo demonstração
+            </span>
+
+            <div class="perfil-topo">
+
+                <div class="foto-perfil" aria-hidden="true">
+                    A
+                </div>
+
+                <div>
+
+                    <h2>
+                        Ana Souza
+                    </h2>
+
+                    <p>
+                        Voluntária • Educação
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="grid-config">
+
+                <div class="input-config">
+
+                    <label for="perfilNome">
+                        Nome completo
+                    </label>
+
+                    <input type="text" id="perfilNome" value="Ana Souza">
+
+                </div>
+
+
+                <div class="input-config">
+
+                    <label for="perfilEmail">
+                        E-mail
+                    </label>
+
+                    <input type="email" id="perfilEmail" value="ana@email.com">
+
+                </div>
+
+
+                <div class="input-config">
+
+                    <label for="perfilTelefone">
+                        Telefone
+                    </label>
+
+                    <input type="text" id="perfilTelefone" value="(16) 99999-9999">
+
+                </div>
+
+
+                <div class="input-config">
+
+                    <label for="perfilCidade">
+                        Cidade
+                    </label>
+
+                    <input type="text" id="perfilCidade" value="Ibitinga - SP">
+
+                </div>
+
+            </div>
+
+
+            <button class="salvar-btn">
+                Salvar alterações
+            </button>
+
+        </div>
+
+
+        <!-- APARÊNCIA -->
+
+        <div class="aba-conteudo" id="aparencia">
+
+    <h2>
+        Aparência
+    </h2>
+
+
+    <!-- MODO ESCURO -->
+
+    <div class="config-item">
+
+        <div>
+
+            <h3>
+                Modo escuro
+            </h3>
+
+            <p>
+                Altera a aparência da plataforma.
+            </p>
+
+        </div>
+
+        <label class="switch">
+
+            <input type="checkbox" id="darkModeToggle" data-acess="tema" aria-label="Modo escuro">
+
+            <span class="slider"></span>
+
+        </label>
+
+    </div>
+
+    <p class="texto-ajuda">
+        Recursos de leitura, contraste e cores ficam na aba
+        <strong>Acessibilidade</strong>.
+    </p>
+
+</div>
+
+
+        <!-- ACESSIBILIDADE -->
+
+        <div class="aba-conteudo" id="acessibilidade">
+
+            <h2>
+                Acessibilidade
+            </h2>
+
+            <div class="config-item">
+
+                <div>
+
+                    <h3>
+                        Alto contraste
+                    </h3>
+
+                    <p>
+                        Aumenta contraste visual da plataforma.
+                    </p>
+
+                </div>
+
+                <label class="switch">
+
+                   <input type="checkbox" id="contrasteAcessibilidade" data-acess="contraste" aria-label="Alto contraste">
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="config-item">
+
+                <div>
+
+                    <h3>
+                        Tamanho do texto
+                    </h3>
+
+                    <p>
+                        Escolha o tamanho que deixa a leitura mais confortável.
+                    </p>
+
+                </div>
+
+                <select id="fonteAcessibilidade" data-acess="fonte">
+
+                    <option value="pequena">Pequeno</option>
+                    <option value="normal">Normal</option>
+                    <option value="grande">Grande</option>
+                    <option value="muito-grande">Muito grande</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="config-item">
+
+                <div>
+
+                    <h3>
+                        Espaçamento entre linhas
+                    </h3>
+
+                    <p>
+                        Aumenta o espaço entre as linhas para facilitar a leitura.
+                    </p>
+
+                </div>
+
+                <select id="espacamentoAcessibilidade" data-acess="espacamento">
+
+                    <option value="normal">Normal</option>
+                    <option value="medio">Médio</option>
+                    <option value="amplo">Amplo</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="config-item">
+
+                <div>
+
+                    <h3>
+                        Reduzir animações
+                    </h3>
+
+                    <p>
+                        Reduz movimentos e animações da plataforma.
+                    </p>
+
+                </div>
+
+                <label class="switch">
+
+                    <input type="checkbox" id="animacoesAcessibilidade" data-acess="animacoes" aria-label="Reduzir animações">
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="config-item">
+
+                <div>
+
+                    <h3>
+                        Ajuste de cores (daltonismo)
+                    </h3>
+
+                    <p>
+                        Ajusta as cores da plataforma para os tipos mais comuns de daltonismo.
+                    </p>
+
+                </div>
+
+                <select id="daltonismoAcessibilidade" data-acess="daltonismo">
+
+                    <option value="nenhum">Nenhum</option>
+                    <option value="protanopia">Protanopia</option>
+                    <option value="deuteranopia">Deuteranopia</option>
+                    <option value="tritanopia">Tritanopia</option>
+                    <option value="acromatopsia">Acromatopsia (preto e branco)</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="config-item">
+
+                <div>
+
+                    <h3>
+                        Libras
+                    </h3>
+
+                    <p>
+                        Abre o tradutor de Libras (VLibras) para navegar em Língua Brasileira de Sinais.
+                    </p>
+
+                </div>
+
+                <button class="salvar-btn" data-acao="abrir-libras">
+                    <i class="bi bi-hand-index-thumb" aria-hidden="true"></i> Abrir VLibras
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- NOTIFICAÇÕES -->
+
+        <div class="aba-conteudo" id="notificacoes">
+
+            <h2>
+                Notificações
+            </h2>
+
+            <div class="check-config">
+
+                <input type="checkbox" id="notifOportunidades" checked>
+
+                <label for="notifOportunidades">
+                    Novas oportunidades
+                </label>
+
+            </div>
+
+
+            <div class="check-config">
+
+                <input type="checkbox" id="notifCampanhas" checked>
+
+                <label for="notifCampanhas">
+                    Campanhas sociais
+                </label>
+
+            </div>
+
+
+            <div class="check-config">
+
+                <input type="checkbox" id="notifEmergenciais">
+
+                <label for="notifEmergenciais">
+                    Ações emergenciais
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRIVACIDADE -->
+
+        <div class="aba-conteudo" id="privacidade">
+
+            <h2>
+                Privacidade e Segurança
+            </h2>
+
+            <div class="input-config">
+
+                <label for="novaSenha">
+                    Nova senha
+                </label>
+
+                <input type="password" id="novaSenha" autocomplete="new-password">
+
+            </div>
+
+
+            <div class="input-config">
+
+                <label for="confirmarSenha">
+                    Confirmar senha
+                </label>
+
+                <input type="password" id="confirmarSenha" autocomplete="new-password">
+
+            </div>
+
+
+            <button class="salvar-btn">
+                Alterar senha
+            </button>
+
+        </div>
+
+
+        <!-- AJUDA -->
+
+        <div class="aba-conteudo" id="ajuda">
+
+            <h2>
+                Central de Ajuda
+            </h2>
+
+            <p class="texto-ajuda">
+                Precisa de suporte? Entre em contato com nossa equipe.
+            </p>
+
+            <button class="salvar-btn">
+                Falar com suporte
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/supabase-client.js"></script>
+<script src="../assets/js/acessibilidade.js"></script>
+
+</body>
+</html>

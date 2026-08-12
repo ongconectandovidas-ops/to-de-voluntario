@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <title>Oportunidades</title>
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+</head>
+
+<body>
+
+    <a class="skip-link" href="#conteudo-principal">Pular para o conteúdo principal</a>
+
+    <!-- MENU -->
+
+    <header>
+
+       <nav class="menu" aria-label="Navegação principal">
+
+    <div class="menu-toggle" role="button" tabindex="0" aria-label="Abrir menu de configurações">
+        <i class="bi bi-list" aria-hidden="true"></i>
+    </div>
+
+    <a href="../index.html">Home</a>
+    <a href="oportunidades.html">Oportunidades</a>
+    <a href="sobre.html">Sobre</a>
+    <a href="doacoes.html">Doações</a>
+    <a href="contato.html">Contato</a>
+    <a href="entrar.html">Entrar</a>
+
+</nav>
+
+    </header>
+
+   <div class="sidebar-lateral">
+
+    <div class="top-sidebar">
+
+        <h2>
+            Configurações
+        </h2>
+
+        <span class="fechar-sidebar" role="button" tabindex="0" aria-label="Fechar menu de configurações">
+            <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </span>
+
+    </div>
+
+    <div class="links-sidebar">
+
+        <a href="configuracoes.html">
+            <i class="bi bi-person-fill" aria-hidden="true"></i> Meu perfil
+        </a>
+
+        <a href="configuracoes.html?aba=aparencia">
+            <i class="bi bi-gear-fill" aria-hidden="true"></i> Aparência
+        </a>
+
+        <a href="configuracoes.html?aba=acessibilidade">
+            <i class="bi bi-universal-access-circle" aria-hidden="true"></i> Acessibilidade
+        </a>
+
+        <a href="configuracoes.html?aba=notificacoes">
+            <i class="bi bi-bell-fill" aria-hidden="true"></i> Notificações
+        </a>
+
+        <a href="configuracoes.html?aba=privacidade">
+            <i class="bi bi-lock-fill" aria-hidden="true"></i> Privacidade
+        </a>
+
+        <a href="configuracoes.html?aba=ajuda">
+            <i class="bi bi-question-circle-fill" aria-hidden="true"></i> Central de ajuda
+        </a>
+
+        <a href="#">
+            <i class="bi bi-box-arrow-right" aria-hidden="true"></i> Sair
+        </a>
+
+    </div>
+
+</div>
+
+    </div>
+    <!-- BANNER -->
+
+    <section class="banner-oportunidades" id="conteudo-principal" tabindex="-1">
+
+        <div class="texto-banner">
+
+            <span>
+                Oportunidades
+            </span>
+
+            <h1>
+                Encontre oportunidades para fazer a diferença
+            </h1>
+
+            <p>
+                Descubra vagas de voluntariado que combinam com você
+                e transforme sua vontade de ajudar em impacto real.
+            </p>
+
+        </div>
+
+        <div class="imagem-banner">
+
+            <img
+                src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?q=80&w=1200&auto=format&fit=crop"
+                alt="Voluntária sorrindo durante ação de voluntariado">
+
+        </div>
+
+    </section>
+
+    <!-- PESQUISA -->
+
+    <section class="pesquisa">
+
+        <input type="text" placeholder="Buscar oportunidades..." aria-label="Buscar oportunidades">
+
+        <select id="estado" aria-label="Filtrar por estado">
+
+    <option value="">Estado</option>
+
+</select>
+
+<select id="cidade" aria-label="Filtrar por cidade">
+
+    <option value="">Cidade</option>
+
+</select>
+
+        <select aria-label="Filtrar por causa">
+            <option>Causas</option>
+            <option>Educação</option>
+            <option>Animais</option>
+            <option>Saúde</option>
+            <option>Meio ambiente</option>
+        </select>
+
+        <select aria-label="Filtrar por habilidade">
+            <option>Habilidades</option>
+            <option>Comunicação</option>
+            <option>Ensino</option>
+            <option>Organização</option>
+            <option>Cuidados</option>
+        </select>
+
+        <select aria-label="Filtrar por disponibilidade">
+            <option>Disponibilidade</option>
+            <option>Manhã</option>
+            <option>Tarde</option>
+            <option>Noite</option>
+            <option>Integral</option>
+        </select>
+
+        <select aria-label="Filtrar por dias de atuação">
+            <option>Dias de atuação</option>
+            <option>Segunda a sexta</option>
+            <option>Finais de semana</option>
+            <option>Todos os dias</option>
+        </select>
+
+        <button>
+            Buscar
+        </button>
+
+    </section>
+
+    <!-- CARDS -->
+
+    <section class="cards-oportunidades">
+
+        <!-- CARD 1 -->
+
+        <div class="card-oportunidade">
+
+            <span class="tipo">
+                Presencial
+            </span>
+
+            <h3>Apoio Escolar</h3>
+
+            <p class="ong">
+                Instituto Esperança
+            </p>
+
+            <p>
+                Ajude crianças com reforço escolar e atividades educativas.
+            </p>
+
+            <p class="cidade">
+                <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> São Paulo - SP
+            </p>
+
+            <div class="botoes-card">
+
+                <button class="detalhes">
+                    Ver detalhes
+                </button>
+
+                <button>
+                    Participar
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- CARD 2 -->
+
+        <div class="card-oportunidade">
+
+            <span class="tipo online">
+                Online
+            </span>
+
+            <h3>Mentoria Educacional</h3>
+
+            <p class="ong">
+                Projeto Futuro
+            </p>
+
+            <p>
+                Compartilhe conhecimentos e ajude jovens nos estudos.
+            </p>
+
+            <p class="cidade">
+                <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> Remoto
+            </p>
+
+            <div class="botoes-card">
+
+                <button class="detalhes">
+                    Ver detalhes
+                </button>
+
+                <button>
+                    Participar
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- CARD 3 -->
+
+        <div class="card-oportunidade">
+
+            <span class="tipo">
+                Híbrido
+            </span>
+
+            <h3>Cuidado com Animais</h3>
+
+            <p class="ong">
+                Patinhas do Bem
+            </p>
+
+            <p>
+                Ajude no cuidado de animais resgatados.
+            </p>
+
+            <p class="cidade">
+                <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> Campinas - SP
+            </p>
+
+            <div class="botoes-card">
+
+                <button class="detalhes">
+                    Ver detalhes
+                </button>
+
+                <button>
+                    Participar
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- CARD 4 -->
+
+        <div class="card-oportunidade">
+
+            <span class="tipo">
+                Presencial
+            </span>
+
+            <h3>Distribuição de Alimentos</h3>
+
+            <p class="ong">
+                Corrente do Bem
+            </p>
+
+            <p>
+                Auxilie na entrega de alimentos para famílias em vulnerabilidade.
+            </p>
+
+            <p class="cidade">
+                <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> Rio de Janeiro - RJ
+            </p>
+
+            <div class="botoes-card">
+
+                <button class="detalhes">
+                    Ver detalhes
+                </button>
+
+                <button>
+                    Participar
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- CARD 5 -->
+
+        <div class="card-oportunidade">
+
+            <span class="tipo online">
+                Online
+            </span>
+
+            <h3>Apoio Psicológico</h3>
+
+            <p class="ong">
+                Rede Acolher
+            </p>
+
+            <p>
+                Ofereça escuta e acolhimento em projetos sociais.
+            </p>
+
+            <p class="cidade">
+                <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> Remoto
+            </p>
+
+            <div class="botoes-card">
+
+                <button class="detalhes">
+                    Ver detalhes
+                </button>
+
+                <button>
+                    Participar
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- CARD 6 -->
+
+        <div class="card-oportunidade">
+
+            <span class="tipo">
+                Presencial
+            </span>
+
+            <h3>Plantio Comunitário</h3>
+
+            <p class="ong">
+                Verde Vida
+            </p>
+
+            <p>
+                Participe de ações ambientais e plantio de árvores.
+            </p>
+
+            <p class="cidade">
+                <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> Curitiba - PR
+            </p>
+
+            <div class="botoes-card">
+
+                <button class="detalhes">
+                    Ver detalhes
+                </button>
+
+                <button>
+                    Participar
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CARREGAR MAIS -->
+
+    <div class="carregar-mais">
+
+        <button>
+            <i class="bi bi-arrow-down" aria-hidden="true"></i> Carregar mais oportunidades
+        </button>
+
+    </div>
+
+    <!-- COMO FUNCIONA -->
+
+    <section class="como-funciona">
+
+        <h2>
+            Seu impacto em 4 passos
+        </h2>
+
+        <div class="passos">
+
+            <div class="passo">
+
+                <div class="icone-passo">
+                    <i class="bi bi-search" aria-hidden="true"></i>
+                </div>
+
+                <h3>Explore</h3>
+
+                <p>
+                    Encontre oportunidades ideais para você.
+                </p>
+
+            </div>
+
+            <div class="passo">
+
+                <div class="icone-passo">
+                    <i class="bi bi-heart-fill" aria-hidden="true"></i>
+                </div>
+
+                <h3>Participe</h3>
+
+                <p>
+                    Escolha uma causa e faça sua inscrição.
+                </p>
+
+            </div>
+
+            <div class="passo">
+
+                <div class="icone-passo">
+                    <i class="bi bi-people-fill" aria-hidden="true"></i>
+                </div>
+
+                <h3>Transforme</h3>
+
+                <p>
+                    Gere impacto positivo na comunidade.
+                </p>
+
+            </div>
+
+            <div class="passo">
+
+                <div class="icone-passo">
+                    <i class="bi bi-star-fill" aria-hidden="true"></i>
+                </div>
+
+                <h3>Acompanhe</h3>
+
+                <p>
+                    Veja sua evolução e participação.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- EVENTOS -->
+
+<section class="eventos">
+
+    <div class="titulo-eventos">
+
+        <h2>
+            Próximos eventos solidários
+        </h2>
+
+        <p>
+            Participe de ações presenciais e ajude ainda mais pessoas.
+        </p>
+
+    </div>
+
+    <div class="cards-eventos">
+
+        <!-- EVENTO 1 -->
+
+        <div class="card-evento">
+
+            <span class="data-evento">
+                12 MAI
+            </span>
+
+            <h3>
+                Campanha do agasalho
+            </h3>
+
+            <p>
+                Arrecadação de roupas e cobertores para famílias.
+            </p>
+
+            <span class="local-evento">
+                <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> São Paulo - SP
+            </span>
+
+        </div>
+
+        <!-- EVENTO 2 -->
+
+        <div class="card-evento">
+
+            <span class="data-evento">
+                20 MAI
+            </span>
+
+            <h3>
+                Mutirão de alimentos
+            </h3>
+
+            <p>
+                Distribuição de cestas básicas para comunidades.
+            </p>
+
+            <span class="local-evento">
+                <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> Belo Horizonte - MG
+            </span>
+
+        </div>
+
+        <!-- EVENTO 3 -->
+
+        <div class="card-evento">
+
+            <span class="data-evento">
+                28 MAI
+            </span>
+
+            <h3>
+                Ação ambiental
+            </h3>
+
+            <p>
+                Plantio de árvores e limpeza de parques.
+            </p>
+
+            <span class="local-evento">
+                <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> Curitiba - PR
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+    <!-- CHAMADA FINAL -->
+
+    <section class="cta-final">
+
+        <div class="texto-cta">
+
+            <h2>
+                Não encontrou o que procura?
+            </h2>
+
+            <p>
+                Cadastre-se e receba novas oportunidades que combinam com você.
+            </p>
+
+        </div>
+
+        <button>
+            Criar meu perfil
+        </button>
+
+    </section>
+
+    <!-- NEWSLETTER -->
+
+<section class="newsletter">
+
+    <div class="newsletter-texto">
+
+        <h2>
+            Receba novas oportunidades no seu e-mail
+        </h2>
+
+        <p>
+            Cadastre-se para acompanhar eventos, vagas e ações sociais.
+        </p>
+
+    </div>
+
+    <div class="newsletter-form">
+
+        <input type="email" placeholder="Digite seu e-mail">
+
+        <button>
+            Quero receber
+        </button>
+
+    </div>
+
+</section>
+    <!-- RODAPÉ -->
+
+<footer class="rodape">
+
+    <div class="rodape-coluna">
+
+        <h3>
+            Conectando Vidas
+        </h3>
+
+        <p>
+            Transformando pequenas ações em grandes impactos sociais.
+        </p>
+
+    </div>
+
+    <div class="rodape-coluna">
+
+        <h4>
+            Navegação
+        </h4>
+
+        <a href="../index.html">Home</a>
+        <a href="oportunidades.html">Oportunidades</a>
+        <a href="sobre.html">Sobre</a>
+
+    </div>
+
+    <div class="rodape-coluna">
+
+        <h4>
+            Contato
+        </h4>
+
+        <p>Email: contato@conectandovidas.com</p>
+        <p>Telefone: (11) 99999-9999</p>
+
+    </div>
+
+    <div class="rodape-coluna">
+
+        <h4>
+            Redes sociais
+        </h4>
+
+        <p>Instagram</p>
+        <p>Facebook</p>
+        <p>LinkedIn</p>
+
+    </div>
+
+</footer>
+<script src="../assets/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="../assets/js/supabase-client.js"></script>
+<script src="../assets/js/acessibilidade.js"></script>
+</body>
+</html>
