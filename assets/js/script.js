@@ -56,6 +56,22 @@ async function atualizarLinkEntrar() {
     linkEntrar.href = caminhoPagina(destino);
 }
 
+const botaoSairSidebar = document.getElementById("botaoSairSidebar");
+
+if (botaoSairSidebar && !botaoSairSidebar.dataset.sairConfigurado) {
+    botaoSairSidebar.dataset.sairConfigurado = "true";
+    botaoSairSidebar.addEventListener("click", async function (evento) {
+        evento.preventDefault();
+
+        if (!supabaseClient) {
+            return;
+        }
+
+        await supabaseClient.auth.signOut();
+        window.location.href = caminhoPagina("").replace(/paginas\/$/, "") || "index.html";
+    });
+}
+
 
 // ========================================
 // ESTADO → CIDADE (API do IBGE, sem lista fixa de estados)

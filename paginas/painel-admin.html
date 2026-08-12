@@ -85,6 +85,10 @@
             <i class="bi bi-briefcase-fill" aria-hidden="true"></i> Oportunidades
         </button>
 
+        <button class="aba-btn" data-aba="contatos-admin">
+            <i class="bi bi-envelope-fill" aria-hidden="true"></i> Contatos
+        </button>
+
     </div>
 
 
@@ -219,6 +223,57 @@
                         </tr>
                     </thead>
                     <tbody id="tabelaOportunidadesAdmin">
+                        <tr><td colspan="6">Carregando...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+        <!-- CONTATOS -->
+
+        <div class="aba-conteudo" id="contatos-admin">
+
+            <h2>
+                Mensagens de contato
+            </h2>
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>Assunto</th>
+                            <th>Mensagem</th>
+                            <th>Recebida em</th>
+                            <th>Situação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaMensagensContato">
+                        <tr><td colspan="6">Carregando...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>
+                Agendamentos de conversa
+            </h2>
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>Data</th>
+                            <th>Horário</th>
+                            <th>Motivo</th>
+                            <th>Situação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaAgendamentos">
                         <tr><td colspan="6">Carregando...</td></tr>
                     </tbody>
                 </table>
@@ -390,6 +445,120 @@ async function carregarOportunidadesAdmin() {
     });
 }
 
+async function carregarMensagensContato() {
+    const corpo = document.getElementById("tabelaMensagensContato");
+
+    const { data, error } = await supabaseClient
+        .from("mensagens_contato")
+        .select("id, nome, email, assunto, mensagem, criado_em, respondido_em")
+        .order("criado_em", { ascending: false });
+
+    corpo.innerHTML = "";
+
+    if (error || !data || data.length === 0) {
+        corpo.innerHTML = '<tr><td colspan="6">Nenhuma mensagem recebida.</td></tr>';
+        return;
+    }
+
+    data.forEach(function (mensagem) {
+        const linha = document.createElement("tr");
+        const situacao = document.createElement("td");
+
+        const badge = document.createElement("span");
+        badge.className = "tipo " + (mensagem.respondido_em ? "" : "status-recusada");
+        badge.textContent = mensagem.respondido_em ? "Respondida" : "Pendente";
+        badge.style.marginRight = "10px";
+        situacao.appendChild(badge);
+
+        if (!mensagem.respondido_em) {
+            const botao = document.createElement("button");
+            botao.className = "salvar-btn";
+            botao.textContent = "Marcar como respondida";
+            botao.addEventListener("click", async function () {
+                await supabaseClient
+                    .from("mensagens_contato")
+                    .update({ respondido_em: new Date().toISOString() })
+                    .eq("id", mensagem.id);
+                carregarMensagensContato();
+            });
+            situacao.appendChild(botao);
+        }
+
+        linha.append(
+            celula(mensagem.nome),
+            celula(mensagem.email),
+            celula(mensagem.assunto),
+            celula(mensagem.mensagem),
+            celula(formatarData(mensagem.criado_em)),
+            situacao
+        );
+        corpo.appendChild(linha);
+    });
+}
+
+const rotulosStatusAgendamento = {
+    pendente: "Pendente",
+    confirmado: "Confirmado",
+    cancelado: "Cancelado"
+};
+
+async function carregarAgendamentos() {
+    const corpo = document.getElementById("tabelaAgendamentos");
+
+    const { data, error } = await supabaseClient
+        .from("agendamentos")
+        .select("id, nome, email, data_reuniao, horario_reuniao, motivo, status")
+        .order("data_reuniao", { ascending: false });
+
+    corpo.innerHTML = "";
+
+    if (error || !data || data.length === 0) {
+        corpo.innerHTML = '<tr><td colspan="6">Nenhum agendamento recebido.</td></tr>';
+        return;
+    }
+
+    data.forEach(function (agendamento) {
+        const linha = document.createElement("tr");
+        const situacao = document.createElement("td");
+
+        const badge = document.createElement("span");
+        badge.className = "tipo status-" + agendamento.status;
+        badge.textContent = rotulosStatusAgendamento[agendamento.status] || agendamento.status;
+        badge.style.marginRight = "10px";
+        situacao.appendChild(badge);
+
+        if (agendamento.status === "pendente") {
+            const botaoConfirmar = document.createElement("button");
+            botaoConfirmar.className = "salvar-btn";
+            botaoConfirmar.textContent = "Confirmar";
+            botaoConfirmar.addEventListener("click", async function () {
+                await supabaseClient.from("agendamentos").update({ status: "confirmado" }).eq("id", agendamento.id);
+                carregarAgendamentos();
+            });
+
+            const botaoCancelar = document.createElement("button");
+            botaoCancelar.className = "salvar-btn";
+            botaoCancelar.textContent = "Cancelar";
+            botaoCancelar.addEventListener("click", async function () {
+                await supabaseClient.from("agendamentos").update({ status: "cancelado" }).eq("id", agendamento.id);
+                carregarAgendamentos();
+            });
+
+            situacao.append(botaoConfirmar, botaoCancelar);
+        }
+
+        linha.append(
+            celula(agendamento.nome),
+            celula(agendamento.email),
+            celula(formatarData(agendamento.data_reuniao)),
+            celula(agendamento.horario_reuniao),
+            celula(agendamento.motivo || "-"),
+            situacao
+        );
+        corpo.appendChild(linha);
+    });
+}
+
 async function sairDoPainelAdmin(evento) {
     evento.preventDefault();
     await supabaseClient.auth.signOut();
@@ -431,6 +600,8 @@ document.getElementById("botaoSairMenu").addEventListener("click", sairDoPainelA
     carregarResumoAdmin();
     carregarUsuarios();
     carregarOrganizacoesAdmin();
+    carregarMensagensContato();
+    carregarAgendamentos();
     carregarOportunidadesAdmin();
 })();
 

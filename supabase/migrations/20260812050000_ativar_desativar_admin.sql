@@ -13,7 +13,7 @@ create policy oportunidades_select_abertas_ou_proprias on public.oportunidades
         or organizacao_id in (select id from public.organizacoes where responsavel_id = auth.uid())
     );
 
-drop policy if exists perfis_update_admin on public.perfis
+drop policy if exists perfis_update_admin on public.perfis;
 create policy perfis_update_admin on public.perfis
     for update using (public.eh_admin()) with check (public.eh_admin());
 
