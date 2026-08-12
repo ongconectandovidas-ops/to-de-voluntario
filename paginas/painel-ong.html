@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Painel da Organização | Tô de Voluntário</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+</head>
+<body>
+
+<a class="skip-link" href="#conteudo-principal">Pular para o conteúdo principal</a>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar-lateral">
+
+    <div class="top-sidebar">
+
+        <h2>
+            Painel
+        </h2>
+
+        <span class="fechar-sidebar" role="button" tabindex="0" aria-label="Fechar menu">
+            <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </span>
+
+    </div>
+
+
+    <div class="links-sidebar">
+
+        <a href="#" id="botaoSairSidebar">
+            <i class="bi bi-box-arrow-right" aria-hidden="true"></i> Sair
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- HEADER -->
+
+<header>
+
+    <nav class="menu" aria-label="Navegação principal">
+
+        <div class="menu-toggle" role="button" tabindex="0" aria-label="Abrir menu">
+            <i class="bi bi-list" aria-hidden="true"></i>
+        </div>
+
+        <a href="../index.html">Home</a>
+        <a href="oportunidades.html">Oportunidades</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="doacoes.html">Doações</a>
+        <a href="contato.html">Contato</a>
+        <a href="#" id="botaoSairMenu">Sair</a>
+
+    </nav>
+
+</header>
+
+
+<!-- PAINEL -->
+
+<section class="pagina-configuracoes" id="conteudo-principal" tabindex="-1">
+
+    <div class="menu-configuracoes">
+
+        <button class="aba-btn ativo" data-aba="minhas-vagas">
+            <i class="bi bi-briefcase-fill" aria-hidden="true"></i> Minhas oportunidades
+        </button>
+
+        <button class="aba-btn" data-aba="candidaturas">
+            <i class="bi bi-people-fill" aria-hidden="true"></i> Candidaturas
+        </button>
+
+        <button class="aba-btn" data-aba="nova-vaga">
+            <i class="bi bi-plus-circle-fill" aria-hidden="true"></i> Nova oportunidade
+        </button>
+
+    </div>
+
+
+    <div class="conteudo-configuracoes">
+
+        <!-- MINHAS VAGAS -->
+
+        <div class="aba-conteudo ativo" id="minhas-vagas">
+
+            <h2 id="nomeOrganizacao">
+                Minhas oportunidades
+            </h2>
+
+            <p class="texto-ajuda">
+                Oportunidades publicadas pela sua organização.
+            </p>
+
+            <div class="lista-painel" id="listaMinhasVagas">
+
+                <p class="texto-ajuda">
+                    Carregando...
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- CANDIDATURAS -->
+
+        <div class="aba-conteudo" id="candidaturas">
+
+            <h2>
+                Candidaturas recebidas
+            </h2>
+
+            <p class="texto-ajuda">
+                Pessoas que se candidataram às suas oportunidades.
+            </p>
+
+            <div class="lista-painel" id="listaCandidaturas">
+
+                <p class="texto-ajuda">
+                    Carregando...
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- NOVA VAGA -->
+
+        <div class="aba-conteudo" id="nova-vaga">
+
+            <h2>
+                Publicar nova oportunidade
+            </h2>
+
+            <form id="formNovaVaga">
+
+                <div class="grid-config">
+
+                    <div class="input-config">
+                        <label for="vagaTitulo">Título *</label>
+                        <input type="text" id="vagaTitulo" placeholder="Ex.: Apoio escolar para crianças">
+                    </div>
+
+                    <div class="input-config">
+                        <label for="vagaCausa">Causa *</label>
+                        <select id="vagaCausa">
+                            <option value="">Selecione</option>
+                        </select>
+                    </div>
+
+                    <div class="input-config">
+                        <label for="vagaModalidade">Modalidade *</label>
+                        <select id="vagaModalidade">
+                            <option value="presencial">Presencial</option>
+                            <option value="virtual">Virtual</option>
+                            <option value="hibrido">Híbrido</option>
+                        </select>
+                    </div>
+
+                    <div class="input-config">
+                        <label for="vagaCidade">Cidade</label>
+                        <input type="text" id="vagaCidade" placeholder="Cidade da oportunidade">
+                    </div>
+
+                    <div class="input-config">
+                        <label for="vagaEstado">Estado</label>
+                        <input type="text" id="vagaEstado" placeholder="UF" maxlength="2">
+                    </div>
+
+                    <div class="input-config">
+                        <label for="vagaPeriodo">Período</label>
+                        <select id="vagaPeriodo">
+                            <option value="">Selecione</option>
+                            <option value="manha">Manhã</option>
+                            <option value="tarde">Tarde</option>
+                            <option value="noite">Noite</option>
+                            <option value="integral">Integral</option>
+                        </select>
+                    </div>
+
+                    <div class="input-config">
+                        <label for="vagaDias">Dias de atuação</label>
+                        <select id="vagaDias">
+                            <option value="">Selecione</option>
+                            <option value="segunda_a_sexta">Segunda a sexta</option>
+                            <option value="fins_de_semana">Finais de semana</option>
+                            <option value="todos_os_dias">Todos os dias</option>
+                        </select>
+                    </div>
+
+                    <div class="input-config">
+                        <label for="vagaVagas">Vagas disponíveis</label>
+                        <input type="number" id="vagaVagas" min="1" value="1">
+                    </div>
+
+                    <div class="input-config" style="grid-column: 1 / -1;">
+                        <label for="vagaDescricao">Descrição *</label>
+                        <input type="text" id="vagaDescricao" placeholder="Descreva a oportunidade">
+                    </div>
+
+                </div>
+
+                <div id="mensagemNovaVaga" class="alert d-none" role="status" aria-live="polite"></div>
+
+                <button class="salvar-btn" type="submit">
+                    Publicar oportunidade
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="../assets/js/script.js"></script>
+<script src="../assets/js/supabase-client.js"></script>
+<script src="../assets/js/acessibilidade.js"></script>
+
+<script>
+
+// ========================================
+// PAINEL DA ONG
+// ========================================
+
+const rotulosStatusVaga = {
+    aberta: "Aberta",
+    pausada: "Pausada",
+    encerrada: "Encerrada"
+};
+
+const rotulosStatusCandidaturaOng = {
+    pendente: "Pendente",
+    aprovada: "Aprovada",
+    recusada: "Recusada",
+    cancelada: "Cancelada"
+};
+
+let organizacaoAtualId = null;
+
+function criarCardVagaOng(vaga) {
+    const card = document.createElement("div");
+    card.className = "card-oportunidade";
+
+    const status = document.createElement("span");
+    status.className = "tipo status-" + vaga.status;
+    status.textContent = rotulosStatusVaga[vaga.status] || vaga.status;
+
+    const titulo = document.createElement("h3");
+    titulo.textContent = vaga.titulo;
+
+    const local = document.createElement("p");
+    local.className = "cidade";
+    local.innerHTML = '<i class="bi bi-geo-alt-fill" aria-hidden="true"></i> ';
+    local.append(textoLocalOportunidade(vaga));
+
+    const vagas = document.createElement("p");
+    vagas.textContent = vaga.vagas_disponiveis + " vaga(s) disponível(is)";
+
+    const botoes = document.createElement("div");
+    botoes.className = "botoes-card";
+
+    const botaoAlternar = document.createElement("button");
+    botaoAlternar.textContent = vaga.status === "aberta" ? "Pausar" : "Reabrir";
+    botaoAlternar.addEventListener("click", async function () {
+        const novoStatus = vaga.status === "aberta" ? "pausada" : "aberta";
+        await supabaseClient.from("oportunidades").update({ status: novoStatus }).eq("id", vaga.id);
+        carregarMinhasVagas();
+    });
+
+    const botaoEncerrar = document.createElement("button");
+    botaoEncerrar.textContent = "Encerrar";
+    botaoEncerrar.addEventListener("click", async function () {
+        await supabaseClient.from("oportunidades").update({ status: "encerrada" }).eq("id", vaga.id);
+        carregarMinhasVagas();
+    });
+
+    const botaoExcluir = document.createElement("button");
+    botaoExcluir.textContent = "Excluir";
+    botaoExcluir.addEventListener("click", async function () {
+        if (!confirm("Excluir esta oportunidade? Essa ação não pode ser desfeita.")) {
+            return;
+        }
+        await supabaseClient.from("oportunidades").delete().eq("id", vaga.id);
+        carregarMinhasVagas();
+    });
+
+    botoes.append(botaoAlternar, botaoEncerrar, botaoExcluir);
+    card.append(status, titulo, local, vagas, botoes);
+
+    return card;
+}
+
+async function carregarMinhasVagas() {
+    const lista = document.getElementById("listaMinhasVagas");
+
+    const { data, error } = await supabaseClient
+        .from("oportunidades")
+        .select("id, titulo, cidade, estado, modalidade, status, vagas_disponiveis")
+        .eq("organizacao_id", organizacaoAtualId)
+        .order("criado_em", { ascending: false });
+
+    lista.innerHTML = "";
+
+    if (error || !data || data.length === 0) {
+        const mensagem = document.createElement("p");
+        mensagem.className = "texto-ajuda";
+        mensagem.textContent = "Você ainda não publicou nenhuma oportunidade.";
+        lista.appendChild(mensagem);
+        return;
+    }
+
+    data.forEach(function (vaga) {
+        lista.appendChild(criarCardVagaOng(vaga));
+    });
+}
+
+function criarCardCandidatura(candidatura) {
+    const voluntario = candidatura.voluntarios || {};
+    const perfil = voluntario.perfis || {};
+    const oportunidade = candidatura.oportunidades || {};
+
+    const card = document.createElement("div");
+    card.className = "card-oportunidade";
+
+    const status = document.createElement("span");
+    status.className = "tipo status-" + candidatura.status;
+    status.textContent = rotulosStatusCandidaturaOng[candidatura.status] || candidatura.status;
+
+    const titulo = document.createElement("h3");
+    titulo.textContent = perfil.nome ? perfil.nome + " " + (perfil.sobrenome || "") : "Voluntário(a)";
+
+    const vaga = document.createElement("p");
+    vaga.className = "ong";
+    vaga.textContent = "Candidatura para: " + (oportunidade.titulo || "");
+
+    const email = document.createElement("p");
+    email.textContent = "E-mail: " + (perfil.email || "-");
+
+    const telefone = document.createElement("p");
+    telefone.textContent = "Telefone: " + (perfil.telefone || "-");
+
+    const cidade = document.createElement("p");
+    cidade.className = "cidade";
+    cidade.innerHTML = '<i class="bi bi-geo-alt-fill" aria-hidden="true"></i> ';
+    cidade.append(voluntario.cidade_atuacao || "-");
+
+    card.append(status, titulo, vaga, email, telefone, cidade);
+
+    if (candidatura.status === "pendente") {
+        const botoes = document.createElement("div");
+        botoes.className = "botoes-card";
+
+        const botaoAprovar = document.createElement("button");
+        botaoAprovar.textContent = "Aprovar";
+        botaoAprovar.addEventListener("click", async function () {
+            await supabaseClient.from("candidaturas").update({ status: "aprovada" }).eq("id", candidatura.id);
+            carregarCandidaturas();
+        });
+
+        const botaoRecusar = document.createElement("button");
+        botaoRecusar.textContent = "Recusar";
+        botaoRecusar.addEventListener("click", async function () {
+            await supabaseClient.from("candidaturas").update({ status: "recusada" }).eq("id", candidatura.id);
+            carregarCandidaturas();
+        });
+
+        botoes.append(botaoAprovar, botaoRecusar);
+        card.appendChild(botoes);
+    }
+
+    return card;
+}
+
+async function carregarCandidaturas() {
+    const lista = document.getElementById("listaCandidaturas");
+
+    const { data, error } = await supabaseClient
+        .from("candidaturas")
+        .select(`
+            id, status,
+            oportunidades!inner(titulo, organizacao_id),
+            voluntarios(cidade_atuacao, perfis(nome, sobrenome, email, telefone))
+        `)
+        .eq("oportunidades.organizacao_id", organizacaoAtualId)
+        .order("criado_em", { ascending: false });
+
+    lista.innerHTML = "";
+
+    if (error || !data || data.length === 0) {
+        const mensagem = document.createElement("p");
+        mensagem.className = "texto-ajuda";
+        mensagem.textContent = "Nenhuma candidatura recebida ainda.";
+        lista.appendChild(mensagem);
+        return;
+    }
+
+    data.forEach(function (candidatura) {
+        lista.appendChild(criarCardCandidatura(candidatura));
+    });
+}
+
+async function carregarCausasFormulario() {
+    const select = document.getElementById("vagaCausa");
+    const { data } = await supabaseClient.from("causas").select("id, nome").order("nome");
+
+    (data || []).forEach(function (causa) {
+        const opcao = document.createElement("option");
+        opcao.value = causa.id;
+        opcao.textContent = causa.nome;
+        select.appendChild(opcao);
+    });
+}
+
+const formNovaVaga = document.getElementById("formNovaVaga");
+const mensagemNovaVaga = document.getElementById("mensagemNovaVaga");
+
+function mostrarMensagemNovaVaga(texto, tipo) {
+    mensagemNovaVaga.textContent = texto;
+    mensagemNovaVaga.className = "alert alert-" + tipo;
+}
+
+formNovaVaga.addEventListener("submit", async function (evento) {
+    evento.preventDefault();
+
+    const titulo = document.getElementById("vagaTitulo").value.trim();
+    const causaId = document.getElementById("vagaCausa").value;
+    const descricao = document.getElementById("vagaDescricao").value.trim();
+
+    if (!titulo || !causaId || !descricao) {
+        mostrarMensagemNovaVaga("Preencha ao menos título, causa e descrição.", "danger");
+        return;
+    }
+
+    mostrarMensagemNovaVaga("Publicando...", "info");
+
+    const { error } = await supabaseClient.from("oportunidades").insert({
+        organizacao_id: organizacaoAtualId,
+        causa_id: causaId,
+        titulo: titulo,
+        descricao: descricao,
+        cidade: document.getElementById("vagaCidade").value.trim() || null,
+        estado: document.getElementById("vagaEstado").value.trim() || null,
+        modalidade: document.getElementById("vagaModalidade").value,
+        periodo: document.getElementById("vagaPeriodo").value || null,
+        dias_atuacao: document.getElementById("vagaDias").value || null,
+        vagas_disponiveis: Number(document.getElementById("vagaVagas").value) || 1
+    });
+
+    if (error) {
+        mostrarMensagemNovaVaga("Não foi possível publicar: " + error.message, "danger");
+        return;
+    }
+
+    mostrarMensagemNovaVaga("Oportunidade publicada com sucesso!", "success");
+    formNovaVaga.reset();
+    carregarMinhasVagas();
+});
+
+async function sairDoPainel(evento) {
+    evento.preventDefault();
+    await supabaseClient.auth.signOut();
+    window.location.href = "../index.html";
+}
+
+document.getElementById("botaoSairSidebar").addEventListener("click", sairDoPainel);
+document.getElementById("botaoSairMenu").addEventListener("click", sairDoPainel);
+
+(async function carregarPainelOng() {
+    if (!supabaseClient) {
+        return;
+    }
+
+    const { data: sessaoData } = await supabaseClient.auth.getSession();
+
+    if (!sessaoData.session) {
+        window.location.href = "entrar.html";
+        return;
+    }
+
+    const usuarioId = sessaoData.session.user.id;
+
+    const { data: perfil } = await supabaseClient
+        .from("perfis")
+        .select("tipo_conta, ativo")
+        .eq("id", usuarioId)
+        .single();
+
+    if (!perfil || perfil.tipo_conta === "voluntario") {
+        window.location.href = "configuracoes.html";
+        return;
+    }
+
+    if (perfil.ativo === false) {
+        await supabaseClient.auth.signOut();
+        window.location.href = "entrar.html";
+        return;
+    }
+
+    if (perfil.tipo_conta === "admin") {
+        window.location.href = "painel-admin.html";
+        return;
+    }
+
+    const { data: organizacao } = await supabaseClient
+        .from("organizacoes")
+        .select("id, nome_fantasia")
+        .eq("responsavel_id", usuarioId)
+        .single();
+
+    if (!organizacao) {
+        return;
+    }
+
+    organizacaoAtualId = organizacao.id;
+    document.getElementById("nomeOrganizacao").textContent = organizacao.nome_fantasia;
+
+    carregarCausasFormulario();
+    carregarMinhasVagas();
+    carregarCandidaturas();
+})();
+
+</script>
+
+</body>
+</html>

@@ -257,10 +257,29 @@
             return;
         }
 
+        const { data: perfil } = await supabaseClient
+            .from("perfis")
+            .select("tipo_conta, ativo")
+            .eq("id", data.session.user.id)
+            .single();
+
+        if (perfil && perfil.ativo === false) {
+            await supabaseClient.auth.signOut();
+            mostrarMensagemLogin("Esta conta foi desativada. Entre em contato com o suporte.", "danger");
+            return;
+        }
+
+        const destinoPorTipo = {
+            admin: "painel-admin.html",
+            ong: "painel-ong.html"
+        };
+
+        const destino = destinoPorTipo[perfil ? perfil.tipo_conta : ""] || "configuracoes.html";
+
         mostrarMensagemLogin("Login realizado com sucesso! Redirecionando...", "success");
 
         setTimeout(function () {
-            window.location.href = "configuracoes.html";
+            window.location.href = destino;
         }, 1200);
     });
 

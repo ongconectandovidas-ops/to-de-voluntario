@@ -94,7 +94,7 @@
         <div class="texto-banner">
 
             <span>
-                Oportunidades
+                Todas as oportunidades
             </span>
 
             <h1>
@@ -122,7 +122,7 @@
 
     <section class="pesquisa">
 
-        <input type="text" placeholder="Buscar oportunidades..." aria-label="Buscar oportunidades">
+        <input type="text" id="buscaTexto" placeholder="Buscar oportunidades..." aria-label="Buscar oportunidades">
 
         <select id="estado" aria-label="Filtrar por estado">
 
@@ -136,38 +136,30 @@
 
 </select>
 
-        <select aria-label="Filtrar por causa">
-            <option>Causas</option>
-            <option>Educação</option>
-            <option>Animais</option>
-            <option>Saúde</option>
-            <option>Meio ambiente</option>
+        <select id="causaFiltro" aria-label="Filtrar por causa">
+            <option value="">Causas</option>
         </select>
 
-        <select aria-label="Filtrar por habilidade">
-            <option>Habilidades</option>
-            <option>Comunicação</option>
-            <option>Ensino</option>
-            <option>Organização</option>
-            <option>Cuidados</option>
+        <select id="habilidadeFiltro" aria-label="Filtrar por habilidade">
+            <option value="">Habilidades</option>
         </select>
 
-        <select aria-label="Filtrar por disponibilidade">
-            <option>Disponibilidade</option>
-            <option>Manhã</option>
-            <option>Tarde</option>
-            <option>Noite</option>
-            <option>Integral</option>
+        <select id="disponibilidadeFiltro" aria-label="Filtrar por disponibilidade">
+            <option value="">Disponibilidade</option>
+            <option value="manha">Manhã</option>
+            <option value="tarde">Tarde</option>
+            <option value="noite">Noite</option>
+            <option value="integral">Integral</option>
         </select>
 
-        <select aria-label="Filtrar por dias de atuação">
-            <option>Dias de atuação</option>
-            <option>Segunda a sexta</option>
-            <option>Finais de semana</option>
-            <option>Todos os dias</option>
+        <select id="diasFiltro" aria-label="Filtrar por dias de atuação">
+            <option value="">Dias de atuação</option>
+            <option value="segunda_a_sexta">Segunda a sexta</option>
+            <option value="fins_de_semana">Finais de semana</option>
+            <option value="todos_os_dias">Todos os dias</option>
         </select>
 
-        <button>
+        <button id="botaoBuscarOportunidades">
             Buscar
         </button>
 
@@ -175,235 +167,13 @@
 
     <!-- CARDS -->
 
-    <section class="cards-oportunidades">
-
-        <!-- CARD 1 -->
-
-        <div class="card-oportunidade">
-
-            <span class="tipo">
-                Presencial
-            </span>
-
-            <h3>Apoio Escolar</h3>
-
-            <p class="ong">
-                Instituto Esperança
-            </p>
-
-            <p>
-                Ajude crianças com reforço escolar e atividades educativas.
-            </p>
-
-            <p class="cidade">
-                <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> São Paulo - SP
-            </p>
-
-            <div class="botoes-card">
-
-                <button class="detalhes">
-                    Ver detalhes
-                </button>
-
-                <button>
-                    Participar
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- CARD 2 -->
-
-        <div class="card-oportunidade">
-
-            <span class="tipo online">
-                Online
-            </span>
-
-            <h3>Mentoria Educacional</h3>
-
-            <p class="ong">
-                Projeto Futuro
-            </p>
-
-            <p>
-                Compartilhe conhecimentos e ajude jovens nos estudos.
-            </p>
-
-            <p class="cidade">
-                <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> Remoto
-            </p>
-
-            <div class="botoes-card">
-
-                <button class="detalhes">
-                    Ver detalhes
-                </button>
-
-                <button>
-                    Participar
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- CARD 3 -->
-
-        <div class="card-oportunidade">
-
-            <span class="tipo">
-                Híbrido
-            </span>
-
-            <h3>Cuidado com Animais</h3>
-
-            <p class="ong">
-                Patinhas do Bem
-            </p>
-
-            <p>
-                Ajude no cuidado de animais resgatados.
-            </p>
-
-            <p class="cidade">
-                <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> Campinas - SP
-            </p>
-
-            <div class="botoes-card">
-
-                <button class="detalhes">
-                    Ver detalhes
-                </button>
-
-                <button>
-                    Participar
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- CARD 4 -->
-
-        <div class="card-oportunidade">
-
-            <span class="tipo">
-                Presencial
-            </span>
-
-            <h3>Distribuição de Alimentos</h3>
-
-            <p class="ong">
-                Corrente do Bem
-            </p>
-
-            <p>
-                Auxilie na entrega de alimentos para famílias em vulnerabilidade.
-            </p>
-
-            <p class="cidade">
-                <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> Rio de Janeiro - RJ
-            </p>
-
-            <div class="botoes-card">
-
-                <button class="detalhes">
-                    Ver detalhes
-                </button>
-
-                <button>
-                    Participar
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- CARD 5 -->
-
-        <div class="card-oportunidade">
-
-            <span class="tipo online">
-                Online
-            </span>
-
-            <h3>Apoio Psicológico</h3>
-
-            <p class="ong">
-                Rede Acolher
-            </p>
-
-            <p>
-                Ofereça escuta e acolhimento em projetos sociais.
-            </p>
-
-            <p class="cidade">
-                <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> Remoto
-            </p>
-
-            <div class="botoes-card">
-
-                <button class="detalhes">
-                    Ver detalhes
-                </button>
-
-                <button>
-                    Participar
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- CARD 6 -->
-
-        <div class="card-oportunidade">
-
-            <span class="tipo">
-                Presencial
-            </span>
-
-            <h3>Plantio Comunitário</h3>
-
-            <p class="ong">
-                Verde Vida
-            </p>
-
-            <p>
-                Participe de ações ambientais e plantio de árvores.
-            </p>
-
-            <p class="cidade">
-                <i class="bi bi-geo-alt-fill" aria-hidden="true"></i> Curitiba - PR
-            </p>
-
-            <div class="botoes-card">
-
-                <button class="detalhes">
-                    Ver detalhes
-                </button>
-
-                <button>
-                    Participar
-                </button>
-
-            </div>
-
-        </div>
+    <section class="cards-oportunidades" id="cardsOportunidades">
+
+        <p class="texto-ajuda">
+            Carregando oportunidades...
+        </p>
 
     </section>
-
-    <!-- CARREGAR MAIS -->
-
-    <div class="carregar-mais">
-
-        <button>
-            <i class="bi bi-arrow-down" aria-hidden="true"></i> Carregar mais oportunidades
-        </button>
-
-    </div>
 
     <!-- COMO FUNCIONA -->
 
@@ -618,7 +388,7 @@
     <div class="rodape-coluna">
 
         <h3>
-            Conectando Vidas
+            Tô de Voluntário
         </h3>
 
         <p>
@@ -645,7 +415,7 @@
             Contato
         </h4>
 
-        <p>Email: contato@conectandovidas.com</p>
+        <p>Email: todevoluntario@email.com</p>
         <p>Telefone: (11) 99999-9999</p>
 
     </div>

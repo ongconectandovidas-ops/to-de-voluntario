@@ -39,6 +39,10 @@
     <i class="bi bi-person-fill" aria-hidden="true"></i> Meu perfil
 </a>
 
+<a href="configuracoes.html?aba=oportunidades">
+    <i class="bi bi-clipboard-check-fill" aria-hidden="true"></i> Minhas oportunidades
+</a>
+
 <a href="configuracoes.html?aba=aparencia">
     <i class="bi bi-gear-fill" aria-hidden="true"></i> Aparência
 </a>
@@ -59,7 +63,7 @@
     <i class="bi bi-question-circle-fill" aria-hidden="true"></i> Central de ajuda
 </a>
 
-<a href="#">
+<a href="#" id="botaoSairSidebar">
     <i class="bi bi-box-arrow-right" aria-hidden="true"></i> Sair
 </a>
 
@@ -103,6 +107,10 @@
             <i class="bi bi-person-fill" aria-hidden="true"></i> Perfil
         </button>
 
+        <button class="aba-btn" data-aba="oportunidades">
+            <i class="bi bi-clipboard-check-fill" aria-hidden="true"></i> Minhas oportunidades
+        </button>
+
         <button class="aba-btn" data-aba="aparencia">
             <i class="bi bi-gear-fill" aria-hidden="true"></i> Aparência
         </button>
@@ -135,24 +143,20 @@
 
         <div class="aba-conteudo ativo" id="perfil">
 
-            <span class="modo-demo">
-                Modo demonstração
-            </span>
-
             <div class="perfil-topo">
 
-                <div class="foto-perfil" aria-hidden="true">
-                    A
+                <div class="foto-perfil" id="perfilInicial" aria-hidden="true">
+                    -
                 </div>
 
                 <div>
 
-                    <h2>
-                        Ana Souza
+                    <h2 id="perfilNomeTopo">
+                        Carregando...
                     </h2>
 
-                    <p>
-                        Voluntária • Educação
+                    <p id="perfilSubtitulo">
+                        Voluntário(a)
                     </p>
 
                 </div>
@@ -168,7 +172,7 @@
                         Nome completo
                     </label>
 
-                    <input type="text" id="perfilNome" value="Ana Souza">
+                    <input type="text" id="perfilNome" readonly>
 
                 </div>
 
@@ -179,7 +183,7 @@
                         E-mail
                     </label>
 
-                    <input type="email" id="perfilEmail" value="ana@email.com">
+                    <input type="email" id="perfilEmail" readonly>
 
                 </div>
 
@@ -190,7 +194,7 @@
                         Telefone
                     </label>
 
-                    <input type="text" id="perfilTelefone" value="(16) 99999-9999">
+                    <input type="text" id="perfilTelefone" readonly>
 
                 </div>
 
@@ -198,19 +202,37 @@
                 <div class="input-config">
 
                     <label for="perfilCidade">
-                        Cidade
+                        Cidade de atuação
                     </label>
 
-                    <input type="text" id="perfilCidade" value="Ibitinga - SP">
+                    <input type="text" id="perfilCidade" readonly>
 
                 </div>
 
             </div>
 
+        </div>
 
-            <button class="salvar-btn">
-                Salvar alterações
-            </button>
+
+        <!-- MINHAS OPORTUNIDADES -->
+
+        <div class="aba-conteudo" id="oportunidades">
+
+            <h2>
+                Minhas oportunidades
+            </h2>
+
+            <p class="texto-ajuda">
+                Oportunidades para as quais você já se candidatou.
+            </p>
+
+            <div class="lista-minhas-oportunidades" id="listaMinhasOportunidades">
+
+                <p class="texto-ajuda">
+                    Carregando...
+                </p>
+
+            </div>
 
         </div>
 
@@ -525,6 +547,134 @@
 <script src="../assets/js/script.js"></script>
 <script src="../assets/js/supabase-client.js"></script>
 <script src="../assets/js/acessibilidade.js"></script>
+
+<script>
+
+// ========================================
+// PAINEL DO VOLUNTÁRIO
+// ========================================
+
+const rotulosStatusCandidatura = {
+    pendente: "Pendente",
+    aprovada: "Aprovada",
+    recusada: "Recusada",
+    cancelada: "Cancelada"
+};
+
+function criarCardMinhaOportunidade(candidatura) {
+    const op = candidatura.oportunidades || {};
+    const card = document.createElement("div");
+    card.className = "card-oportunidade";
+
+    const status = document.createElement("span");
+    status.className = "tipo status-" + candidatura.status;
+    status.textContent = rotulosStatusCandidatura[candidatura.status] || candidatura.status;
+
+    const titulo = document.createElement("h3");
+    titulo.textContent = op.titulo || "Oportunidade removida";
+
+    const ong = document.createElement("p");
+    ong.className = "ong";
+    ong.textContent = op.organizacoes ? op.organizacoes.nome_fantasia : "";
+
+    const local = document.createElement("p");
+    local.className = "cidade";
+    local.innerHTML = '<i class="bi bi-geo-alt-fill" aria-hidden="true"></i> ';
+    local.append(textoLocalOportunidade(op));
+
+    card.append(status, titulo, ong, local);
+    return card;
+}
+
+async function carregarMinhasOportunidades(voluntarioId) {
+    const lista = document.getElementById("listaMinhasOportunidades");
+
+    const { data, error } = await supabaseClient
+        .from("candidaturas")
+        .select("id, status, criado_em, oportunidades(titulo, cidade, estado, modalidade, organizacoes(nome_fantasia))")
+        .eq("voluntario_id", voluntarioId)
+        .order("criado_em", { ascending: false });
+
+    lista.innerHTML = "";
+
+    if (error || !data || data.length === 0) {
+        const mensagem = document.createElement("p");
+        mensagem.className = "texto-ajuda";
+        mensagem.textContent = "Você ainda não se candidatou a nenhuma oportunidade.";
+        lista.appendChild(mensagem);
+        return;
+    }
+
+    data.forEach(function (candidatura) {
+        lista.appendChild(criarCardMinhaOportunidade(candidatura));
+    });
+}
+
+(async function carregarPainelVoluntario() {
+    if (!supabaseClient) {
+        return;
+    }
+
+    const { data: sessaoData } = await supabaseClient.auth.getSession();
+
+    if (!sessaoData.session) {
+        window.location.href = "entrar.html";
+        return;
+    }
+
+    const usuarioId = sessaoData.session.user.id;
+
+    const { data: perfil } = await supabaseClient
+        .from("perfis")
+        .select("nome, sobrenome, email, telefone, tipo_conta, ativo, voluntarios(cidade_atuacao)")
+        .eq("id", usuarioId)
+        .single();
+
+    if (!perfil) {
+        return;
+    }
+
+    if (perfil.ativo === false) {
+        await supabaseClient.auth.signOut();
+        window.location.href = "entrar.html";
+        return;
+    }
+
+    if (perfil.tipo_conta === "ong") {
+        window.location.href = "painel-ong.html";
+        return;
+    }
+
+    if (perfil.tipo_conta === "admin") {
+        window.location.href = "painel-admin.html";
+        return;
+    }
+
+    const nomeCompleto = [perfil.nome, perfil.sobrenome].filter(Boolean).join(" ");
+    const cidade = perfil.voluntarios ? perfil.voluntarios.cidade_atuacao : "";
+
+    document.getElementById("perfilInicial").textContent = (perfil.nome || "?").charAt(0).toUpperCase();
+    document.getElementById("perfilNomeTopo").textContent = nomeCompleto || perfil.email;
+    document.getElementById("perfilSubtitulo").textContent = "Voluntário(a)" + (cidade ? " - " + cidade : "");
+    document.getElementById("perfilNome").value = nomeCompleto;
+    document.getElementById("perfilEmail").value = perfil.email;
+    document.getElementById("perfilTelefone").value = perfil.telefone || "";
+    document.getElementById("perfilCidade").value = cidade || "";
+
+    carregarMinhasOportunidades(usuarioId);
+})();
+
+const botaoSairSidebar = document.getElementById("botaoSairSidebar");
+
+if (botaoSairSidebar) {
+    botaoSairSidebar.addEventListener("click", async function (evento) {
+        evento.preventDefault();
+        await supabaseClient.auth.signOut();
+        window.location.href = "../index.html";
+    });
+}
+
+</script>
 
 </body>
 </html>
