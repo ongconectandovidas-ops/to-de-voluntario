@@ -4,7 +4,7 @@
 // nunca dados pessoais/identificáveis do usuário.
 
 const NVIDIA_URL = "https://integrate.api.nvidia.com/v1/chat/completions";
-const NVIDIA_MODEL = "meta/llama-3.1-8b-instruct";
+const NVIDIA_MODEL = "z-ai/glm-5.3-flash";
 
 const SYSTEM_PROMPT = "Você é o assistente virtual do site 'Tô de Voluntário', uma plataforma que conecta " +
     "voluntários e ONGs e recebe doações via Pix/boleto. Responda em português do Brasil, de forma curta " +

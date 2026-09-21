@@ -74,14 +74,13 @@ body{
     color: white;
     border: none;
     padding: 15px 35px;
-    border-radius: 30px;
+    border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
     font-size: 16px;
 }
 
 .botoes button:hover{
-    transform: scale(1.05);
 }
 
 .botao-secundario{
@@ -101,7 +100,7 @@ body{
 
 .imagem-inicio img{
     width: 100%;
-    border-radius: 30px;
+    border-radius: 10px;
 }
 
 @media(max-width: 900px){
@@ -139,21 +138,23 @@ body{
 }
 
 .card{
-    background-color: #1F9AAA;
-    color: white;
+    background-color: #fff;
+    color: #156E78;
     width: 250px;
     padding: 40px 25px;
-    border-radius: 25px;
-    transition: 0.3s;
+    border: 1px solid #E4DCC8;
+    border-radius: 10px;
+    transition: border-color 0.3s;
 }
 
 .card:hover{
-    transform: translateY(-10px);
+    border-color: #1F9AAA;
 }
 
 .icone{
-    font-size: 50px;
+    font-size: 40px;
     margin-bottom: 20px;
+    color: #1F9AAA;
 }
 
 .card h3{
@@ -207,7 +208,7 @@ body{
 .vaga{
     background-color: white;
     padding: 30px;
-    border-radius: 25px;
+    border-radius: 6px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -231,20 +232,19 @@ body{
     color: white;
     border: none;
     padding: 14px 28px;
-    border-radius: 30px;
+    border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
 }
 
 .vaga button:hover{
-    transform: scale(1.05);
 }
 
 .ong-card{
     flex: 1;
     background-color: #CDE8E5;
     padding: 40px 30px;
-    border-radius: 30px;
+    border-radius: 10px;
     text-align: center;
 }
 
@@ -268,13 +268,12 @@ body{
     color: white;
     border: none;
     padding: 15px 30px;
-    border-radius: 30px;
+    border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
 }
 
 .ong-card button:hover{
-    transform: scale(1.05);
 }
 
 /* IMPACTO */
@@ -348,7 +347,7 @@ body{
     background-color: #DDEFE9;
     width: 320px;
     padding: 40px 30px;
-    border-radius: 30px;
+    border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.08);
 }
 
@@ -399,14 +398,13 @@ body{
     color: white;
     border: none;
     padding: 16px 35px;
-    border-radius: 30px;
+    border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
     font-size: 16px;
 }
 
 .botoes-final button:hover{
-    transform: scale(1.05);
 }
 
 .botao-final-secundario{
@@ -489,7 +487,7 @@ body{
     background-color: #1F9AAA;
     color: white;
     padding: 10px 22px;
-    border-radius: 30px;
+    border-radius: 10px;
     font-size: 15px;
 }
 
@@ -512,7 +510,7 @@ body{
 
 .imagem-banner img{
     width: 100%;
-    border-radius: 30px;
+    border-radius: 10px;
 }
 
 /* PESQUISA */
@@ -521,7 +519,7 @@ body{
     background-color: #E8DCC2;
     margin: 0 80px;
     padding: 30px;
-    border-radius: 30px;
+    border-radius: 10px;
 
     display: flex;
     justify-content: center;
@@ -532,7 +530,7 @@ body{
 .pesquisa input,
 .pesquisa select{
     padding: 15px 20px;
-    border-radius: 20px;
+    border-radius: 6px;
     border: none;
     min-width: 220px;
     font-size: 16px;
@@ -543,14 +541,13 @@ body{
     color: white;
     border: none;
     padding: 15px 35px;
-    border-radius: 20px;
+    border-radius: 6px;
     cursor: pointer;
     transition: 0.3s;
     font-size: 16px;
 }
 
 .pesquisa button:hover{
-    transform: scale(1.05);
 }
 
 /* CARDS */
@@ -566,21 +563,20 @@ body{
 .card-oportunidade{
     background-color: white;
     padding: 35px;
-    border-radius: 30px;
+    border-radius: 10px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 
     transition: 0.3s;
 }
 
 .card-oportunidade:hover{
-    transform: translateY(-10px);
 }
 
 .tipo{
     background-color: #1F9AAA;
     color: white;
     padding: 8px 18px;
-    border-radius: 20px;
+    border-radius: 6px;
     font-size: 14px;
 }
 
@@ -627,7 +623,7 @@ body{
 
 .stat-card{
     background-color: white;
-    border-radius: 25px;
+    border-radius: 6px;
     padding: 25px 30px;
     display: flex;
     align-items: center;
@@ -694,13 +690,12 @@ body{
     color: white;
     border: none;
     padding: 13px 22px;
-    border-radius: 20px;
+    border-radius: 6px;
     cursor: pointer;
     transition: 0.3s;
 }
 
 .botoes-card button:hover{
-    transform: scale(1.05);
 }
 
 .detalhes{
@@ -734,13 +729,12 @@ body{
     color: white;
     width: 250px;
     padding: 40px 25px;
-    border-radius: 30px;
+    border-radius: 10px;
 
     transition: 0.3s;
 }
 
 .passo:hover{
-    transform: translateY(-10px);
 }
 
 .icone-passo{
@@ -845,7 +839,7 @@ body{
     margin: 80px;
     padding: 50px;
 
-    border-radius: 30px;
+    border-radius: 10px;
 
     display: flex;
     justify-content: space-between;
@@ -873,7 +867,7 @@ body{
 
     padding: 18px 35px;
 
-    border-radius: 40px;
+    border-radius: 10px;
 
     font-size: 18px;
     font-weight: bold;
@@ -884,7 +878,6 @@ body{
 }
 
 .cta-final button:hover{
-    transform: scale(1.05);
 }
 /* CARREGAR MAIS */
 
@@ -905,7 +898,7 @@ body{
 
     padding: 18px 35px;
 
-    border-radius: 40px;
+    border-radius: 10px;
 
     font-size: 18px;
     font-weight: bold;
@@ -919,7 +912,6 @@ body{
     background-color: #156E78;
     color: white;
 
-    transform: scale(1.05);
 }
 /* EVENTOS */
 
@@ -958,7 +950,7 @@ body{
 
     padding: 35px;
 
-    border-radius: 25px;
+    border-radius: 6px;
 
     box-shadow: 0 5px 20px rgba(0,0,0,0.08);
 
@@ -966,7 +958,6 @@ body{
 }
 
 .card-evento:hover{
-    transform: translateY(-10px);
 }
 
 .data-evento{
@@ -976,7 +967,7 @@ body{
 
     padding: 10px 18px;
 
-    border-radius: 20px;
+    border-radius: 6px;
 
     font-weight: bold;
 }
@@ -1009,7 +1000,7 @@ body{
 
     padding: 60px;
 
-    border-radius: 30px;
+    border-radius: 10px;
 
     display: flex;
     justify-content: space-between;
@@ -1052,7 +1043,7 @@ body{
 
     border: none;
 
-    border-radius: 40px;
+    border-radius: 10px;
 
     width: 300px;
 
@@ -1068,7 +1059,7 @@ body{
 
     padding: 18px 30px;
 
-    border-radius: 40px;
+    border-radius: 10px;
 
     font-size: 16px;
     font-weight: bold;
@@ -1079,7 +1070,6 @@ body{
 }
 
 .newsletter-form button:hover{
-    transform: scale(1.05);
 }
 /* SOBRE */
 
@@ -1115,7 +1105,7 @@ body{
 
 .imagem-hero-sobre img{
     width: 100%;
-    border-radius: 35px;
+    border-radius: 10px;
 }
 
 
@@ -1135,7 +1125,7 @@ body{
 
 .imagem-historia img{
     width: 100%;
-    border-radius: 35px;
+    border-radius: 10px;
 }
 
 .texto-historia{
@@ -1179,21 +1169,23 @@ body{
 }
 
 .card-valor{
-    background-color: #1F9AAA;
-    color: white;
+    background-color: #fff;
+    color: #156E78;
     width: 320px;
     padding: 45px 30px;
-    border-radius: 30px;
-    transition: 0.3s;
+    border: 1px solid #E4DCC8;
+    border-radius: 10px;
+    transition: border-color 0.3s;
 }
 
 .card-valor:hover{
-    transform: translateY(-10px);
+    border-color: #1F9AAA;
 }
 
 .icone-valor{
-    font-size: 50px;
+    font-size: 42px;
     margin-bottom: 25px;
+    color: #1F9AAA;
 }
 
 .card-valor h3{
@@ -1231,7 +1223,7 @@ body{
     flex: 1;
     background-color: white;
     padding: 45px;
-    border-radius: 30px;
+    border-radius: 10px;
 }
 
 .funciona-card h3{
@@ -1282,7 +1274,7 @@ body{
     background-color: #D8ECEB;
     width: 250px;
     padding: 45px 25px;
-    border-radius: 30px;
+    border-radius: 10px;
 }
 
 .numero-card h3{
@@ -1320,7 +1312,7 @@ body{
 .resultado-card{
     flex: 1;
     background-color: white;
-    border-radius: 30px;
+    border-radius: 10px;
     overflow: hidden;
 }
 
@@ -1365,10 +1357,11 @@ body{
 
 .depoimento-card{
     flex: 1;
-    background-color: #1F9AAA;
-    color: white;
+    background-color: #fff;
+    color: #156E78;
     padding: 40px;
-    border-radius: 30px;
+    border: 1px solid #E4DCC8;
+    border-radius: 10px;
 }
 
 .depoimento-card p{
@@ -1412,7 +1405,7 @@ body{
     width: 420px;
     height: 300px;
     object-fit: cover;
-    border-radius: 30px;
+    border-radius: 10px;
 }
 
 @keyframes slide{
@@ -1453,14 +1446,13 @@ body{
     color: white;
     border: none;
     padding: 18px 40px;
-    border-radius: 30px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 18px;
     transition: 0.3s;
 }
 
 .cta-sobre button:hover{
-    transform: scale(1.05);
 }
 
 
@@ -1530,14 +1522,13 @@ body{
     color: white;
     border: none;
     padding: 18px 40px;
-    border-radius: 30px;
+    border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
     font-size: 18px;
 }
 
 .texto-hero-doacoes button:hover{
-    transform: scale(1.05);
 }
 
 .imagem-hero-doacoes{
@@ -1546,7 +1537,7 @@ body{
 
 .imagem-hero-doacoes img{
     width: 100%;
-    border-radius: 35px;
+    border-radius: 10px;
 }
 
 
@@ -1566,7 +1557,7 @@ body{
 
 .imagem-ajuda img{
     width: 100%;
-    border-radius: 35px;
+    border-radius: 10px;
 }
 
 .texto-ajuda{
@@ -1633,13 +1624,12 @@ body{
     color: white;
     border: none;
     padding: 16px 35px;
-    border-radius: 30px;
+    border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
 }
 
 .texto-arrecadacao button:hover{
-    transform: scale(1.05);
 }
 
 .imagem-arrecadacao{
@@ -1648,7 +1638,7 @@ body{
 
 .imagem-arrecadacao img{
     width: 100%;
-    border-radius: 35px;
+    border-radius: 10px;
 }
 
 
@@ -1723,7 +1713,7 @@ body{
 .item-ajuda{
     background-color: white;
     padding: 18px 35px;
-    border-radius: 30px;
+    border-radius: 10px;
     font-size: 18px;
     color: #156E78;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
@@ -1770,14 +1760,13 @@ body{
     color: #156E78;
     border: none;
     padding: 18px 40px;
-    border-radius: 30px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 18px;
     transition: 0.3s;
 }
 
 .cta-doacoes button:hover{
-    transform: scale(1.05);
 }
 
 
@@ -1824,7 +1813,7 @@ body{
     max-width: 520px;
     background-color: white;
     padding: 60px;
-    border-radius: 35px;
+    border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
@@ -1855,7 +1844,7 @@ body{
 
 .campo-form input{
     padding: 18px;
-    border-radius: 15px;
+    border-radius: 6px;
     border: 1px solid #D8ECEB;
     outline: none;
     font-size: 16px;
@@ -1892,7 +1881,7 @@ body{
     width: 100%;
     padding: 18px;
     border: none;
-    border-radius: 18px;
+    border-radius: 6px;
     background-color: #1F9AAA;
     color: white;
     font-size: 18px;
@@ -1901,7 +1890,6 @@ body{
 }
 
 .card-login button:hover{
-    transform: scale(1.02);
 }
 
 .criar-conta{
@@ -1969,7 +1957,7 @@ body{
     flex: 1;
     background-color: white;
     padding: 50px;
-    border-radius: 35px;
+    border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.06);
 }
 
@@ -1995,7 +1983,7 @@ body{
 .campo-contato input,
 .campo-contato textarea{
     padding: 18px;
-    border-radius: 18px;
+    border-radius: 6px;
     border: 1px solid #D8ECEB;
     outline: none;
     font-size: 16px;
@@ -2016,7 +2004,7 @@ body{
     width: 100%;
     border: none;
     padding: 18px;
-    border-radius: 18px;
+    border-radius: 6px;
     background-color: #1F9AAA;
     color: white;
     font-size: 18px;
@@ -2025,7 +2013,6 @@ body{
 }
 
 .formulario-contato button:hover{
-    transform: scale(1.02);
 }
 
 
@@ -2036,7 +2023,7 @@ body{
     background-color: #156E78;
     color: white;
     padding: 50px;
-    border-radius: 35px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -2057,7 +2044,7 @@ body{
     margin-top: 40px;
     background-color: rgba(255,255,255,0.15);
     padding: 30px;
-    border-radius: 25px;
+    border-radius: 6px;
 }
 
 .horario h3{
@@ -2086,7 +2073,7 @@ body{
     background-color: #156E78;
     color: white;
     padding: 50px;
-    border-radius: 35px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -2108,14 +2095,14 @@ body{
     margin-top: 40px;
     background-color: rgba(255,255,255,0.15);
     padding: 25px;
-    border-radius: 25px;
+    border-radius: 6px;
 }
 
 .form-agendamento{
     flex: 1;
     background-color: white;
     padding: 50px;
-    border-radius: 35px;
+    border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.06);
 }
 
@@ -2134,7 +2121,7 @@ body{
 .campo-agendamento input,
 .campo-agendamento textarea{
     padding: 18px;
-    border-radius: 18px;
+    border-radius: 6px;
     border: 1px solid #D8ECEB;
     outline: none;
     font-size: 16px;
@@ -2164,7 +2151,7 @@ body{
     width: 100%;
     border: none;
     padding: 18px;
-    border-radius: 18px;
+    border-radius: 6px;
     background-color: #1F9AAA;
     color: white;
     font-size: 18px;
@@ -2173,7 +2160,6 @@ body{
 }
 
 .form-agendamento button:hover{
-    transform: scale(1.02);
 }
 
 
@@ -2204,14 +2190,13 @@ body{
     color: white;
     border: none;
     padding: 18px 40px;
-    border-radius: 30px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 18px;
     transition: 0.3s;
 }
 
 .parceria button:hover{
-    transform: scale(1.05);
 }
 
 
@@ -2239,7 +2224,7 @@ body{
 .rede-item{
     background-color: white;
     padding: 18px 35px;
-    border-radius: 30px;
+    border-radius: 10px;
     color: #156E78;
     font-weight: 600;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
@@ -2301,7 +2286,6 @@ body{
 }
 
 .menu-toggle:hover{
-    transform: scale(1.1);
 }
 
 body:has(.sidebar-lateral.ativo) .menu-toggle{
@@ -2359,7 +2343,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     text-decoration: none;
     color: #156E78;
     padding: 18px;
-    border-radius: 18px;
+    border-radius: 6px;
     transition: 0.3s;
     font-size: 18px;
     font-weight: 500;
@@ -2417,7 +2401,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 
 .card-cadastro{
     background-color: #fff;
-    border-radius: 30px;
+    border-radius: 10px;
     padding: 45px 35px;
     box-shadow: 0 5px 25px rgba(0,0,0,0.06);
     transition: 0.4s;
@@ -2425,7 +2409,6 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 }
 
 .card-cadastro:hover{
-    transform: translateY(-10px);
 }
 
 .icone-cadastro{
@@ -2451,7 +2434,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     background-color: #156E78;
     color: white;
     padding: 16px 28px;
-    border-radius: 15px;
+    border-radius: 6px;
     text-decoration: none;
     transition: 0.3s;
     font-weight: 600;
@@ -2485,7 +2468,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 .passo{
     background-color: white;
     padding: 40px 25px;
-    border-radius: 25px;
+    border-radius: 6px;
 }
 
 .passo span{
@@ -2531,7 +2514,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 .beneficio-item{
     background-color: #F8F5EF;
     padding: 45px 30px;
-    border-radius: 25px;
+    border-radius: 6px;
 }
 
 .beneficio-item h3{
@@ -2568,7 +2551,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     background-color: white;
     color: #156E78;
     padding: 18px 35px;
-    border-radius: 18px;
+    border-radius: 6px;
     text-decoration: none;
     font-size: 18px;
     font-weight: 600;
@@ -2576,7 +2559,6 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 }
 
 .final-cadastro a:hover{
-    transform: scale(1.05);
 }
 
 
@@ -2639,7 +2621,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     background-color: #F5ECD7;
     color: #156E78;
     padding: 10px 22px;
-    border-radius: 30px;
+    border-radius: 10px;
     font-size: 15px;
     font-weight: 600;
 }
@@ -2667,7 +2649,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     margin: auto;
     background-color: white;
     padding: 70px;
-    border-radius: 35px;
+    border-radius: 10px;
     box-shadow: 0 5px 25px rgba(0,0,0,0.05);
 }
 
@@ -2713,7 +2695,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 .input-group input,
 .input-group select{
     height: 60px;
-    border-radius: 16px;
+    border-radius: 6px;
     border: 1px solid #dcdcdc;
     padding: 0 20px;
     font-size: 16px;
@@ -2771,7 +2753,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     color: white;
     font-size: 18px;
     font-weight: 600;
-    border-radius: 18px;
+    border-radius: 6px;
     cursor: pointer;
     transition: 0.3s;
 }
@@ -2806,7 +2788,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     width: 90%;
     max-width: 850px;
     background-color: white;
-    border-radius: 30px;
+    border-radius: 10px;
     padding: 50px;
     position: relative;
     max-height: 85vh;
@@ -2885,7 +2867,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 .menu-configuracoes{
     width: 280px;
     background-color: white;
-    border-radius: 30px;
+    border-radius: 10px;
     padding: 30px 20px;
     height: fit-content;
     box-shadow: 0 5px 25px rgba(0,0,0,0.05);
@@ -2898,7 +2880,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     border: none;
     background-color: transparent;
     padding: 18px 20px;
-    border-radius: 16px;
+    border-radius: 6px;
     text-align: left;
     font-size: 16px;
     cursor: pointer;
@@ -2922,7 +2904,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 .conteudo-configuracoes{
     flex: 1;
     background-color: white;
-    border-radius: 35px;
+    border-radius: 10px;
     padding: 50px;
     box-shadow: 0 5px 25px rgba(0,0,0,0.05);
 }
@@ -2999,7 +2981,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 
 .input-config input{
     height: 60px;
-    border-radius: 16px;
+    border-radius: 6px;
     border: 1px solid #ddd;
     padding: 0 20px;
     font-size: 16px;
@@ -3020,7 +3002,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     color: white;
     border: none;
     padding: 18px 35px;
-    border-radius: 16px;
+    border-radius: 6px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
@@ -3108,7 +3090,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     border: none;
     width: 60px;
     height: 60px;
-    border-radius: 16px;
+    border-radius: 6px;
     font-size: 22px;
     font-weight: bold;
     cursor: pointer;
