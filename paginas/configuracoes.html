@@ -595,8 +595,45 @@ const rotulosStatusCandidatura = {
     pendente: "Pendente",
     aprovada: "Aprovada",
     recusada: "Recusada",
-    cancelada: "Cancelada"
+    cancelada: "Cancelada",
+    concluida: "Concluída"
 };
+
+async function baixarCertificado(candidaturaId, botao) {
+    const textoOriginal = botao.textContent;
+    botao.disabled = true;
+    botao.textContent = "Gerando...";
+
+    try {
+        const { data: sessaoData } = await supabaseClient.auth.getSession();
+
+        const resposta = await fetch("/api/gerar-certificado", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + sessaoData.session.access_token
+            },
+            body: JSON.stringify({ candidaturaId })
+        });
+
+        if (!resposta.ok) {
+            const erro = await resposta.json().catch(function () { return {}; });
+            alert(erro.erro || "Não foi possível gerar o certificado.");
+            return;
+        }
+
+        const blob = await resposta.blob();
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "certificado.pdf";
+        link.click();
+        URL.revokeObjectURL(url);
+    } finally {
+        botao.disabled = false;
+        botao.textContent = textoOriginal;
+    }
+}
 
 function criarCardMinhaOportunidade(candidatura) {
     const op = candidatura.oportunidades || {};
@@ -620,6 +657,21 @@ function criarCardMinhaOportunidade(candidatura) {
     local.append(textoLocalOportunidade(op));
 
     card.append(status, titulo, ong, local);
+
+    if (candidatura.status === "concluida") {
+        const botoes = document.createElement("div");
+        botoes.className = "botoes-card";
+
+        const botaoCertificado = document.createElement("button");
+        botaoCertificado.textContent = "Baixar certificado";
+        botaoCertificado.addEventListener("click", function () {
+            baixarCertificado(candidatura.id, botaoCertificado);
+        });
+
+        botoes.appendChild(botaoCertificado);
+        card.appendChild(botoes);
+    }
+
     return card;
 }
 

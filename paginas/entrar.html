@@ -131,7 +131,7 @@
 
                     </div>
 
-                    <a href="#">
+                    <a href="#" id="linkEsqueciSenha">
                         Esqueci minha senha
                     </a>
 
@@ -281,6 +281,30 @@
         setTimeout(function () {
             window.location.href = destino;
         }, 1200);
+    });
+
+    document.getElementById("linkEsqueciSenha").addEventListener("click", async function (evento) {
+        evento.preventDefault();
+
+        if (!supabaseClient) {
+            mostrarMensagemLogin("Recuperação de senha indisponível no momento.", "danger");
+            return;
+        }
+
+        const email = window.prompt("Digite o e-mail da sua conta para receber o link de redefinição:");
+
+        if (!email) {
+            return;
+        }
+
+        const { error } = await supabaseClient.auth.resetPasswordForEmail(email.trim(), {
+            redirectTo: window.location.origin + "/paginas/configuracoes.html"
+        });
+
+        mostrarMensagemLogin(
+            error ? "Não foi possível enviar o link: " + error.message : "Se o e-mail existir, enviamos um link de redefinição de senha.",
+            error ? "danger" : "success"
+        );
     });
 
     </script>

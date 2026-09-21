@@ -1,11 +1,15 @@
 // Vercel Serverless Function - roda no servidor, nunca no navegador.
 // A chave NVIDIA_API_KEY fica só em env var da Vercel (Project Settings > Environment Variables).
-//
-// ponytail: ainda mocado (sem chamada real pra NVIDIA). Quando for ligar de verdade, chamar o
-// endpoint compatível com OpenAI da NVIDIA NIM (https://integrate.api.nvidia.com/v1/chat/completions)
-// com "Authorization: Bearer " + process.env.NVIDIA_API_KEY e um modelo gratuito (ex.: da família
-// Llama/Mistral disponível no catálogo NIM). LGPD: nunca enviar dados pessoais/identificáveis do
-// usuário nessa chamada - só a pergunta em si.
+// Chama o endpoint compatível com OpenAI da NVIDIA NIM. LGPD: só a pergunta em si é enviada,
+// nunca dados pessoais/identificáveis do usuário.
+
+const NVIDIA_URL = "https://integrate.api.nvidia.com/v1/chat/completions";
+const NVIDIA_MODEL = "meta/llama-3.1-8b-instruct";
+
+const SYSTEM_PROMPT = "Você é o assistente virtual do site 'Tô de Voluntário', uma plataforma que conecta " +
+    "voluntários e ONGs e recebe doações via Pix/boleto. Responda em português do Brasil, de forma curta " +
+    "(no máximo 3 frases) e objetiva, só sobre cadastro de voluntários/ONGs, oportunidades e doações. " +
+    "Se a pergunta fugir desse assunto, diga que não pode ajudar com isso e sugira o formulário de contato.";
 
 module.exports = async function handler(req, res) {
     if (req.method !== "POST") {
@@ -25,9 +29,33 @@ module.exports = async function handler(req, res) {
         return;
     }
 
-    res.status(200).json({
-        mocado: true,
-        resposta: "Resposta de exemplo - a chamada real para a IA da NVIDIA ainda não foi implementada.",
-        pergunta: pergunta
-    });
+    try {
+        const respostaNvidia = await fetch(NVIDIA_URL, {
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer " + process.env.NVIDIA_API_KEY,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                model: NVIDIA_MODEL,
+                messages: [
+                    { role: "system", content: SYSTEM_PROMPT },
+                    { role: "user", content: pergunta }
+                ],
+                max_tokens: 200,
+                temperature: 0.3
+            })
+        });
+
+        const resultado = await respostaNvidia.json();
+
+        if (!respostaNvidia.ok) {
+            res.status(502).json({ erro: (resultado && resultado.error && resultado.error.message) || "Falha ao consultar a IA" });
+            return;
+        }
+
+        res.status(200).json({ resposta: resultado.choices[0].message.content.trim() });
+    } catch (erro) {
+        res.status(502).json({ erro: "Não foi possível conectar com a IA: " + erro.message });
+    }
 };

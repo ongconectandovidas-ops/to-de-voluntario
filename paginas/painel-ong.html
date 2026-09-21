@@ -253,7 +253,8 @@ const rotulosStatusCandidaturaOng = {
     pendente: "Pendente",
     aprovada: "Aprovada",
     recusada: "Recusada",
-    cancelada: "Cancelada"
+    cancelada: "Cancelada",
+    concluida: "Concluída"
 };
 
 let organizacaoAtualId = null;
@@ -386,6 +387,21 @@ function criarCardCandidatura(candidatura) {
         });
 
         botoes.append(botaoAprovar, botaoRecusar);
+        card.appendChild(botoes);
+    }
+
+    if (candidatura.status === "aprovada") {
+        const botoes = document.createElement("div");
+        botoes.className = "botoes-card";
+
+        const botaoConcluir = document.createElement("button");
+        botaoConcluir.textContent = "Concluir participação";
+        botaoConcluir.addEventListener("click", async function () {
+            await supabaseClient.from("candidaturas").update({ status: "concluida" }).eq("id", candidatura.id);
+            carregarCandidaturas();
+        });
+
+        botoes.appendChild(botaoConcluir);
         card.appendChild(botoes);
     }
 

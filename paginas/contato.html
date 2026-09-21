@@ -501,9 +501,8 @@
 
     // ========================================
     // ASSISTENTE VIRTUAL (IA) - DÚVIDAS FREQUENTES
-    // ponytail: respostas mocadas por palavra-chave. Trocar o corpo desta
-    // função por um fetch("/api/duvida-ia", { body: JSON.stringify({ pergunta }) })
-    // quando a function da Vercel estiver ligada na NVIDIA (NIM) de verdade.
+    // Tenta a IA (api/duvida-ia.js, NVIDIA NIM); se faltar NVIDIA_API_KEY ou a
+    // chamada falhar, cai no FAQ por palavra-chave abaixo.
     // ========================================
 
     const FAQ_MOCADO = [
@@ -515,7 +514,7 @@
         { palavras: ["ong", "organiza"], resposta: "ONGs e empresas podem se cadastrar em 'Cadastro de ONG' para publicar oportunidades e receber doações." }
     ];
 
-    function responderAssistente(pergunta) {
+    function responderPorPalavraChave(pergunta) {
         const perguntaSemAcento = pergunta.toLowerCase();
         const encontrada = FAQ_MOCADO.find(function (item) {
             return item.palavras.some(function (palavra) {
@@ -528,10 +527,30 @@
             : "Ainda não tenho uma resposta pronta para isso. Envie sua pergunta pelo formulário de contato que nossa equipe responde rapidinho.";
     }
 
+    async function responderAssistente(pergunta) {
+        try {
+            const resposta = await fetch("/api/duvida-ia", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ pergunta })
+            });
+
+            const resultado = await resposta.json();
+
+            if (!resposta.ok || !resultado.resposta) {
+                return responderPorPalavraChave(pergunta);
+            }
+
+            return resultado.resposta;
+        } catch (erro) {
+            return responderPorPalavraChave(pergunta);
+        }
+    }
+
     const formPerguntaAssistente = document.getElementById("formPerguntaAssistente");
     const mensagensAssistente = document.getElementById("mensagensAssistente");
 
-    formPerguntaAssistente.addEventListener("submit", function (evento) {
+    formPerguntaAssistente.addEventListener("submit", async function (evento) {
         evento.preventDefault();
 
         const campoPergunta = document.getElementById("perguntaAssistente");
@@ -544,14 +563,15 @@
         const perguntaEl = document.createElement("p");
         perguntaEl.innerHTML = '<i class="bi bi-person-fill" aria-hidden="true"></i> <strong>Você:</strong> ';
         perguntaEl.append(pergunta);
+        mensagensAssistente.append(perguntaEl);
+        campoPergunta.value = "";
 
         const respostaEl = document.createElement("p");
         respostaEl.innerHTML = '<i class="bi bi-robot" aria-hidden="true"></i> <strong>Assistente:</strong> ';
-        respostaEl.append(responderAssistente(pergunta));
+        respostaEl.append(await responderAssistente(pergunta));
 
-        mensagensAssistente.append(perguntaEl, respostaEl);
+        mensagensAssistente.append(respostaEl);
         mensagensAssistente.scrollTop = mensagensAssistente.scrollHeight;
-        campoPergunta.value = "";
     });
 
     </script>
