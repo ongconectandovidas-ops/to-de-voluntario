@@ -10,26 +10,32 @@ body{
     color: #156E78;
 }
 
-.menu{
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    padding: 30px;
-    flex-wrap: wrap;
+.menu.navbar{
+    padding: 14px 0;
 }
 
-.menu a{
-    text-decoration: none;
+.menu .navbar-brand{
     color: #156E78;
-    border: 2px solid #156E78;
-    padding: 12px 25px;
-    border-radius: 30px;
-    transition: 0.3s;
+    font-weight: 700;
+    font-size: 1.4rem;
 }
 
-.menu a:hover{
-    background-color: #156E78;
-    color: white;
+.menu .nav-link{
+    color: #156E78;
+    font-weight: 500;
+}
+
+.menu .nav-link:hover,
+.menu .nav-link:focus,
+.menu .dropdown-item:hover{
+    color: #0d4f57;
+}
+
+.menu .btn-outline-primary{
+    --bs-btn-color: #156E78;
+    --bs-btn-border-color: #156E78;
+    --bs-btn-hover-bg: #156E78;
+    --bs-btn-hover-border-color: #156E78;
 }
 
 .inicio{
@@ -1090,14 +1096,6 @@ body{
     flex: 1;
 }
 
-.tag-sobre{
-    background-color: #1F9AAA;
-    color: white;
-    padding: 8px 18px;
-    border-radius: 20px;
-    font-size: 14px;
-}
-
 .texto-hero-sobre h1{
     font-size: 60px;
     margin: 30px 0;
@@ -1513,14 +1511,6 @@ body{
     flex: 1;
 }
 
-.tag-doacao{
-    background-color: #1F9AAA;
-    color: white;
-    padding: 8px 18px;
-    border-radius: 20px;
-    font-size: 14px;
-}
-
 .texto-hero-doacoes h1{
     font-size: 60px;
     margin: 30px 0;
@@ -1838,14 +1828,6 @@ body{
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
-.tag-login{
-    background-color: #1F9AAA;
-    color: white;
-    padding: 8px 18px;
-    border-radius: 20px;
-    font-size: 14px;
-}
-
 .card-login h1{
     font-size: 45px;
     color: #156E78;
@@ -1956,14 +1938,6 @@ body{
 .hero-contato{
     padding: 120px 80px 80px;
     text-align: center;
-}
-
-.tag-contato{
-    background-color: #1F9AAA;
-    color: white;
-    padding: 8px 18px;
-    border-radius: 20px;
-    font-size: 14px;
 }
 
 .hero-contato h1{
@@ -2118,14 +2092,6 @@ body{
     justify-content: center;
 }
 
-.tag-assistente{
-    background-color: rgba(255,255,255,0.2);
-    width: fit-content;
-    padding: 8px 18px;
-    border-radius: 20px;
-    font-size: 14px;
-    margin-bottom: 25px;
-}
 
 .assistente-box h2{
     font-size: 45px;
@@ -2327,10 +2293,10 @@ body{
 /* MENU LATERAL */
 
 .menu-toggle{
-    font-size: 32px;
+    font-size: 28px;
     cursor: pointer;
     color: #156E78;
-    margin-right: 25px;
+    line-height: 1;
     transition: 0.3s;
 }
 
@@ -2421,15 +2387,6 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     padding: 120px 8% 80px;
     text-align: center;
     background-color: #F8F5EF;
-}
-
-.tag-cadastro{
-    background-color: #F5ECD7;
-    color: #156E78;
-    padding: 10px 22px;
-    border-radius: 30px;
-    font-size: 15px;
-    font-weight: 600;
 }
 
 .hero-cadastro h1{
@@ -3293,10 +3250,8 @@ header {
     width: 100%;
     position: relative;
     z-index: 1000;
-}
-
-.menu {
-    display: flex !important;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
 }
 /* ========================================
    CONFIGURAÇÕES DE APARÊNCIA
@@ -3316,13 +3271,13 @@ body.modo-escuro header {
     background-color: #181818;
 }
 
-body.modo-escuro .menu a {
+body.modo-escuro .menu .navbar-brand,
+body.modo-escuro .menu .nav-link {
     color: #ffffff;
 }
 
-body.modo-escuro .menu a:hover {
-    background-color: #156E78;
-    color: white;
+body.modo-escuro .menu .nav-link:hover {
+    color: #156E78;
 }
 
 body.modo-escuro main,

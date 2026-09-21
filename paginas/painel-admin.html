@@ -48,16 +48,31 @@
 
 <header>
 
-    <nav class="menu" aria-label="Navegação principal">
+    <nav class="navbar navbar-expand-lg menu" aria-label="Navegação principal">
+        <div class="container">
 
-        <div class="menu-toggle" role="button" tabindex="0" aria-label="Abrir menu">
-            <i class="bi bi-list" aria-hidden="true"></i>
+            <a class="navbar-brand" href="../index.html">Tô de Voluntário</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPrincipal" aria-controls="navbarPrincipal" aria-expanded="false" aria-label="Abrir menu de navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarPrincipal">
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="oportunidades.html">Oportunidades</a></li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-3">
+                    <a href="#" id="botaoSairMenu" class="btn btn-outline-secondary">Sair</a>
+                    <button type="button" class="menu-toggle btn btn-link p-0" aria-label="Abrir menu de configurações">
+                        <i class="bi bi-gear-fill" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+            </div>
         </div>
-
-        <a href="../index.html">Home</a>
-        <a href="oportunidades.html">Oportunidades</a>
-        <a href="#" id="botaoSairMenu">Sair</a>
-
     </nav>
 
 </header>

@@ -76,19 +76,43 @@
 
 <header>
 
-    <nav class="menu" aria-label="Navegação principal">
+    <nav class="navbar navbar-expand-lg menu" aria-label="Navegação principal">
+        <div class="container">
 
-        <div class="menu-toggle" role="button" tabindex="0" aria-label="Abrir menu de configurações">
-            <i class="bi bi-list" aria-hidden="true"></i>
+            <a class="navbar-brand" href="../index.html">Tô de Voluntário</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPrincipal" aria-controls="navbarPrincipal" aria-expanded="false" aria-label="Abrir menu de navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarPrincipal">
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="oportunidades.html">Oportunidades</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+                    <li class="nav-item"><a class="nav-link" href="doacoes.html">Doações</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contato.html">Contato</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Cadastre-se
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="cadastro-voluntario.html">Sou voluntário(a)</a></li>
+                            <li><a class="dropdown-item" href="cadastro-ong.html">Sou ONG/empresa</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="d-flex align-items-center gap-3">
+                    <a class="btn btn-outline-primary" href="entrar.html">Entrar</a>
+                    <button type="button" class="menu-toggle btn btn-link p-0" aria-label="Abrir menu de configurações">
+                        <i class="bi bi-gear-fill" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+            </div>
         </div>
-
-       <a href="../index.html">Home</a>
-<a href="oportunidades.html">Oportunidades</a>
-<a href="sobre.html">Sobre</a>
-<a href="doacoes.html">Doações</a>
-<a href="contato.html">Contato</a>
-<a href="entrar.html">Entrar</a>
-
     </nav>
 
 </header>

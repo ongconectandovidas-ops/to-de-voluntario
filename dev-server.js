@@ -19,7 +19,7 @@ if (fs.existsSync(envPath)) {
     });
 }
 
-const PORTA = 8935;
+const PORTA = 9018;
 
 const TIPOS_MIME = {
     ".html": "text/html; charset=utf-8",
