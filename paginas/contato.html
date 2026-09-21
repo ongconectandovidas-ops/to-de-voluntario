@@ -168,11 +168,11 @@
             </h2>
 
             <p>
-                <i class="bi bi-envelope-fill" aria-hidden="true"></i> todevoluntario@email.com
+                <i class="bi bi-envelope-fill" aria-hidden="true"></i> todevoluntario@gmail.com
             </p>
 
             <p>
-                <i class="bi bi-telephone-fill" aria-hidden="true"></i> (11) 99999-9999
+                <i class="bi bi-telephone-fill" aria-hidden="true"></i> (17) 99223-8813
             </p>
 
             <p>
@@ -220,14 +220,25 @@
                 Escolha uma data e fale com um de nossos responsáveis.
             </p>
 
-            <div class="mensagem-assistente">
+            <div class="mensagem-assistente" id="mensagensAssistente">
 
                 <p>
-                    <i class="bi bi-emoji-smile-fill" aria-hidden="true"></i> Olá! Estou aqui para ajudar você
-                    a encontrar o melhor horário para atendimento.
+                    <i class="bi bi-emoji-smile-fill" aria-hidden="true"></i> Olá! Sou o assistente virtual do Tô de
+                    Voluntário. Pergunte sobre cadastro, doações ou oportunidades.
                 </p>
 
             </div>
+
+            <form class="form-agendamento" id="formPerguntaAssistente" style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+
+                <input type="text" id="perguntaAssistente" placeholder="Digite sua dúvida..."
+                       aria-label="Digite sua dúvida para o assistente virtual" style="flex: 1;">
+
+                <button type="submit">
+                    Perguntar
+                </button>
+
+            </form>
 
         </div>
 
@@ -383,11 +394,11 @@
             </h4>
 
             <p>
-                todevoluntario@email.com
+                todevoluntario@gmail.com
             </p>
 
             <p>
-                (11) 99999-9999
+                (17) 99223-8813
             </p>
 
         </div>
@@ -485,6 +496,62 @@
 
         mostrarMensagem(mensagemAgendamento, "Reunião agendada com sucesso!", "success");
         formAgendamento.reset();
+    });
+
+
+    // ========================================
+    // ASSISTENTE VIRTUAL (IA) - DÚVIDAS FREQUENTES
+    // ponytail: respostas mocadas por palavra-chave. Trocar o corpo desta
+    // função por um fetch("/api/duvida-ia", { body: JSON.stringify({ pergunta }) })
+    // quando a function da Vercel estiver ligada na NVIDIA (NIM) de verdade.
+    // ========================================
+
+    const FAQ_MOCADO = [
+        { palavras: ["cnpj"], resposta: "O CNPJ é opcional no cadastro de ONG, mas quando informado precisa ser válido - validamos o dígito verificador automaticamente." },
+        { palavras: ["doa", "pix", "boleto", "contribui"], resposta: "Você pode doar via Pix ou boleto na página Doações. Ao registrar uma doação financeira, mostramos o QR Code ou o código copia-e-cola para pagamento." },
+        { palavras: ["cadastr", "voluntari"], resposta: "Para virar voluntário(a), acesse 'Cadastro de Voluntário' no menu, preencha seus dados e confirme o e-mail que enviaremos." },
+        { palavras: ["confirma", "e-mail", "email"], resposta: "Depois de se cadastrar, enviamos um e-mail de confirmação. Clique no link recebido para ativar sua conta." },
+        { palavras: ["oportunidade", "vaga"], resposta: "As oportunidades ficam listadas na página 'Oportunidades', com filtro por cidade e área de atuação." },
+        { palavras: ["ong", "organiza"], resposta: "ONGs e empresas podem se cadastrar em 'Cadastro de ONG' para publicar oportunidades e receber doações." }
+    ];
+
+    function responderAssistente(pergunta) {
+        const perguntaSemAcento = pergunta.toLowerCase();
+        const encontrada = FAQ_MOCADO.find(function (item) {
+            return item.palavras.some(function (palavra) {
+                return perguntaSemAcento.includes(palavra);
+            });
+        });
+
+        return encontrada
+            ? encontrada.resposta
+            : "Ainda não tenho uma resposta pronta para isso. Envie sua pergunta pelo formulário de contato que nossa equipe responde rapidinho.";
+    }
+
+    const formPerguntaAssistente = document.getElementById("formPerguntaAssistente");
+    const mensagensAssistente = document.getElementById("mensagensAssistente");
+
+    formPerguntaAssistente.addEventListener("submit", function (evento) {
+        evento.preventDefault();
+
+        const campoPergunta = document.getElementById("perguntaAssistente");
+        const pergunta = campoPergunta.value.trim();
+
+        if (!pergunta) {
+            return;
+        }
+
+        const perguntaEl = document.createElement("p");
+        perguntaEl.innerHTML = '<i class="bi bi-person-fill" aria-hidden="true"></i> <strong>Você:</strong> ';
+        perguntaEl.append(pergunta);
+
+        const respostaEl = document.createElement("p");
+        respostaEl.innerHTML = '<i class="bi bi-robot" aria-hidden="true"></i> <strong>Assistente:</strong> ';
+        respostaEl.append(responderAssistente(pergunta));
+
+        mensagensAssistente.append(perguntaEl, respostaEl);
+        mensagensAssistente.scrollTop = mensagensAssistente.scrollHeight;
+        campoPergunta.value = "";
     });
 
     </script>

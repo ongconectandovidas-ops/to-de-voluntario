@@ -148,7 +148,8 @@
                         CNPJ
                     </label>
 
-                    <input type="text" id="cnpj" placeholder="00.000.000/0000-00">
+                    <input type="text" id="cnpj" placeholder="00.000.000/0000-00" maxlength="18" inputmode="numeric">
+                    <small id="cnpjFeedback" class="texto-ajuda"></small>
 
                 </div>
 
@@ -160,6 +161,17 @@
                     </label>
 
                     <input type="text" id="site" placeholder="https://">
+
+                </div>
+
+
+                <div class="input-group">
+
+                    <label for="cep">
+                        CEP
+                    </label>
+
+                    <input type="text" id="cep" placeholder="00000-000" maxlength="9" inputmode="numeric">
 
                 </div>
 
@@ -440,6 +452,92 @@ function mostrarMensagemOng(texto, tipo) {
     mensagemCadastroOng.className = "alert alert-" + tipo;
 }
 
+// ========================================
+// CNPJ: máscara + validação do dígito verificador
+// ========================================
+
+function cnpjValido(cnpj) {
+    cnpj = cnpj.replace(/\D/g, "");
+
+    if (cnpj.length !== 14 || /^(\d)\1{13}$/.test(cnpj)) {
+        return false;
+    }
+
+    function calcularDigito(base) {
+        const pesos = base.length === 12
+            ? [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+            : [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+        const soma = base.split("").reduce(function (acc, digito, indice) {
+            return acc + Number(digito) * pesos[indice];
+        }, 0);
+        const resto = soma % 11;
+        return resto < 2 ? 0 : 11 - resto;
+    }
+
+    const base = cnpj.slice(0, 12);
+    const digito1 = calcularDigito(base);
+    const digito2 = calcularDigito(base + digito1);
+
+    return cnpj === base + String(digito1) + String(digito2);
+}
+
+const campoCnpj = document.getElementById("cnpj");
+const cnpjFeedback = document.getElementById("cnpjFeedback");
+
+campoCnpj.addEventListener("input", function () {
+    let numeros = campoCnpj.value.replace(/\D/g, "").slice(0, 14);
+    numeros = numeros.replace(/^(\d{2})(\d)/, "$1.$2");
+    numeros = numeros.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+    numeros = numeros.replace(/\.(\d{3})(\d)/, ".$1/$2");
+    numeros = numeros.replace(/(\d{4})(\d)/, "$1-$2");
+    campoCnpj.value = numeros;
+
+    if (!campoCnpj.value) {
+        cnpjFeedback.textContent = "";
+        return;
+    }
+
+    const valido = cnpjValido(campoCnpj.value);
+    cnpjFeedback.textContent = valido ? "CNPJ válido" : "CNPJ inválido";
+    cnpjFeedback.style.color = valido ? "#198754" : "#dc3545";
+});
+
+// ========================================
+// CEP: busca de endereço via ViaCEP (API pública, sem chave)
+// ========================================
+
+const campoCep = document.getElementById("cep");
+const campoCidadeOng = document.getElementById("cidade");
+const campoEstadoOng = document.getElementById("estado-org");
+
+campoCep.addEventListener("input", function () {
+    let numeros = campoCep.value.replace(/\D/g, "").slice(0, 8);
+    campoCep.value = numeros.replace(/^(\d{5})(\d)/, "$1-$2");
+});
+
+campoCep.addEventListener("blur", async function () {
+    const cep = campoCep.value.replace(/\D/g, "");
+
+    if (cep.length !== 8) {
+        return;
+    }
+
+    try {
+        const resposta = await fetch("https://viacep.com.br/ws/" + cep + "/json/");
+        const dados = await resposta.json();
+
+        if (dados.erro) {
+            mostrarMensagemOng("CEP não encontrado.", "warning");
+            return;
+        }
+
+        campoCidadeOng.value = dados.localidade || campoCidadeOng.value;
+        campoEstadoOng.value = dados.uf || campoEstadoOng.value;
+    } catch (erro) {
+        mostrarMensagemOng("Não foi possível buscar o endereço agora. Preencha cidade e estado manualmente.", "warning");
+    }
+});
+
 formOng.addEventListener("submit", async function (evento) {
     evento.preventDefault();
 
@@ -465,6 +563,11 @@ formOng.addEventListener("submit", async function (evento) {
         return;
     }
 
+    if (campoCnpj.value && !cnpjValido(campoCnpj.value)) {
+        mostrarMensagemOng("O CNPJ informado é inválido.", "danger");
+        return;
+    }
+
     if (!supabaseClient) {
         mostrarMensagemOng("O cadastro está indisponível no momento (Supabase não configurado).", "danger");
         return;
@@ -476,6 +579,7 @@ formOng.addEventListener("submit", async function (evento) {
         email,
         password: senha,
         options: {
+            emailRedirectTo: window.location.origin + "/paginas/entrar.html",
             data: {
                 tipo_conta: "ong",
                 nome: nome,

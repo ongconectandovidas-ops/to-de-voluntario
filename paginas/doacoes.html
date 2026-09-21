@@ -136,9 +136,8 @@
             </h1>
 
             <p>
-                Este formulário registra sua intenção de doação - nossa equipe entra em
-                contato para combinar a forma de pagamento ou a entrega dos itens.
-                Nenhum valor é cobrado automaticamente aqui.
+                Para Pix ou boleto, geramos a cobrança na hora e mostramos o QR Code/código de pagamento.
+                Para os demais itens ou formas de pagamento, nossa equipe entra em contato para combinar.
             </p>
 
         </div>
@@ -199,6 +198,11 @@
                         </select>
                     </div>
 
+                    <div class="input-group" id="campoCpfCnpjDoacao" style="display: none;">
+                        <label for="doacaoCpfCnpj">CPF/CNPJ do pagador *</label>
+                        <input type="text" id="doacaoCpfCnpj" placeholder="Necessário para gerar o boleto" maxlength="18" inputmode="numeric">
+                    </div>
+
                 </div>
 
             </div>
@@ -253,84 +257,6 @@
     </section>
 
 
-    <!-- CAMPANHAS -->
-
-    <section class="campanhas">
-
-        <h2>
-            Campanhas em destaque
-        </h2>
-
-        <div class="cards-campanhas">
-
-            <div class="campanha-card">
-
-                <img
-                src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=1200&auto=format&fit=crop"
-                alt="Roupas e cobertores arrecadados para a campanha do agasalho">
-
-                <div class="conteudo-campanha">
-
-                    <h3>
-                        Campanha do agasalho
-                    </h3>
-
-                    <p>
-                        Arrecadação de roupas e cobertores para famílias
-                        em situação de vulnerabilidade durante o inverno.
-                    </p>
-
-                    <div class="barra-progresso">
-
-                        <div class="progresso"></div>
-
-                    </div>
-
-                    <span>
-                        72% arrecadado
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="campanha-card">
-
-                <img
-                src="https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=1200&auto=format&fit=crop"
-                alt="Cestas básicas e alimentos arrecadados para combate à fome">
-
-                <div class="conteudo-campanha">
-
-                    <h3>
-                        Combate à fome
-                    </h3>
-
-                    <p>
-                        Distribuição de cestas básicas e alimentos
-                        para comunidades carentes.
-                    </p>
-
-                    <div class="barra-progresso">
-
-                        <div class="progresso progresso2"></div>
-
-                    </div>
-
-                    <span>
-                        54% arrecadado
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
     <!-- PONTO DE ARRECADAÇÃO -->
 
     <section class="arrecadacao">
@@ -359,7 +285,7 @@
 
             <div class="info-local">
 
-                <p><i class="bi bi-geo-alt-fill" aria-hidden="true"></i> Rua exemplo, 120 — São Paulo/SP</p>
+                <p><i class="bi bi-geo-alt-fill" aria-hidden="true"></i> KAMILI ENVIAR</p>
                 <p><i class="bi bi-clock-fill" aria-hidden="true"></i> Segunda à sexta — 9h às 18h</p>
 
             </div>
@@ -398,21 +324,21 @@ alt="Ponto de arrecadação">
 
             <div>
 
-                <h3>+200</h3>
+                <h3>KAMILI ENVIAR</h3>
                 <p>Campanhas realizadas</p>
 
             </div>
 
             <div>
 
-                <h3>+18 mil</h3>
+                <h3>KAMILI ENVIAR</h3>
                 <p>Pessoas impactadas</p>
 
             </div>
 
             <div>
 
-                <h3>92%</h3>
+                <h3>KAMILI ENVIAR</h3>
                 <p>Destinado aos projetos</p>
 
             </div>
@@ -464,12 +390,11 @@ alt="Ponto de arrecadação">
     <section class="depoimento-destaque">
 
         <p>
-            “Com o apoio das doações conseguimos ampliar nosso projeto
-            e ajudar dezenas de famílias.”
+            “KAMILI ENVIAR”
         </p>
 
         <h4>
-            Instituto Esperança
+            KAMILI ENVIAR
         </h4>
 
     </section>
@@ -488,6 +413,33 @@ alt="Ponto de arrecadação">
         </button>
 
     </section>
+
+
+    <!-- MODAL DE PAGAMENTO (Pix / Boleto) -->
+    <!-- ponytail: dados de exemplo. Quando a function /api/criar-cobranca estiver
+         ligada na AbacatePay de verdade, trocamos o QR/copia-e-cola/linha digitável
+         mocados pela resposta real da API. -->
+
+    <div class="modal fade" id="modalPagamento" tabindex="-1" aria-labelledby="modalPagamentoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h2 class="modal-title h5" id="modalPagamentoLabel">Finalize sua doação</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+
+                <div class="modal-body text-center" id="corpoModalPagamento">
+                    <!-- preenchido via JS: bloco de Pix ou de boleto -->
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 
     <!-- RODAPÉ -->
@@ -528,11 +480,11 @@ alt="Ponto de arrecadação">
             </h4>
 
             <p>
-                todevoluntario@email.com
+                todevoluntario@gmail.com
             </p>
 
             <p>
-                (11) 99999-9999
+                (17) 99223-8813
             </p>
 
         </div>
@@ -559,7 +511,7 @@ alt="Ponto de arrecadação">
     document.getElementById("botaoFazerDoacao").addEventListener("click", rolarAteFormularioDoacao);
 
     document.getElementById("botaoVerLocalizacao").addEventListener("click", function () {
-        window.open("https://www.google.com/maps/search/" + encodeURIComponent("Rua exemplo, 120, São Paulo, SP"), "_blank");
+        window.open("https://www.google.com/maps/search/" + encodeURIComponent("KAMILI ENVIAR"), "_blank");
     });
 
     // ========================================
@@ -574,6 +526,24 @@ alt="Ponto de arrecadação">
         const isItem = doacaoTipo.value === "item";
         campoValorDoacao.style.display = isItem ? "none" : "";
         campoItemDoacao.style.display = isItem ? "" : "none";
+    });
+
+    const doacaoMetodo = document.getElementById("doacaoMetodo");
+    const campoCpfCnpjDoacao = document.getElementById("campoCpfCnpjDoacao");
+    const campoDoacaoCpfCnpj = document.getElementById("doacaoCpfCnpj");
+
+    doacaoMetodo.addEventListener("change", function () {
+        campoCpfCnpjDoacao.style.display = doacaoMetodo.value === "boleto" ? "" : "none";
+    });
+
+    campoDoacaoCpfCnpj.addEventListener("input", function () {
+        let numeros = campoDoacaoCpfCnpj.value.replace(/\D/g, "").slice(0, 14);
+        if (numeros.length > 11) {
+            numeros = numeros.replace(/^(\d{2})(\d)/, "$1.$2").replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3").replace(/\.(\d{3})(\d)/, ".$1/$2").replace(/(\d{4})(\d)/, "$1-$2");
+        } else {
+            numeros = numeros.replace(/^(\d{3})(\d)/, "$1.$2").replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3").replace(/\.(\d{3})(\d)/, ".$1-$2");
+        }
+        campoDoacaoCpfCnpj.value = numeros;
     });
 
     async function carregarOrganizacoesDoacao() {
@@ -638,6 +608,7 @@ alt="Ponto de arrecadação">
         const item = document.getElementById("doacaoItem").value.trim();
         const organizacaoId = document.getElementById("doacaoOrganizacao").value || null;
         const metodoPagamento = document.getElementById("doacaoMetodo").value;
+        const cpfCnpj = campoDoacaoCpfCnpj.value.trim();
 
         if (!nome || !email) {
             mostrarMensagemDoacao("Informe nome e e-mail para contato.", "danger");
@@ -646,6 +617,11 @@ alt="Ponto de arrecadação">
 
         if (tipo === "financeira" && !valor) {
             mostrarMensagemDoacao("Informe o valor da doação.", "danger");
+            return;
+        }
+
+        if (tipo === "financeira" && metodoPagamento === "boleto" && !cpfCnpj) {
+            mostrarMensagemDoacao("Informe o CPF/CNPJ do pagador para gerar o boleto.", "danger");
             return;
         }
 
@@ -682,10 +658,122 @@ alt="Ponto de arrecadação">
             "Doação registrada! Nenhum valor foi cobrado agora - nossa equipe vai entrar em contato para combinar o pagamento ou a entrega dos itens.",
             "success"
         );
+
+        if (tipo === "financeira" && (metodoPagamento === "pix" || metodoPagamento === "boleto")) {
+            await abrirModalPagamento(metodoPagamento, valor, nome, email, cpfCnpj);
+        }
+
         formDoacao.reset();
         campoValorDoacao.style.display = "";
         campoItemDoacao.style.display = "none";
+        campoCpfCnpjDoacao.style.display = "none";
     });
+
+
+    // ========================================
+    // MODAL DE PAGAMENTO - Pix / Boleto
+    // Pix: sempre a mesma chave/QR Code estático (não gera cobrança dinâmica).
+    // Boleto: continua gerando de verdade via AbacatePay (/api/criar-cobranca).
+    // ========================================
+
+    const PIX_COPIA_COLA = "00020126360014br.gov.bcb.pix0114+55179928212945204000053039865802BR5909Recebedor6006Brasil62070503***6304C683";
+
+    async function abrirModalPagamento(metodo, valor, nome, email, cpfCnpj) {
+        const corpo = document.getElementById("corpoModalPagamento");
+        const modal = new bootstrap.Modal(document.getElementById("modalPagamento"));
+        const valorFormatado = Number(valor).toFixed(2).replace(".", ",");
+
+        if (metodo === "pix") {
+            corpo.innerHTML = `
+                <p>Faça o Pix no valor de <strong>R$ ${valorFormatado}</strong> escaneando o QR Code ou usando o copia-e-cola abaixo:</p>
+                <img src="../assets/img/pix-qrcode.png" alt="QR Code Pix" width="200" height="200">
+                <div class="input-group my-3">
+                    <input type="text" class="form-control" readonly value="${PIX_COPIA_COLA}" id="campoCopiaCola">
+                    <button class="btn btn-outline-primary" type="button" id="botaoCopiarPix">Copiar</button>
+                </div>
+                <p class="texto-ajuda" id="statusEmailPagamento">Enviando as instruções por e-mail...</p>
+            `;
+            modal.show();
+
+            document.getElementById("botaoCopiarPix").addEventListener("click", function () {
+                navigator.clipboard.writeText(PIX_COPIA_COLA);
+                this.textContent = "Copiado!";
+                setTimeout(() => { this.textContent = "Copiar"; }, 2000);
+            });
+
+            enviarEmailPagamento("pix", valor, nome, email, {});
+            return;
+        }
+
+        corpo.innerHTML = '<p><span class="spinner-border spinner-border-sm" aria-hidden="true"></span> Gerando boleto...</p>';
+        modal.show();
+
+        let resposta;
+        let cobranca;
+
+        try {
+            resposta = await fetch("/api/criar-cobranca", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ metodo, valor, nome, email, cpfCnpj: cpfCnpj || null })
+            });
+            cobranca = await resposta.json();
+        } catch (erro) {
+            corpo.innerHTML = '<p class="alert alert-danger">Não foi possível conectar ao servidor de pagamentos. Tente novamente em instantes.</p>';
+            return;
+        }
+
+        if (!resposta.ok) {
+            corpo.innerHTML = '<p class="alert alert-danger">' + (cobranca.erro || "Não foi possível gerar a cobrança.") + '</p>';
+            return;
+        }
+
+        const avisoSandbox = cobranca.devMode
+            ? '<p class="alert alert-warning">Modo de teste da AbacatePay - nenhum valor real será cobrado.</p>'
+            : "";
+
+        corpo.innerHTML = `
+            ${avisoSandbox}
+            <p>Linha digitável do boleto:</p>
+            <div class="input-group my-3">
+                <input type="text" class="form-control" readonly value="${cobranca.barCode || ""}">
+            </div>
+            ${cobranca.url ? `<a class="btn btn-outline-primary" href="${cobranca.url}" target="_blank" rel="noopener">Visualizar boleto</a>` : ""}
+            <p class="texto-ajuda mt-3" id="statusEmailPagamento">Enviando as instruções por e-mail...</p>
+        `;
+
+        enviarEmailPagamento(metodo, valor, nome, email, cobranca);
+    }
+
+    async function enviarEmailPagamento(metodo, valor, nome, email, cobranca) {
+        const statusEmail = document.getElementById("statusEmailPagamento");
+
+        try {
+            const resposta = await fetch("/api/enviar-email", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    nome, email, metodo, valor,
+                    brCode: cobranca.brCode,
+                    brCodeBase64: cobranca.brCodeBase64,
+                    barCode: cobranca.barCode,
+                    url: cobranca.url,
+                    expiresAt: cobranca.expiresAt,
+                    devMode: cobranca.devMode
+                })
+            });
+
+            if (!statusEmail) return;
+
+            statusEmail.textContent = resposta.ok
+                ? "Também enviamos essas instruções para " + email + "."
+                : "Guarde este código - não conseguimos enviar por e-mail agora.";
+        } catch (erro) {
+            if (statusEmail) {
+                statusEmail.textContent = "Guarde este código - não conseguimos enviar por e-mail agora.";
+            }
+        }
+    }
 
     </script>
 </body>

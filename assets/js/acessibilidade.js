@@ -70,7 +70,8 @@ function sincronizarControles() {
             campo.checked =
                 (chave === "tema" && valor === "escuro") ||
                 (chave === "contraste" && valor === "alto") ||
-                (chave === "animacoes" && valor === "reduzidas");
+                (chave === "animacoes" && valor === "reduzidas") ||
+                (chave === "daltonismo" && valor === "acromatopsia");
         } else {
             campo.value = valor;
         }
@@ -97,6 +98,7 @@ document.addEventListener("change", function (evento) {
         if (chave === "tema") definirPreferencia("tema", campo.checked ? "escuro" : "claro");
         if (chave === "contraste") definirPreferencia("contraste", campo.checked ? "alto" : "normal");
         if (chave === "animacoes") definirPreferencia("animacoes", campo.checked ? "reduzidas" : "normal");
+        if (chave === "daltonismo") definirPreferencia("daltonismo", campo.checked ? "acromatopsia" : "nenhum");
     } else {
         definirPreferencia(chave, campo.value);
     }
@@ -172,6 +174,11 @@ function injetarPainelAcessibilidade() {
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch" id="fltAnimacoes" data-acess="animacoes">
                     <label class="form-check-label" for="fltAnimacoes">Reduzir animações</label>
+                </div>
+
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="fltPretoBranco" data-acess="daltonismo">
+                    <label class="form-check-label" for="fltPretoBranco">Tela em preto e branco</label>
                 </div>
 
                 <div class="mb-3 mt-3">

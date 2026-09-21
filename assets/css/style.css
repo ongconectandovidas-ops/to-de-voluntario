@@ -1602,75 +1602,6 @@ body{
 }
 
 
-/* CAMPANHAS */
-
-.campanhas{
-    padding: 100px 80px;
-}
-
-.campanhas h2{
-    text-align: center;
-    font-size: 50px;
-    margin-bottom: 60px;
-    color: #156E78;
-    font-style: italic;
-}
-
-.cards-campanhas{
-    display: flex;
-    gap: 40px;
-    flex-wrap: wrap;
-}
-
-.campanha-card{
-    flex: 1;
-    background-color: white;
-    border-radius: 30px;
-    overflow: hidden;
-}
-
-.campanha-card img{
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
-}
-
-.conteudo-campanha{
-    padding: 30px;
-}
-
-.conteudo-campanha h3{
-    font-size: 32px;
-    margin-bottom: 20px;
-    color: #156E78;
-}
-
-.conteudo-campanha p{
-    line-height: 32px;
-    color: #156E78;
-    margin-bottom: 25px;
-}
-
-.barra-progresso{
-    width: 100%;
-    height: 12px;
-    background-color: #D8ECEB;
-    border-radius: 20px;
-    margin-bottom: 15px;
-}
-
-.progresso{
-    width: 72%;
-    height: 12px;
-    background-color: #1F9AAA;
-    border-radius: 20px;
-}
-
-.progresso2{
-    width: 54%;
-}
-
-
 /* ARRECADAÇÃO */
 
 .arrecadacao{
@@ -1873,7 +1804,6 @@ body{
 
     .texto-hero-doacoes h1,
     .texto-ajuda h2,
-    .campanhas h2,
     .texto-arrecadacao h2,
     .transparencia h2,
     .galeria-doacoes h2,
@@ -1881,7 +1811,6 @@ body{
         font-size: 38px;
     }
 
-    .campanhas,
     .transparencia,
     .depoimento-destaque,
     .cta-doacoes{

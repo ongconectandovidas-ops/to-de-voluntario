@@ -635,6 +635,7 @@ formVoluntario.addEventListener("submit", async function (evento) {
         email,
         password: senha,
         options: {
+            emailRedirectTo: window.location.origin + "/paginas/entrar.html",
             data: {
                 tipo_conta: "voluntario",
                 nome: nome,
