@@ -4008,3 +4008,45 @@ body.modo-escuro .botoes button:not(.botao-doar):not(.botao-secundario) {
     background-color: #f5f5f5;
     color: #121212;
 }
+
+
+/* BARRA DE FILTROS (candidaturas do painel da ONG) */
+
+.barra-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0.25rem 0 0.75rem;
+}
+
+.barra-filtros .campo-busca {
+    position: relative;
+    flex: 1 1 240px;
+}
+
+.barra-filtros .campo-busca i {
+    position: absolute;
+    left: 0.85rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    pointer-events: none;
+}
+
+.barra-filtros input[type="search"] {
+    width: 100%;
+    padding: 0.6rem 0.9rem 0.6rem 2.4rem;
+}
+
+.barra-filtros select {
+    flex: 0 1 auto;
+    padding: 0.6rem 0.9rem;
+    max-width: 100%;
+}
+
+.barra-filtros .btn-link {
+    color: var(--muted);
+    text-decoration: underline;
+    font-size: 0.9rem;
+}

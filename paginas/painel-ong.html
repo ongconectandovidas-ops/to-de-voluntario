@@ -148,6 +148,39 @@
                 <i class="bi bi-file-earmark-pdf" aria-hidden="true"></i> Exportar relatório em PDF
             </button>
 
+            <div class="barra-filtros" id="barraFiltrosCandidaturas">
+
+                <div class="campo-busca">
+                    <i class="bi bi-search" aria-hidden="true"></i>
+                    <input type="search" id="filtroBusca" placeholder="Buscar por nome ou e-mail"
+                           aria-label="Buscar candidato por nome ou e-mail" autocomplete="off">
+                </div>
+
+                <select id="filtroOportunidade" aria-label="Filtrar por oportunidade">
+                    <option value="">Todas as oportunidades</option>
+                </select>
+
+                <select id="filtroStatus" aria-label="Filtrar por status">
+                    <option value="">Todos os status</option>
+                    <option value="pendente">Pendente</option>
+                    <option value="aprovada">Aprovada</option>
+                    <option value="recusada">Recusada</option>
+                    <option value="concluida">Concluída</option>
+                    <option value="cancelada">Cancelada</option>
+                </select>
+
+                <select id="filtroOrdem" aria-label="Ordenar candidaturas">
+                    <option value="recentes">Mais recentes</option>
+                    <option value="antigas">Mais antigas</option>
+                    <option value="nome">Nome (A-Z)</option>
+                </select>
+
+                <button type="button" id="botaoLimparFiltros" class="btn btn-link p-0">Limpar</button>
+
+            </div>
+
+            <p class="texto-ajuda" id="contadorCandidaturas" aria-live="polite"></p>
+
             <div class="lista-painel" id="listaCandidaturas">
 
                 <p class="texto-ajuda">
@@ -292,6 +325,8 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="../assets/js/script.js"></script>
@@ -322,59 +357,67 @@ let organizacaoAtualId = null;
 let organizacaoAtualNome = "";
 let candidaturasCarregadas = [];
 
-function esc(texto) {
-    return String(texto ?? "-").replace(/[&<>"']/g, function (c) {
-        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
-    });
-}
-
-// ponytail: usa o "Salvar como PDF" do navegador (window.print), sem API/Puppeteer. Se precisar
-// de download direto do arquivo, mover para api/ como o gerar-certificado.
+// Gera o PDF no navegador (jsPDF + autoTable) e baixa direto: sem pop-up e sem janela de impressão.
 function exportarCandidatosPdf(lista, nomeOportunidade) {
     if (!lista || lista.length === 0) {
         alert("Nenhuma candidatura para exportar.");
         return;
     }
 
-    const linhas = lista.map(function (c) {
-        const v = c.voluntarios || {};
-        const p = v.perfis || {};
-        return "<tr><td>" + esc(((p.nome || "") + " " + (p.sobrenome || "")).trim() || "-") + "</td>" +
-            "<td>" + esc(p.email) + "</td><td>" + esc(p.telefone) + "</td><td>" + esc(v.cidade_atuacao) + "</td>" +
-            "<td>" + esc((c.oportunidades || {}).titulo) + "</td>" +
-            "<td>" + esc(rotulosStatusCandidaturaOng[c.status] || c.status) + "</td></tr>";
-    }).join("");
-
-    const janela = window.open("", "_blank");
-
-    if (!janela) {
-        alert("Permita pop-ups para exportar o relatório.");
+    if (!window.jspdf) {
+        alert("Não foi possível carregar o gerador de PDF. Verifique a conexão e tente de novo.");
         return;
     }
 
-    janela.document.write(`<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">
-        <title>Relatório de candidatos - ${esc(organizacaoAtualNome)}</title>
-        <style>
-            @page { size: A4 landscape; margin: 12mm; }
-            body { font-family: Arial, sans-serif; font-size: 12px; color: #222; }
-            h1 { font-size: 20px; margin: 0 0 4px; } p { margin: 0 0 12px; color: #666; }
-            table { width: 100%; border-collapse: collapse; }
-            th, td { border: 1px solid #ccc; padding: 6px 8px; text-align: left; }
-            th { background: #0d6efd; color: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            tr { page-break-inside: avoid; } thead { display: table-header-group; }
-        </style></head><body>
-        <h1>Relatório de candidatos — ${esc(organizacaoAtualNome)}</h1>
-        ${nomeOportunidade ? "<p><strong>Oportunidade: " + esc(nomeOportunidade) + "</strong></p>" : ""}
-        <p>Gerado em ${new Date().toLocaleString("pt-BR")} · Total: ${lista.length}</p>
-        <table><thead><tr><th>Nome</th><th>E-mail</th><th>Telefone</th><th>Cidade</th><th>Oportunidade</th><th>Status</th></tr></thead>
-        <tbody>${linhas}</tbody></table></body></html>`);
-    janela.document.close();
-    janela.focus();
-    janela.print();
+    const doc = new window.jspdf.jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(16);
+    doc.text("Relatório de candidatos - " + organizacaoAtualNome, 14, 16);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(100);
+
+    let y = 23;
+
+    if (nomeOportunidade) {
+        doc.text("Oportunidade: " + nomeOportunidade, 14, y);
+        y += 5;
+    }
+
+    doc.text("Gerado em " + new Date().toLocaleString("pt-BR") + " - Total: " + lista.length, 14, y);
+
+    doc.autoTable({
+        startY: y + 5,
+        head: [["Nome", "E-mail", "Telefone", "Cidade", "Oportunidade", "Status"]],
+        body: lista.map(function (c) {
+            const v = c.voluntarios || {};
+            const p = v.perfis || {};
+            return [
+                ((p.nome || "") + " " + (p.sobrenome || "")).trim() || "-",
+                p.email || "-",
+                p.telefone || "-",
+                v.cidade_atuacao || "-",
+                (c.oportunidades || {}).titulo || "-",
+                rotulosStatusCandidaturaOng[c.status] || c.status
+            ];
+        }),
+        styles: { fontSize: 9, cellPadding: 2.5, lineColor: [232, 230, 225], lineWidth: 0.2 },
+        headStyles: { fillColor: [23, 23, 23], textColor: 255, fontStyle: "bold" },
+        alternateRowStyles: { fillColor: [250, 249, 247] }
+    });
+
+    const base = (nomeOportunidade || "todas-as-oportunidades")
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+    doc.save("candidatos-" + base + ".pdf");
 }
 
 document.getElementById("botaoExportarCandidatos").addEventListener("click", function () {
-    exportarCandidatosPdf(candidaturasCarregadas);
+    exportarCandidatosPdf(candidaturasFiltradas, document.getElementById("filtroOportunidade").selectedOptions[0].value
+        ? document.getElementById("filtroOportunidade").selectedOptions[0].textContent : undefined);
 });
 
 // ========================================
@@ -666,34 +709,144 @@ function criarCardCandidatura(candidatura) {
     return card;
 }
 
-async function carregarCandidaturas() {
-    const lista = document.getElementById("listaCandidaturas");
+let candidaturasFiltradas = [];
+const CHAVE_FILTROS = "filtrosCandidaturas";
 
+function normalizarTexto(t) {
+    return String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+}
+
+function nomeDaCandidatura(c) {
+    const p = ((c.voluntarios || {}).perfis) || {};
+    return ((p.nome || "") + " " + (p.sobrenome || "")).trim();
+}
+
+// Preferências de filtro (status e ordem) ficam salvas neste navegador; a busca e a oportunidade não.
+function salvarPreferenciasFiltros() {
+    try {
+        localStorage.setItem(CHAVE_FILTROS, JSON.stringify({
+            status: document.getElementById("filtroStatus").value,
+            ordem: document.getElementById("filtroOrdem").value
+        }));
+    } catch (e) { /* armazenamento indisponível */ }
+}
+
+function restaurarPreferenciasFiltros() {
+    try {
+        const salvo = JSON.parse(localStorage.getItem(CHAVE_FILTROS));
+
+        if (salvo) {
+            document.getElementById("filtroStatus").value = salvo.status || "";
+            document.getElementById("filtroOrdem").value = salvo.ordem || "recentes";
+        }
+    } catch (e) { /* sem preferências salvas */ }
+}
+
+function preencherFiltroOportunidades() {
+    const select = document.getElementById("filtroOportunidade");
+    const atual = select.value;
+    const vistas = new Map();
+
+    candidaturasCarregadas.forEach(function (c) {
+        const o = c.oportunidades || {};
+        vistas.set(o.id, o.titulo);
+    });
+
+    select.innerHTML = '<option value="">Todas as oportunidades</option>';
+
+    Array.from(vistas.entries())
+        .sort(function (x, y) { return String(x[1]).localeCompare(String(y[1]), "pt-BR"); })
+        .forEach(function ([id, titulo]) {
+            const opcao = document.createElement("option");
+            opcao.value = id;
+            opcao.textContent = titulo;
+            select.appendChild(opcao);
+        });
+
+    select.value = vistas.has(atual) ? atual : "";
+}
+
+function aplicarFiltrosCandidaturas() {
+    const lista = document.getElementById("listaCandidaturas");
+    const busca = normalizarTexto(document.getElementById("filtroBusca").value);
+    const oportunidade = document.getElementById("filtroOportunidade").value;
+    const status = document.getElementById("filtroStatus").value;
+    const ordem = document.getElementById("filtroOrdem").value;
+
+    let resultado = candidaturasCarregadas.filter(function (c) {
+        const p = ((c.voluntarios || {}).perfis) || {};
+
+        return (!oportunidade || (c.oportunidades || {}).id === oportunidade) &&
+            (!status || c.status === status) &&
+            (!busca || normalizarTexto(nomeDaCandidatura(c) + " " + (p.email || "")).includes(busca));
+    });
+
+    if (ordem === "antigas") {
+        resultado = resultado.slice().reverse();
+    } else if (ordem === "nome") {
+        resultado = resultado.slice().sort(function (x, y) {
+            return nomeDaCandidatura(x).localeCompare(nomeDaCandidatura(y), "pt-BR");
+        });
+    }
+
+    candidaturasFiltradas = resultado;
+    lista.innerHTML = "";
+
+    const contador = document.getElementById("contadorCandidaturas");
+
+    if (candidaturasCarregadas.length === 0) {
+        contador.textContent = "";
+        lista.innerHTML = '<p class="texto-ajuda">Nenhuma candidatura recebida ainda.</p>';
+        return;
+    }
+
+    contador.textContent = resultado.length + " de " + candidaturasCarregadas.length + " candidatura(s)";
+
+    if (resultado.length === 0) {
+        lista.innerHTML = '<p class="texto-ajuda">Nenhuma candidatura com esses filtros.</p>';
+        return;
+    }
+
+    resultado.forEach(function (candidatura) {
+        lista.appendChild(criarCardCandidatura(candidatura));
+    });
+}
+
+async function carregarCandidaturas() {
     const { data, error } = await supabaseClient
         .from("candidaturas")
         .select(`
-            id, status,
-            oportunidades!inner(titulo, organizacao_id),
+            id, status, criado_em,
+            oportunidades!inner(id, titulo, organizacao_id),
             voluntarios(cidade_atuacao, perfis(nome, sobrenome, email, telefone))
         `)
         .eq("oportunidades.organizacao_id", organizacaoAtualId)
         .order("criado_em", { ascending: false });
 
-    lista.innerHTML = "";
     candidaturasCarregadas = error || !data ? [] : data;
-
-    if (error || !data || data.length === 0) {
-        const mensagem = document.createElement("p");
-        mensagem.className = "texto-ajuda";
-        mensagem.textContent = "Nenhuma candidatura recebida ainda.";
-        lista.appendChild(mensagem);
-        return;
-    }
-
-    data.forEach(function (candidatura) {
-        lista.appendChild(criarCardCandidatura(candidatura));
-    });
+    preencherFiltroOportunidades();
+    aplicarFiltrosCandidaturas();
 }
+
+["filtroOportunidade", "filtroStatus", "filtroOrdem"].forEach(function (id) {
+    document.getElementById(id).addEventListener("change", function () {
+        salvarPreferenciasFiltros();
+        aplicarFiltrosCandidaturas();
+    });
+});
+
+document.getElementById("filtroBusca").addEventListener("input", aplicarFiltrosCandidaturas);
+
+document.getElementById("botaoLimparFiltros").addEventListener("click", function () {
+    document.getElementById("filtroBusca").value = "";
+    document.getElementById("filtroOportunidade").value = "";
+    document.getElementById("filtroStatus").value = "";
+    document.getElementById("filtroOrdem").value = "recentes";
+    salvarPreferenciasFiltros();
+    aplicarFiltrosCandidaturas();
+});
+
+restaurarPreferenciasFiltros();
 
 async function carregarCausasFormulario() {
     const select = document.getElementById("vagaCausa");
