@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/documento/validar", "destination": "/paginas/validar-certificado.html" }
+  ]
+}
