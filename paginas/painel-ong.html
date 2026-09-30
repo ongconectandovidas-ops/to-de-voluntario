@@ -677,6 +677,11 @@ document.getElementById("botaoSairMenu").addEventListener("click", sairDoPainel)
     const { data: organizacao } = await consultaOrganizacao;
 
     if (!organizacao) {
+        // Conta tipo "ong" sem linha em organizacoes: antes as listas ficavam em "Carregando..." para sempre.
+        sessionStorage.removeItem(chaveCacheOng);
+        ["listaMinhasVagas", "listaCandidaturas"].forEach(function (id) {
+            document.getElementById(id).innerHTML = '<p class="texto-ajuda">Nenhuma organização vinculada a esta conta. Faça o cadastro de ONG com este usuário.</p>';
+        });
         return;
     }
 

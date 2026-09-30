@@ -49,9 +49,15 @@ function lerCorpoJson(req) {
 const servidor = http.createServer(async function (req, res) {
     let urlPath = req.url.split("?")[0];
 
-    // Mesmo rewrite do vercel.json
+    // Mesmos rewrites do vercel.json: /entrar (ou /entrar.html) -> paginas/entrar.html
     if (urlPath === "/documento/validar") {
         urlPath = "/paginas/validar-certificado.html";
+    }
+
+    const limpa = urlPath.match(/^\/([\w-]+)(\.html)?$/);
+
+    if (limpa && fs.existsSync(path.join(__dirname, "paginas", limpa[1] + ".html"))) {
+        urlPath = "/paginas/" + limpa[1] + ".html";
     }
 
     if (urlPath.startsWith("/api/")) {

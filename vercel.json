@@ -1,5 +1,11 @@
 {
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/paginas/:pagina.html", "destination": "/:pagina", "permanent": true },
+    { "source": "/paginas/:pagina", "destination": "/:pagina", "permanent": true }
+  ],
   "rewrites": [
-    { "source": "/documento/validar", "destination": "/paginas/validar-certificado.html" }
+    { "source": "/documento/validar", "destination": "/paginas/validar-certificado.html" },
+    { "source": "/:pagina", "destination": "/paginas/:pagina.html" }
   ]
 }
