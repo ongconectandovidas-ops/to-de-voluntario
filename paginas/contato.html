@@ -11,6 +11,8 @@
 
     <link rel="stylesheet" href="../assets/css/style.css">
 
+    <link rel="preconnect" href="https://xeokfqlkhrynxzldwvup.supabase.co" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 </head>
 <body>
 
@@ -526,8 +528,8 @@
     const FAQ_MOCADO = [
         { palavras: ["cnpj"], resposta: "O CNPJ é opcional no cadastro de ONG, mas quando informado precisa ser válido - validamos o dígito verificador automaticamente." },
         { palavras: ["doa", "pix", "boleto", "contribui"], resposta: "Você pode doar via Pix ou boleto na página Doações. Ao registrar uma doação financeira, mostramos o QR Code ou o código copia-e-cola para pagamento." },
-        { palavras: ["cadastr", "voluntari"], resposta: "Para virar voluntário(a), acesse 'Cadastro de Voluntário' no menu, preencha seus dados e confirme o e-mail que enviaremos." },
-        { palavras: ["confirma", "e-mail", "email"], resposta: "Depois de se cadastrar, enviamos um e-mail de confirmação. Clique no link recebido para ativar sua conta." },
+        { palavras: ["cadastr", "voluntari"], resposta: "Para virar voluntário(a), acesse 'Cadastro de Voluntário' no menu e preencha seus dados. O acesso é liberado logo após o cadastro." },
+        { palavras: ["contato", "falar", "atendimento", "reuni"], resposta: "Use o formulário de contato aqui nesta página ou agende uma reunião no formulário de agendamento." },
         { palavras: ["oportunidade", "vaga"], resposta: "As oportunidades ficam listadas na página 'Oportunidades', com filtro por cidade e área de atuação." },
         { palavras: ["ong", "organiza"], resposta: "ONGs e empresas podem se cadastrar em 'Cadastro de ONG' para publicar oportunidades e receber doações." }
     ];
@@ -556,11 +558,13 @@
             const resultado = await resposta.json();
 
             if (!resposta.ok || !resultado.resposta) {
+                console.warn("IA indisponível, usando FAQ:", resposta.status, resultado.erro);
                 return responderPorPalavraChave(pergunta);
             }
 
             return resultado.resposta;
         } catch (erro) {
+            console.warn("IA indisponível, usando FAQ:", erro.message);
             return responderPorPalavraChave(pergunta);
         }
     }
@@ -572,6 +576,7 @@
         evento.preventDefault();
 
         const campoPergunta = document.getElementById("perguntaAssistente");
+        const botaoPergunta = formPerguntaAssistente.querySelector("button");
         const pergunta = campoPergunta.value.trim();
 
         if (!pergunta) {
@@ -584,11 +589,26 @@
         mensagensAssistente.append(perguntaEl);
         campoPergunta.value = "";
 
+        // Bloqueia o envio enquanto a IA responde e mostra "digitando...".
+        campoPergunta.disabled = true;
+        botaoPergunta.disabled = true;
+
         const respostaEl = document.createElement("p");
         respostaEl.innerHTML = '<i class="bi bi-robot" aria-hidden="true"></i> <strong>Assistente:</strong> ';
-        respostaEl.append(await responderAssistente(pergunta));
-
+        const digitando = document.createElement("span");
+        digitando.className = "digitando";
+        digitando.setAttribute("aria-label", "Assistente digitando");
+        digitando.innerHTML = "<i></i><i></i><i></i>";
+        respostaEl.append(digitando);
         mensagensAssistente.append(respostaEl);
+        mensagensAssistente.scrollTop = mensagensAssistente.scrollHeight;
+
+        const resposta = await responderAssistente(pergunta);
+
+        digitando.replaceWith(resposta);
+        campoPergunta.disabled = false;
+        botaoPergunta.disabled = false;
+        campoPergunta.focus();
         mensagensAssistente.scrollTop = mensagensAssistente.scrollHeight;
     });
 

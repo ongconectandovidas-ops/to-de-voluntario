@@ -53,21 +53,33 @@ async function atualizarLinkEntrar() {
         return;
     }
 
+    const destinoPorTipo = {
+        admin: "painel-admin.html",
+        ong: "painel-ong.html"
+    };
+
+    function mostrarPainel(tipoConta) {
+        linkEntrar.textContent = "Painel";
+        linkEntrar.href = caminhoPagina(destinoPorTipo[tipoConta] || "configuracoes.html");
+    }
+
+    // Cache por usuário na aba: evita 1 consulta ao Supabase em toda página (o painel revalida o papel).
+    const chaveCache = "tipoConta:" + sessaoData.session.user.id;
+    const emCache = sessionStorage.getItem(chaveCache);
+
+    if (emCache !== null) {
+        mostrarPainel(emCache);
+        return;
+    }
+
     const { data: perfil } = await supabaseClient
         .from("perfis")
         .select("tipo_conta")
         .eq("id", sessaoData.session.user.id)
         .single();
 
-    const destinoPorTipo = {
-        admin: "painel-admin.html",
-        ong: "painel-ong.html"
-    };
-
-    const destino = destinoPorTipo[perfil ? perfil.tipo_conta : ""] || "configuracoes.html";
-
-    linkEntrar.textContent = "Painel";
-    linkEntrar.href = caminhoPagina(destino);
+    sessionStorage.setItem(chaveCache, perfil ? perfil.tipo_conta : "");
+    mostrarPainel(perfil ? perfil.tipo_conta : "");
 }
 
 const botaoSairSidebar = document.getElementById("botaoSairSidebar");
@@ -349,8 +361,7 @@ async function carregarOportunidadesDestaque() {
         .from("oportunidades")
         .select("id, titulo, descricao, cidade, estado, modalidade")
         .eq("status", "aberta")
-        .order("cliques", { ascending: false })
-        .order("criado_em", { ascending: false })
+        .order("criado_em", { ascending: true })
         .limit(3);
 
     if (error || !data || data.length === 0) {
@@ -532,4 +543,33 @@ document.addEventListener("click", function (evento) {
     }
 
     participar(botao.dataset.oportunidadeId, botao);
+});
+
+
+// ========================================
+// MOSTRAR/OCULTAR SENHA (todo input type="password", dentro do próprio campo)
+// ========================================
+
+document.querySelectorAll('input[type="password"]').forEach(function (campo) {
+    const envoltorio = document.createElement("div");
+    envoltorio.style.position = "relative";
+    campo.parentNode.insertBefore(envoltorio, campo);
+    envoltorio.appendChild(campo);
+    campo.style.paddingRight = "2.75rem";
+
+    const botao = document.createElement("button");
+    botao.type = "button";
+    botao.setAttribute("aria-label", "Mostrar senha");
+    botao.style.cssText = "position:absolute;top:50%;right:0.5rem;transform:translateY(-50%);" +
+        "width:auto;margin:0;padding:0.25rem;border:0;background:transparent;color:inherit;cursor:pointer;line-height:1";
+    botao.innerHTML = '<i class="bi bi-eye" aria-hidden="true"></i>';
+
+    botao.addEventListener("click", function () {
+        const mostrar = campo.type === "password";
+        campo.type = mostrar ? "text" : "password";
+        botao.setAttribute("aria-label", mostrar ? "Ocultar senha" : "Mostrar senha");
+        botao.firstChild.className = mostrar ? "bi bi-eye-slash" : "bi bi-eye";
+    });
+
+    envoltorio.appendChild(botao);
 });

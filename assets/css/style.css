@@ -569,8 +569,6 @@ body{
     transition: 0.3s;
 }
 
-.card-oportunidade:hover{
-}
 
 .tipo{
     background-color: #1F9AAA;
@@ -734,8 +732,6 @@ body{
     transition: 0.3s;
 }
 
-.passo:hover{
-}
 
 .icone-passo{
     font-size: 50px;
@@ -957,8 +953,6 @@ body{
     transition: 0.3s;
 }
 
-.card-evento:hover{
-}
 
 .data-evento{
     background-color: #1F9AAA;
@@ -1579,7 +1573,31 @@ body{
 }
 
 .lista-ajuda{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
     margin-top: 30px;
+}
+
+.lista-ajuda p,
+.itens-arrecadacao p{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #fff;
+    border: 1px solid #E4DCC8;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 0;
+    font-size: 16px;
+    color: #156E78;
+}
+
+.lista-ajuda i,
+.itens-arrecadacao i{
+    color: #1F9AAA;
+    font-size: 20px;
+    flex-shrink: 0;
 }
 
 
@@ -1612,6 +1630,9 @@ body{
 }
 
 .itens-arrecadacao{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
     margin: 30px 0;
 }
 
@@ -1779,6 +1800,11 @@ body{
     .arrecadacao{
         flex-direction: column;
         padding: 60px 30px;
+    }
+
+    .lista-ajuda,
+    .itens-arrecadacao{
+        grid-template-columns: 1fr;
     }
 
     .texto-hero-doacoes h1,
@@ -2285,8 +2311,6 @@ body{
     transition: 0.3s;
 }
 
-.menu-toggle:hover{
-}
 
 body:has(.sidebar-lateral.ativo) .menu-toggle{
     visibility: hidden;
@@ -2408,8 +2432,6 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     text-align: center;
 }
 
-.card-cadastro:hover{
-}
 
 .icone-cadastro{
     font-size: 60px;
@@ -2615,15 +2637,6 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 .topo-formulario{
     text-align: center;
     margin-bottom: 70px;
-}
-
-.topo-formulario span{
-    background-color: #F5ECD7;
-    color: #156E78;
-    padding: 10px 22px;
-    border-radius: 10px;
-    font-size: 15px;
-    font-weight: 600;
 }
 
 .topo-formulario h1{
@@ -2973,23 +2986,39 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     margin-bottom: 30px;
 }
 
+.grid-config .input-config{
+    margin-bottom: 0;
+}
+
 .input-config label{
     margin-bottom: 12px;
     color: #444;
     font-weight: 600;
 }
 
-.input-config input{
+.input-config input,
+.input-config select,
+.input-config textarea{
     height: 60px;
     border-radius: 6px;
     border: 1px solid #ddd;
     padding: 0 20px;
     font-size: 16px;
+    font-family: inherit;
     outline: none;
-    transition: 0.3s;
+    transition: border-color 0.3s;
+    background-color: #fff;
 }
 
-.input-config input:focus{
+.input-config textarea{
+    height: auto;
+    padding: 15px 20px;
+    resize: vertical;
+}
+
+.input-config input:focus,
+.input-config select:focus,
+.input-config textarea:focus{
     border-color: #156E78;
     box-shadow: 0 0 0 4px rgba(21,110,120,0.08);
 }
@@ -3333,9 +3362,56 @@ body.modo-escuro .aba-conteudo p {
 }
 
 
+/* FUNDOS DE PÁGINA/SEÇÃO (bege/branco fixos no CSS base) */
+
+body.modo-escuro .pagina-login,
+body.modo-escuro .pagina-configuracoes,
+body.modo-escuro .hero-cadastro,
+body.modo-escuro .como-funciona,
+body.modo-escuro .formulario-voluntario,
+body.modo-escuro .secao-formulario,
+body.modo-escuro .beneficio-item,
+body.modo-escuro .pesquisa {
+    background-color: #121212;
+}
+
+body.modo-escuro .vaga,
+body.modo-escuro .stat-card,
+body.modo-escuro .card-evento,
+body.modo-escuro .card-valor,
+body.modo-escuro .funciona-card,
+body.modo-escuro .resultado-card,
+body.modo-escuro .depoimento-card,
+body.modo-escuro .item-ajuda,
+body.modo-escuro .itens-arrecadacao p,
+body.modo-escuro .card-login,
+body.modo-escuro .formulario-contato,
+body.modo-escuro .form-agendamento,
+body.modo-escuro .rede-item,
+body.modo-escuro .tipos-cadastro,
+body.modo-escuro .card-cadastro,
+body.modo-escuro .passo,
+body.modo-escuro .form-voluntario,
+body.modo-escuro .conteudo-termos,
+body.modo-escuro .menu-configuracoes,
+body.modo-escuro .conteudo-configuracoes {
+    background-color: #1e1e1e;
+}
+
+body.modo-escuro h1,
+body.modo-escuro h2,
+body.modo-escuro h3,
+body.modo-escuro h4,
+body.modo-escuro p,
+body.modo-escuro label,
+body.modo-escuro li {
+    color: #f5f5f5;
+}
+
 /* CAMPOS */
 
 body.modo-escuro input,
+body.modo-escuro textarea,
 body.modo-escuro select {
     background-color: #2a2a2a;
     color: #ffffff;
@@ -3527,4 +3603,24 @@ body.alto-contraste textarea:focus-visible {
 body.modo-escuro #painelAcessibilidade {
     background-color: #1e1e1e;
     color: #f5f5f5;
+}
+
+/* ASSISTENTE - INDICADOR "DIGITANDO" */
+
+.digitando i {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 3px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: digitando 1.2s infinite ease-in-out;
+}
+
+.digitando i:nth-child(2) { animation-delay: 0.2s; }
+.digitando i:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes digitando {
+    0%, 80%, 100% { opacity: 0.2; }
+    40% { opacity: 1; }
 }

@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../assets/css/style.css">
 
+    <link rel="preconnect" href="https://xeokfqlkhrynxzldwvup.supabase.co" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 </head>
 <body>
 
@@ -738,6 +740,19 @@ async function carregarMinhasOportunidades(voluntarioId) {
     const usuarioId = sessaoData.session.user.id;
     perfilIdAtual = usuarioId;
 
+    // Cabeçalho (nome/cidade) do cache na hora; a consulta abaixo atualiza.
+    const chaveCachePerfil = "cabecalhoPerfil:" + usuarioId;
+
+    try {
+        const c = JSON.parse(sessionStorage.getItem(chaveCachePerfil));
+        document.getElementById("perfilInicial").textContent = c.inicial;
+        document.getElementById("perfilNomeTopo").textContent = c.nome;
+        document.getElementById("perfilSubtitulo").textContent = c.subtitulo;
+    } catch (e) { /* sem cache ainda */ }
+
+    // Dispara já, em paralelo com a busca do perfil (antes esperava o perfil terminar = round trips em fila).
+    carregarMinhasOportunidades(usuarioId);
+
     const { data: perfil } = await supabaseClient
         .from("perfis")
         .select("nome, sobrenome, email, telefone, tipo_conta, ativo, notificacoes, voluntarios(cidade_atuacao)")
@@ -770,6 +785,11 @@ async function carregarMinhasOportunidades(voluntarioId) {
     document.getElementById("perfilInicial").textContent = (perfil.nome || "?").charAt(0).toUpperCase();
     document.getElementById("perfilNomeTopo").textContent = nomeCompleto || perfil.email;
     document.getElementById("perfilSubtitulo").textContent = "Voluntário(a)" + (cidade ? " - " + cidade : "");
+    sessionStorage.setItem(chaveCachePerfil, JSON.stringify({
+        inicial: (perfil.nome || "?").charAt(0).toUpperCase(),
+        nome: nomeCompleto || perfil.email,
+        subtitulo: "Voluntário(a)" + (cidade ? " - " + cidade : "")
+    }));
     document.getElementById("perfilNome").value = nomeCompleto;
     document.getElementById("perfilEmail").value = perfil.email;
     document.getElementById("perfilTelefone").value = perfil.telefone || "";
@@ -791,19 +811,9 @@ async function carregarMinhasOportunidades(voluntarioId) {
             }).eq("id", usuarioId);
         });
     });
-
-    carregarMinhasOportunidades(usuarioId);
 })();
 
-const botaoSairSidebar = document.getElementById("botaoSairSidebar");
-
-if (botaoSairSidebar) {
-    botaoSairSidebar.addEventListener("click", async function (evento) {
-        evento.preventDefault();
-        await supabaseClient.auth.signOut();
-        window.location.href = "../index.html";
-    });
-}
+// Botão "Sair" da sidebar: tratado em assets/js/script.js (declarar de novo aqui dá SyntaxError).
 
 const botaoSalvarPerfil = document.getElementById("botaoSalvarPerfil");
 const mensagemPerfil = document.getElementById("mensagemPerfil");
