@@ -5,9 +5,9 @@
 }
 
 body{
-    background-color: #F5ECD7;
-    font-family: Georgia, serif;
-    color: #156E78;
+    background-color: #ffffff;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    color: #171717;
 }
 
 .menu.navbar{
@@ -15,27 +15,27 @@ body{
 }
 
 .menu .navbar-brand{
-    color: #156E78;
+    color: #171717;
     font-weight: 700;
     font-size: 1.4rem;
 }
 
 .menu .nav-link{
-    color: #156E78;
+    color: #171717;
     font-weight: 500;
 }
 
 .menu .nav-link:hover,
 .menu .nav-link:focus,
 .menu .dropdown-item:hover{
-    color: #0d4f57;
+    color: #000000;
 }
 
 .menu .btn-outline-primary{
-    --bs-btn-color: #156E78;
-    --bs-btn-border-color: #156E78;
-    --bs-btn-hover-bg: #156E78;
-    --bs-btn-hover-border-color: #156E78;
+    --bs-btn-color: #171717;
+    --bs-btn-border-color: #171717;
+    --bs-btn-hover-bg: #171717;
+    --bs-btn-hover-border-color: #171717;
 }
 
 .inicio{
@@ -54,7 +54,7 @@ body{
 .texto-inicio h1{
     font-size: 55px;
     margin-bottom: 30px;
-    font-style: italic;
+    font-style: normal;
 }
 
 .texto-inicio p{
@@ -70,7 +70,7 @@ body{
 }
 
 .botoes button{
-    background-color: #1F9AAA;
+    background-color: #171717;
     color: white;
     border: none;
     padding: 15px 35px;
@@ -85,12 +85,12 @@ body{
 
 .botao-secundario{
     background-color: transparent !important;
-    border: 2px solid #156E78 !important;
-    color: #156E78 !important;
+    border: 2px solid #d6d3cd !important;
+    color: #171717 !important;
 }
 
 .botao-secundario:hover{
-    background-color: #156E78 !important;
+    background-color: #404040 !important;
     color: white !important;
 }
 
@@ -127,7 +127,7 @@ body{
 .vantagens h2{
     font-size: 40px;
     margin-bottom: 60px;
-    font-style: italic;
+    font-style: normal;
 }
 
 .cards-vantagens{
@@ -139,22 +139,22 @@ body{
 
 .card{
     background-color: #fff;
-    color: #156E78;
+    color: #171717;
     width: 250px;
     padding: 40px 25px;
-    border: 1px solid #E4DCC8;
+    border: 1px solid #E8E6E1;
     border-radius: 10px;
     transition: border-color 0.3s;
 }
 
 .card:hover{
-    border-color: #1F9AAA;
+    border-color: #d6d3cd;
 }
 
 .icone{
     font-size: 40px;
     margin-bottom: 20px;
-    color: #1F9AAA;
+    color: #171717;
 }
 
 .card h3{
@@ -183,11 +183,11 @@ body{
 
 .titulo-oportunidades h2{
     font-size: 40px;
-    font-style: italic;
+    font-style: normal;
 }
 
 .titulo-oportunidades a{
-    color: #156E78;
+    color: #171717;
     text-decoration: none;
     font-weight: bold;
 }
@@ -214,7 +214,7 @@ body{
     align-items: center;
     gap: 20px;
     flex-wrap: wrap;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    box-shadow: none;
 }
 
 .texto-vaga h3{
@@ -228,7 +228,7 @@ body{
 }
 
 .vaga button{
-    background-color: #1F9AAA;
+    background-color: #171717;
     color: white;
     border: none;
     padding: 14px 28px;
@@ -242,7 +242,7 @@ body{
 
 .ong-card{
     flex: 1;
-    background-color: #CDE8E5;
+    background-color: #F1F0ED;
     padding: 40px 30px;
     border-radius: 10px;
     text-align: center;
@@ -264,7 +264,7 @@ body{
 }
 
 .ong-card button{
-    background-color: #1F9AAA;
+    background-color: #171717;
     color: white;
     border: none;
     padding: 15px 30px;
@@ -279,7 +279,7 @@ body{
 /* IMPACTO */
 
 .impacto{
-    background-color: #1F9AAA;
+    background-color: #171717;
     color: white;
     padding: 90px 80px;
     text-align: center;
@@ -288,7 +288,7 @@ body{
 .impacto h2{
     font-size: 42px;
     margin-bottom: 30px;
-    font-style: italic;
+    font-style: normal;
 }
 
 .texto-impacto{
@@ -333,7 +333,7 @@ body{
 .relatos h2{
     font-size: 42px;
     margin-bottom: 70px;
-    font-style: italic;
+    font-style: normal;
 }
 
 .cards-relatos{
@@ -344,11 +344,11 @@ body{
 }
 
 .relato{
-    background-color: #DDEFE9;
+    background-color: #F1F0ED;
     width: 320px;
     padding: 40px 30px;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    box-shadow: none;
 }
 
 .relato img{
@@ -378,7 +378,7 @@ body{
 .chamada-final h2{
     font-size: 45px;
     margin-bottom: 25px;
-    font-style: italic;
+    font-style: normal;
 }
 
 .chamada-final p{
@@ -394,7 +394,7 @@ body{
 }
 
 .botoes-final button{
-    background-color: #1F9AAA;
+    background-color: #171717;
     color: white;
     border: none;
     padding: 16px 35px;
@@ -409,12 +409,12 @@ body{
 
 .botao-final-secundario{
     background-color: transparent !important;
-    border: 2px solid #156E78 !important;
-    color: #156E78 !important;
+    border: 2px solid #d6d3cd !important;
+    color: #171717 !important;
 }
 
 .botao-final-secundario:hover{
-    background-color: #156E78 !important;
+    background-color: #404040 !important;
     color: white !important;
 }
 
@@ -484,7 +484,7 @@ body{
 }
 
 .texto-banner span{
-    background-color: #1F9AAA;
+    background-color: #171717;
     color: white;
     padding: 10px 22px;
     border-radius: 10px;
@@ -496,7 +496,7 @@ body{
     margin-top: 30px;
     margin-bottom: 30px;
     line-height: 65px;
-    font-style: italic;
+    font-style: normal;
 }
 
 .texto-banner p{
@@ -516,7 +516,7 @@ body{
 /* PESQUISA */
 
 .pesquisa{
-    background-color: #E8DCC2;
+    background-color: #f3f1ec;
     margin: 0 80px;
     padding: 30px;
     border-radius: 10px;
@@ -537,7 +537,7 @@ body{
 }
 
 .pesquisa button{
-    background-color: #1F9AAA;
+    background-color: #171717;
     color: white;
     border: none;
     padding: 15px 35px;
@@ -564,14 +564,14 @@ body{
     background-color: white;
     padding: 35px;
     border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    box-shadow: none;
 
     transition: 0.3s;
 }
 
 
 .tipo{
-    background-color: #1F9AAA;
+    background-color: #171717;
     color: white;
     padding: 8px 18px;
     border-radius: 6px;
@@ -579,7 +579,7 @@ body{
 }
 
 .online{
-    background-color: #156E78;
+    background-color: #171717;
 }
 
 .status-aprovada{
@@ -626,7 +626,7 @@ body{
     display: flex;
     align-items: center;
     gap: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    box-shadow: none;
 }
 
 .stat-icone{
@@ -634,7 +634,7 @@ body{
     height: 55px;
     min-width: 55px;
     border-radius: 50%;
-    background-color: #1F9AAA;
+    background-color: #171717;
     color: white;
     display: flex;
     align-items: center;
@@ -646,7 +646,7 @@ body{
     display: block;
     font-size: 32px;
     font-weight: 700;
-    color: #156E78;
+    color: #171717;
     line-height: 1.2;
 }
 
@@ -684,7 +684,7 @@ body{
 }
 
 .botoes-card button{
-    background-color: #1F9AAA;
+    background-color: #171717;
     color: white;
     border: none;
     padding: 13px 22px;
@@ -698,8 +698,8 @@ body{
 
 .detalhes{
     background-color: transparent !important;
-    border: 2px solid #156E78 !important;
-    color: #156E78 !important;
+    border: 2px solid #d6d3cd !important;
+    color: #171717 !important;
 }
 
 /* COMO FUNCIONA */
@@ -712,7 +712,7 @@ body{
 .como-funciona h2{
     font-size: 45px;
     margin-bottom: 60px;
-    font-style: italic;
+    font-style: normal;
 }
 
 .passos{
@@ -723,7 +723,7 @@ body{
 }
 
 .passo{
-    background-color: #1F9AAA;
+    background-color: #171717;
     color: white;
     width: 250px;
     padding: 40px 25px;
@@ -776,7 +776,7 @@ body{
 /* RODAPÉ */
 
 .rodape{
-    background-color: #156E78;
+    background-color: #171717;
     color: white;
 
     padding: 70px 80px;
@@ -830,7 +830,7 @@ body{
 /* CTA FINAL */
 
 .cta-final{
-    background-color: #156E78;
+    background-color: #171717;
 
     margin: 80px;
     padding: 50px;
@@ -856,8 +856,8 @@ body{
 }
 
 .cta-final button{
-    background-color: #F5ECD7;
-    color: #156E78;
+    background-color: #ffffff;
+    color: #171717;
 
     border: none;
 
@@ -888,9 +888,9 @@ body{
 .carregar-mais button{
     background-color: transparent;
 
-    border: 2px solid #156E78;
+    border: 2px solid #d6d3cd;
 
-    color: #156E78;
+    color: #171717;
 
     padding: 18px 35px;
 
@@ -905,7 +905,7 @@ body{
 }
 
 .carregar-mais button:hover{
-    background-color: #156E78;
+    background-color: #404040;
     color: white;
 
 }
@@ -922,14 +922,14 @@ body{
 
 .titulo-eventos h2{
     font-size: 42px;
-    color: #156E78;
+    color: #171717;
     margin-bottom: 15px;
-    font-style: italic;
+    font-style: normal;
 }
 
 .titulo-eventos p{
     font-size: 20px;
-    color: #156E78;
+    color: #171717;
 }
 
 .cards-eventos{
@@ -948,14 +948,14 @@ body{
 
     border-radius: 6px;
 
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    box-shadow: none;
 
     transition: 0.3s;
 }
 
 
 .data-evento{
-    background-color: #1F9AAA;
+    background-color: #171717;
 
     color: white;
 
@@ -970,25 +970,25 @@ body{
     margin-top: 25px;
     margin-bottom: 20px;
 
-    color: #156E78;
+    color: #171717;
 
     font-size: 28px;
 }
 
 .card-evento p{
-    color: #156E78;
+    color: #171717;
     line-height: 28px;
     margin-bottom: 20px;
 }
 
 .local-evento{
     font-weight: bold;
-    color: #156E78;
+    color: #171717;
 }
 /* NEWSLETTER */
 
 .newsletter{
-    background-color: #1F9AAA;
+    background-color: #171717;
 
     margin: 80px;
 
@@ -1045,7 +1045,7 @@ body{
 }
 
 .newsletter-form button{
-    background-color: #156E78;
+    background-color: #171717;
 
     color: white;
 
@@ -1083,14 +1083,14 @@ body{
 .texto-hero-sobre h1{
     font-size: 60px;
     margin: 30px 0;
-    color: #156E78;
-    font-style: italic;
+    color: #171717;
+    font-style: normal;
 }
 
 .texto-hero-sobre p{
     font-size: 22px;
     line-height: 38px;
-    color: #156E78;
+    color: #171717;
 }
 
 .imagem-hero-sobre{
@@ -1129,15 +1129,15 @@ body{
 .texto-historia h2{
     font-size: 50px;
     margin-bottom: 30px;
-    color: #156E78;
-    font-style: italic;
+    color: #171717;
+    font-style: normal;
 }
 
 .texto-historia p{
     font-size: 20px;
     line-height: 38px;
     margin-bottom: 25px;
-    color: #156E78;
+    color: #171717;
 }
 
 
@@ -1151,8 +1151,8 @@ body{
 .valores h2{
     font-size: 50px;
     margin-bottom: 60px;
-    color: #156E78;
-    font-style: italic;
+    color: #171717;
+    font-style: normal;
 }
 
 .cards-valores{
@@ -1164,22 +1164,22 @@ body{
 
 .card-valor{
     background-color: #fff;
-    color: #156E78;
+    color: #171717;
     width: 320px;
     padding: 45px 30px;
-    border: 1px solid #E4DCC8;
+    border: 1px solid #E8E6E1;
     border-radius: 10px;
     transition: border-color 0.3s;
 }
 
 .card-valor:hover{
-    border-color: #1F9AAA;
+    border-color: #d6d3cd;
 }
 
 .icone-valor{
     font-size: 42px;
     margin-bottom: 25px;
-    color: #1F9AAA;
+    color: #171717;
 }
 
 .card-valor h3{
@@ -1203,8 +1203,8 @@ body{
     text-align: center;
     font-size: 50px;
     margin-bottom: 60px;
-    color: #156E78;
-    font-style: italic;
+    color: #171717;
+    font-style: normal;
 }
 
 .cards-funcionamento{
@@ -1223,7 +1223,7 @@ body{
 .funciona-card h3{
     font-size: 34px;
     margin-bottom: 30px;
-    color: #156E78;
+    color: #171717;
 }
 
 .funciona-card ul{
@@ -1233,7 +1233,7 @@ body{
 .funciona-card li{
     margin-bottom: 20px;
     font-size: 20px;
-    color: #156E78;
+    color: #171717;
 }
 
 
@@ -1246,15 +1246,15 @@ body{
 
 .impacto-social h2{
     font-size: 50px;
-    color: #156E78;
-    font-style: italic;
+    color: #171717;
+    font-style: normal;
     margin-bottom: 20px;
 }
 
 .subtitulo-impacto{
     font-size: 20px;
     margin-bottom: 60px;
-    color: #156E78;
+    color: #171717;
 }
 
 .numeros-impacto{
@@ -1265,7 +1265,7 @@ body{
 }
 
 .numero-card{
-    background-color: #D8ECEB;
+    background-color: #f1f0ed;
     width: 250px;
     padding: 45px 25px;
     border-radius: 10px;
@@ -1273,13 +1273,13 @@ body{
 
 .numero-card h3{
     font-size: 50px;
-    color: #156E78;
+    color: #171717;
     margin-bottom: 15px;
 }
 
 .numero-card p{
     font-size: 18px;
-    color: #156E78;
+    color: #171717;
 }
 
 
@@ -1293,8 +1293,8 @@ body{
     text-align: center;
     font-size: 50px;
     margin-bottom: 60px;
-    color: #156E78;
-    font-style: italic;
+    color: #171717;
+    font-style: normal;
 }
 
 .cards-resultados{
@@ -1318,13 +1318,13 @@ body{
 
 .resultado-card h3{
     font-size: 30px;
-    color: #156E78;
+    color: #171717;
     padding: 25px 25px 10px;
 }
 
 .resultado-card p{
     padding: 0 25px 30px;
-    color: #156E78;
+    color: #171717;
     line-height: 30px;
 }
 
@@ -1339,8 +1339,8 @@ body{
 .depoimentos h2{
     font-size: 50px;
     margin-bottom: 60px;
-    color: #156E78;
-    font-style: italic;
+    color: #171717;
+    font-style: normal;
 }
 
 .cards-depoimentos{
@@ -1352,9 +1352,9 @@ body{
 .depoimento-card{
     flex: 1;
     background-color: #fff;
-    color: #156E78;
+    color: #171717;
     padding: 40px;
-    border: 1px solid #E4DCC8;
+    border: 1px solid #E8E6E1;
     border-radius: 10px;
 }
 
@@ -1379,8 +1379,8 @@ body{
     text-align: center;
     font-size: 50px;
     margin-bottom: 60px;
-    color: #156E78;
-    font-style: italic;
+    color: #171717;
+    font-style: normal;
 }
 
 .carrossel{
@@ -1425,18 +1425,18 @@ body{
 .cta-sobre h2{
     font-size: 55px;
     margin-bottom: 30px;
-    color: #156E78;
-    font-style: italic;
+    color: #171717;
+    font-style: normal;
 }
 
 .cta-sobre p{
     font-size: 22px;
     margin-bottom: 40px;
-    color: #156E78;
+    color: #171717;
 }
 
 .cta-sobre button{
-    background-color: #1F9AAA;
+    background-color: #171717;
     color: white;
     border: none;
     padding: 18px 40px;
@@ -1500,19 +1500,19 @@ body{
 .texto-hero-doacoes h1{
     font-size: 60px;
     margin: 30px 0;
-    color: #156E78;
-    font-style: italic;
+    color: #171717;
+    font-style: normal;
 }
 
 .texto-hero-doacoes p{
     font-size: 22px;
     line-height: 38px;
     margin-bottom: 40px;
-    color: #156E78;
+    color: #171717;
 }
 
 .texto-hero-doacoes button{
-    background-color: #1F9AAA;
+    background-color: #171717;
     color: white;
     border: none;
     padding: 18px 40px;
@@ -1561,15 +1561,15 @@ body{
 .texto-ajuda h2{
     font-size: 50px;
     margin-bottom: 30px;
-    color: #156E78;
-    font-style: italic;
+    color: #171717;
+    font-style: normal;
 }
 
 .texto-ajuda p{
     font-size: 20px;
     line-height: 38px;
     margin-bottom: 20px;
-    color: #156E78;
+    color: #171717;
 }
 
 .lista-ajuda{
@@ -1585,17 +1585,17 @@ body{
     align-items: center;
     gap: 10px;
     background-color: #fff;
-    border: 1px solid #E4DCC8;
+    border: 1px solid #E8E6E1;
     border-radius: 8px;
     padding: 14px 18px;
     margin: 0;
     font-size: 16px;
-    color: #156E78;
+    color: #171717;
 }
 
 .lista-ajuda i,
 .itens-arrecadacao i{
-    color: #1F9AAA;
+    color: #171717;
     font-size: 20px;
     flex-shrink: 0;
 }
@@ -1618,15 +1618,15 @@ body{
 .texto-arrecadacao h2{
     font-size: 50px;
     margin-bottom: 30px;
-    color: #156E78;
-    font-style: italic;
+    color: #171717;
+    font-style: normal;
 }
 
 .texto-arrecadacao p{
     font-size: 20px;
     line-height: 38px;
     margin-bottom: 20px;
-    color: #156E78;
+    color: #171717;
 }
 
 .itens-arrecadacao{
@@ -1641,7 +1641,7 @@ body{
 }
 
 .texto-arrecadacao button{
-    background-color: #1F9AAA;
+    background-color: #171717;
     color: white;
     border: none;
     padding: 16px 35px;
@@ -1673,15 +1673,15 @@ body{
 .transparencia h2{
     font-size: 50px;
     margin-bottom: 25px;
-    color: #156E78;
-    font-style: italic;
+    color: #171717;
+    font-style: normal;
 }
 
 .texto-transparencia{
     font-size: 22px;
     line-height: 38px;
     margin-bottom: 60px;
-    color: #156E78;
+    color: #171717;
 }
 
 .numeros-transparencia{
@@ -1693,12 +1693,12 @@ body{
 
 .numeros-transparencia h3{
     font-size: 60px;
-    color: #156E78;
+    color: #171717;
     margin-bottom: 15px;
 }
 
 .numeros-transparencia p{
-    color: #156E78;
+    color: #171717;
 }
 
 
@@ -1711,15 +1711,15 @@ body{
 
 .toda-ajuda h2{
     font-size: 50px;
-    color: #156E78;
+    color: #171717;
     margin-bottom: 25px;
-    font-style: italic;
+    font-style: normal;
 }
 
 .toda-ajuda p{
     font-size: 22px;
     line-height: 38px;
-    color: #156E78;
+    color: #171717;
     max-width: 900px;
     margin: 0 auto 50px;
 }
@@ -1736,8 +1736,8 @@ body{
     padding: 18px 35px;
     border-radius: 10px;
     font-size: 18px;
-    color: #156E78;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    color: #171717;
+    box-shadow: none;
 }
 
 /* DEPOIMENTO */
@@ -1750,21 +1750,21 @@ body{
 .depoimento-destaque p{
     font-size: 34px;
     line-height: 55px;
-    color: #156E78;
-    font-style: italic;
+    color: #171717;
+    font-style: normal;
     margin-bottom: 30px;
 }
 
 .depoimento-destaque h4{
     font-size: 24px;
-    color: #156E78;
+    color: #171717;
 }
 
 
 /* CTA */
 
 .cta-doacoes{
-    background-color: #156E78;
+    background-color: #171717;
     padding: 120px 80px;
     text-align: center;
 }
@@ -1773,12 +1773,12 @@ body{
     color: white;
     font-size: 50px;
     margin-bottom: 40px;
-    font-style: italic;
+    font-style: normal;
 }
 
 .cta-doacoes button{
     background-color: white;
-    color: #156E78;
+    color: #171717;
     border: none;
     padding: 18px 40px;
     border-radius: 10px;
@@ -1827,7 +1827,7 @@ body{
 
 .pagina-login{
     min-height: 100vh;
-    background-color: #F5ECD7;
+    background-color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1840,18 +1840,18 @@ body{
     background-color: white;
     padding: 60px;
     border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    box-shadow: none;
 }
 
 .card-login h1{
     font-size: 45px;
-    color: #156E78;
+    color: #171717;
     margin: 30px 0 20px;
-    font-style: italic;
+    font-style: normal;
 }
 
 .card-login p{
-    color: #156E78;
+    color: #171717;
     line-height: 30px;
     margin-bottom: 35px;
 }
@@ -1864,21 +1864,21 @@ body{
 
 .campo-form label{
     margin-bottom: 10px;
-    color: #156E78;
+    color: #171717;
     font-weight: 600;
 }
 
 .campo-form input{
     padding: 18px;
     border-radius: 6px;
-    border: 1px solid #D8ECEB;
+    border: 1px solid #F1F0ED;
     outline: none;
     font-size: 16px;
     transition: 0.3s;
 }
 
 .campo-form input:focus{
-    border-color: #1F9AAA;
+    border-color: #d6d3cd;
 }
 
 .opcoes-login{
@@ -1894,11 +1894,11 @@ body{
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #156E78;
+    color: #171717;
 }
 
 .opcoes-login a{
-    color: #1F9AAA;
+    color: #171717;
     text-decoration: none;
     font-weight: 600;
 }
@@ -1908,7 +1908,7 @@ body{
     padding: 18px;
     border: none;
     border-radius: 6px;
-    background-color: #1F9AAA;
+    background-color: #171717;
     color: white;
     font-size: 18px;
     cursor: pointer;
@@ -1928,7 +1928,7 @@ body{
 }
 
 .criar-conta a{
-    color: #1F9AAA;
+    color: #171717;
     font-weight: 700;
     text-decoration: none;
 }
@@ -1956,15 +1956,15 @@ body{
 
 .hero-contato h1{
     font-size: 60px;
-    color: #156E78;
+    color: #171717;
     margin: 30px 0;
-    font-style: italic;
+    font-style: normal;
 }
 
 .hero-contato p{
     font-size: 22px;
     line-height: 38px;
-    color: #156E78;
+    color: #171717;
     max-width: 850px;
     margin: auto;
 }
@@ -1984,14 +1984,14 @@ body{
     background-color: white;
     padding: 50px;
     border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    box-shadow: none;
 }
 
 .formulario-contato h2{
     font-size: 40px;
-    color: #156E78;
+    color: #171717;
     margin-bottom: 35px;
-    font-style: italic;
+    font-style: normal;
 }
 
 .campo-contato{
@@ -2002,7 +2002,7 @@ body{
 
 .campo-contato label{
     margin-bottom: 10px;
-    color: #156E78;
+    color: #171717;
     font-weight: 600;
 }
 
@@ -2010,7 +2010,7 @@ body{
 .campo-contato textarea{
     padding: 18px;
     border-radius: 6px;
-    border: 1px solid #D8ECEB;
+    border: 1px solid #F1F0ED;
     outline: none;
     font-size: 16px;
     transition: 0.3s;
@@ -2023,7 +2023,7 @@ body{
 
 .campo-contato input:focus,
 .campo-contato textarea:focus{
-    border-color: #1F9AAA;
+    border-color: #d6d3cd;
 }
 
 .formulario-contato button{
@@ -2031,7 +2031,7 @@ body{
     border: none;
     padding: 18px;
     border-radius: 6px;
-    background-color: #1F9AAA;
+    background-color: #171717;
     color: white;
     font-size: 18px;
     cursor: pointer;
@@ -2046,7 +2046,7 @@ body{
 
 .info-contato{
     flex: 1;
-    background-color: #156E78;
+    background-color: #171717;
     color: white;
     padding: 50px;
     border-radius: 10px;
@@ -2058,7 +2058,7 @@ body{
 .info-contato h2{
     font-size: 40px;
     margin-bottom: 35px;
-    font-style: italic;
+    font-style: normal;
 }
 
 .info-contato p{
@@ -2096,7 +2096,7 @@ body{
 
 .assistente-box{
     flex: 1;
-    background-color: #156E78;
+    background-color: #171717;
     color: white;
     padding: 50px;
     border-radius: 10px;
@@ -2109,7 +2109,7 @@ body{
 .assistente-box h2{
     font-size: 45px;
     margin-bottom: 30px;
-    font-style: italic;
+    font-style: normal;
 }
 
 .assistente-box p{
@@ -2129,7 +2129,7 @@ body{
     background-color: white;
     padding: 50px;
     border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    box-shadow: none;
 }
 
 .campo-agendamento{
@@ -2140,7 +2140,7 @@ body{
 
 .campo-agendamento label{
     margin-bottom: 10px;
-    color: #156E78;
+    color: #171717;
     font-weight: 600;
 }
 
@@ -2148,7 +2148,7 @@ body{
 .campo-agendamento textarea{
     padding: 18px;
     border-radius: 6px;
-    border: 1px solid #D8ECEB;
+    border: 1px solid #F1F0ED;
     outline: none;
     font-size: 16px;
     transition: 0.3s;
@@ -2161,7 +2161,7 @@ body{
 
 .campo-agendamento input:focus,
 .campo-agendamento textarea:focus{
-    border-color: #1F9AAA;
+    border-color: #d6d3cd;
 }
 
 .linha-agendamento{
@@ -2178,7 +2178,7 @@ body{
     border: none;
     padding: 18px;
     border-radius: 6px;
-    background-color: #1F9AAA;
+    background-color: #171717;
     color: white;
     font-size: 18px;
     cursor: pointer;
@@ -2198,21 +2198,21 @@ body{
 
 .parceria h2{
     font-size: 50px;
-    color: #156E78;
+    color: #171717;
     margin-bottom: 30px;
-    font-style: italic;
+    font-style: normal;
 }
 
 .parceria p{
     font-size: 22px;
     line-height: 38px;
-    color: #156E78;
+    color: #171717;
     max-width: 900px;
     margin: auto auto 40px;
 }
 
 .parceria button{
-    background-color: #1F9AAA;
+    background-color: #171717;
     color: white;
     border: none;
     padding: 18px 40px;
@@ -2235,9 +2235,9 @@ body{
 
 .redes h2{
     font-size: 45px;
-    color: #156E78;
+    color: #171717;
     margin-bottom: 50px;
-    font-style: italic;
+    font-style: normal;
 }
 
 .icons-redes{
@@ -2251,9 +2251,9 @@ body{
     background-color: white;
     padding: 18px 35px;
     border-radius: 10px;
-    color: #156E78;
+    color: #171717;
     font-weight: 600;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: none;
 }
 
 
@@ -2306,7 +2306,7 @@ body{
 .menu-toggle{
     font-size: 28px;
     cursor: pointer;
-    color: #156E78;
+    color: #171717;
     line-height: 1;
     transition: 0.3s;
 }
@@ -2323,7 +2323,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     width: 320px;
     height: 100vh;
     background-color: white;
-    box-shadow: 5px 0 20px rgba(0,0,0,0.08);
+    box-shadow: none;
     padding: 40px 30px;
     z-index: 1001;
     transition: 0.4s;
@@ -2341,15 +2341,15 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 }
 
 .top-sidebar h2{
-    color: #156E78;
+    color: #171717;
     font-size: 32px;
-    font-style: italic;
+    font-style: normal;
 }
 
 .fechar-sidebar{
     font-size: 28px;
     cursor: pointer;
-    color: #156E78;
+    color: #171717;
     transition: 0.3s;
 }
 
@@ -2365,7 +2365,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 
 .links-sidebar a{
     text-decoration: none;
-    color: #156E78;
+    color: #171717;
     padding: 18px;
     border-radius: 6px;
     transition: 0.3s;
@@ -2374,7 +2374,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 }
 
 .links-sidebar a:hover{
-    background-color: #F5ECD7;
+    background-color: #ffffff;
     transform: translateX(5px);
 }
 
@@ -2394,12 +2394,12 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 .hero-cadastro{
     padding: 120px 8% 80px;
     text-align: center;
-    background-color: #F8F5EF;
+    background-color: #faf9f7;
 }
 
 .hero-cadastro h1{
     font-size: 60px;
-    color: #156E78;
+    color: #171717;
     margin-top: 30px;
     margin-bottom: 25px;
 }
@@ -2427,7 +2427,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     background-color: #fff;
     border-radius: 10px;
     padding: 45px 35px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.06);
+    box-shadow: none;
     transition: 0.4s;
     text-align: center;
 }
@@ -2440,7 +2440,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 
 .card-cadastro h2{
     font-size: 32px;
-    color: #156E78;
+    color: #171717;
     margin-bottom: 20px;
 }
 
@@ -2453,7 +2453,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 
 .card-cadastro a{
     display: inline-block;
-    background-color: #156E78;
+    background-color: #171717;
     color: white;
     padding: 16px 28px;
     border-radius: 6px;
@@ -2471,13 +2471,13 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 
 .como-funciona{
     padding: 100px 8%;
-    background-color: #F8F5EF;
+    background-color: #faf9f7;
     text-align: center;
 }
 
 .como-funciona h2{
     font-size: 48px;
-    color: #156E78;
+    color: #171717;
     margin-bottom: 70px;
 }
 
@@ -2496,7 +2496,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 .passo span{
     width: 70px;
     height: 70px;
-    background-color: #156E78;
+    background-color: #171717;
     color: white;
     display: flex;
     align-items: center;
@@ -2509,7 +2509,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 }
 
 .passo h3{
-    color: #156E78;
+    color: #171717;
     font-size: 22px;
 }
 
@@ -2523,7 +2523,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 
 .beneficios-cadastro h2{
     font-size: 48px;
-    color: #156E78;
+    color: #171717;
     margin-bottom: 70px;
 }
 
@@ -2534,13 +2534,13 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 }
 
 .beneficio-item{
-    background-color: #F8F5EF;
+    background-color: #faf9f7;
     padding: 45px 30px;
     border-radius: 6px;
 }
 
 .beneficio-item h3{
-    color: #156E78;
+    color: #171717;
     font-size: 28px;
     margin-bottom: 20px;
 }
@@ -2557,7 +2557,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 .final-cadastro{
     padding: 120px 8%;
     text-align: center;
-    background-color: #156E78;
+    background-color: #171717;
 }
 
 .final-cadastro h2{
@@ -2571,7 +2571,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 .final-cadastro a{
     display: inline-block;
     background-color: white;
-    color: #156E78;
+    color: #171717;
     padding: 18px 35px;
     border-radius: 6px;
     text-decoration: none;
@@ -2631,7 +2631,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 
 .formulario-voluntario{
     padding: 120px 8%;
-    background-color: #F8F5EF;
+    background-color: #faf9f7;
 }
 
 .topo-formulario{
@@ -2641,7 +2641,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 
 .topo-formulario h1{
     font-size: 58px;
-    color: #156E78;
+    color: #171717;
     margin-top: 30px;
     margin-bottom: 20px;
 }
@@ -2663,7 +2663,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     background-color: white;
     padding: 70px;
     border-radius: 10px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+    box-shadow: none;
 }
 
 
@@ -2676,7 +2676,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 }
 
 .secao-formulario h2{
-    color: #156E78;
+    color: #171717;
     font-size: 34px;
     margin-bottom: 40px;
 }
@@ -2719,8 +2719,8 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 
 .input-group input:focus,
 .input-group select:focus{
-    border-color: #156E78;
-    box-shadow: 0 0 0 4px rgba(21,110,120,0.08);
+    border-color: #d6d3cd;
+    box-shadow: none;
 }
 
 
@@ -2745,7 +2745,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 }
 
 .abrir-termos{
-    color: #156E78;
+    color: #171717;
     font-weight: 600;
     cursor: pointer;
     transition: 0.3s;
@@ -2762,7 +2762,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     width: 100%;
     height: 65px;
     border: none;
-    background-color: #156E78;
+    background-color: #171717;
     color: white;
     font-size: 18px;
     font-weight: 600;
@@ -2814,11 +2814,11 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     right: 30px;
     font-size: 28px;
     cursor: pointer;
-    color: #156E78;
+    color: #171717;
 }
 
 .conteudo-termos h2{
-    color: #156E78;
+    color: #171717;
     font-size: 34px;
     margin-bottom: 35px;
 }
@@ -2870,7 +2870,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     display: flex;
     gap: 40px;
     padding: 120px 8%;
-    background-color: #F8F5EF;
+    background-color: #faf9f7;
     min-height: 100vh;
 }
 
@@ -2883,7 +2883,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     border-radius: 10px;
     padding: 30px 20px;
     height: fit-content;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+    box-shadow: none;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -2903,11 +2903,11 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 }
 
 .aba-btn:hover{
-    background-color: #F5ECD7;
+    background-color: #ffffff;
 }
 
 .aba-btn.ativo{
-    background-color: #156E78;
+    background-color: #171717;
     color: white;
 }
 
@@ -2919,7 +2919,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     background-color: white;
     border-radius: 10px;
     padding: 50px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+    box-shadow: none;
 }
 
 
@@ -2948,7 +2948,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
     width: 110px;
     height: 110px;
     border-radius: 50%;
-    background-color: #156E78;
+    background-color: #171717;
     color: white;
     display: flex;
     align-items: center;
@@ -2959,7 +2959,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 
 .perfil-topo h2{
     font-size: 36px;
-    color: #156E78;
+    color: #171717;
     margin-bottom: 10px;
 }
 
@@ -3019,15 +3019,15 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 .input-config input:focus,
 .input-config select:focus,
 .input-config textarea:focus{
-    border-color: #156E78;
-    box-shadow: 0 0 0 4px rgba(21,110,120,0.08);
+    border-color: #d6d3cd;
+    box-shadow: none;
 }
 
 
 /* BOTÃO */
 
 .salvar-btn{
-    background-color: #156E78;
+    background-color: #171717;
     color: white;
     border: none;
     padding: 18px 35px;
@@ -3056,7 +3056,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 }
 
 .config-item h3{
-    color: #156E78;
+    color: #171717;
     font-size: 22px;
     margin-bottom: 8px;
 }
@@ -3103,7 +3103,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 }
 
 .switch input:checked + .slider{
-    background-color: #156E78;
+    background-color: #171717;
 }
 
 .switch input:checked + .slider::before{
@@ -3114,7 +3114,7 @@ body:has(.sidebar-lateral.ativo) .menu-toggle{
 /* FONTE */
 
 .fonte-btn{
-    background-color: #156E78;
+    background-color: #171717;
     color: white;
     border: none;
     width: 60px;
@@ -3262,7 +3262,7 @@ header {
     position: relative;
     z-index: 1000;
     background-color: #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    box-shadow: none;
 }
 /* ========================================
    CONFIGURAÇÕES DE APARÊNCIA
@@ -3569,7 +3569,7 @@ html.daltonismo-acromatopsia {
     left: 10px;
     z-index: 2000;
     padding: 12px 20px;
-    background-color: #156E78;
+    background-color: #171717;
     color: #ffffff;
     border-radius: 6px;
     text-decoration: none;
@@ -3592,7 +3592,7 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 [tabindex]:focus-visible {
-    outline: 3px solid #156E78;
+    outline: 3px solid #d6d3cd;
     outline-offset: 2px;
 }
 
@@ -3617,10 +3617,10 @@ body.alto-contraste textarea:focus-visible {
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background-color: #156E78;
+    background-color: #171717;
     color: #ffffff;
     border: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: none;
     font-size: 26px;
     display: flex;
     align-items: center;
@@ -3660,4 +3660,351 @@ body.modo-escuro #painelAcessibilidade {
 @keyframes digitando {
     0%, 80%, 100% { opacity: 0.2; }
     40% { opacity: 1; }
+}
+
+
+/* FONTE: Inter em tudo (inclusive campos e botões) */
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+
+/* ========================================================================
+   DESIGN MINIMALISTA
+   Tokens + regras de baixa especificidade: as regras por componente acima
+   (já neutralizadas) continuam valendo onde forem mais específicas.
+   ======================================================================== */
+
+:root {
+    --ink: #171717;
+    --muted: #6b6b6b;
+    --line: #e8e6e1;
+    --soft: #faf9f7;
+    --doe: #c2410c;
+    --doe-hover: #9a3412;
+    --raio: 14px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #fff;
+    color: var(--ink);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+}
+
+h1 { font-size: clamp(2.25rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.75rem, 3.2vw, 2.25rem); }
+h3 { font-size: 1.15rem; }
+
+a {
+    color: inherit;
+}
+
+/* NAVEGAÇÃO */
+
+header,
+.menu.navbar {
+    background-color: #fff;
+    box-shadow: none;
+}
+
+header {
+    border-bottom: 1px solid var(--line);
+}
+
+.menu .navbar-brand {
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    font-size: 1.25rem;
+}
+
+.menu .nav-link {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--muted);
+}
+
+.menu .nav-link:hover,
+.menu .nav-link:focus {
+    color: var(--ink);
+}
+
+/* "Doações" vira o CTA permanente do menu */
+.menu .nav-link[href$="doacoes.html"] {
+    background-color: var(--doe);
+    color: #fff;
+    border-radius: 999px;
+    padding: 0.4rem 1rem;
+    margin-left: 0.25rem;
+}
+
+.menu .nav-link[href$="doacoes.html"]:hover,
+.menu .nav-link[href$="doacoes.html"]:focus {
+    background-color: var(--doe-hover);
+    color: #fff;
+}
+
+/* BOTÕES */
+
+button,
+.btn {
+    font-weight: 500;
+    border-radius: 10px;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.botao-secundario,
+.botao-final-secundario {
+    background-color: transparent !important;
+    color: var(--ink) !important;
+    border: 1px solid var(--ink) !important;
+}
+
+.botao-secundario:hover,
+.botao-final-secundario:hover {
+    background-color: var(--ink) !important;
+    color: #fff !important;
+}
+
+/* Doar: única cor de destaque do site */
+.botao-doar,
+.pagina-doacoes #botaoQueroAjudar,
+.pagina-doacoes #botaoFazerDoacao,
+.pagina-doacoes .botao-formulario {
+    background-color: var(--doe) !important;
+    color: #fff !important;
+    border: 0;
+}
+
+.botao-doar:hover,
+.pagina-doacoes #botaoQueroAjudar:hover,
+.pagina-doacoes #botaoFazerDoacao:hover,
+.pagina-doacoes .botao-formulario:hover {
+    background-color: var(--doe-hover) !important;
+}
+
+/* SUPERFÍCIES: bordas finas, sem sombra */
+
+.card,
+.vaga,
+.card-oportunidade,
+.card-valor,
+.funciona-card,
+.resultado-card,
+.stat-card,
+.item-ajuda,
+.card-login,
+.card-cadastro,
+.formulario-contato,
+.form-agendamento,
+.form-voluntario,
+.conteudo-configuracoes,
+.menu-configuracoes,
+.rede-item {
+    border: 1px solid var(--line);
+    border-radius: var(--raio);
+    box-shadow: none;
+    background-color: #fff;
+}
+
+section img,
+.imagem-inicio img {
+    border-radius: var(--raio);
+    box-shadow: none;
+}
+
+/* CAMPOS */
+
+input,
+select,
+textarea {
+    border: 1px solid #d6d3cd;
+    border-radius: 10px;
+    background-color: #fff;
+    color: var(--ink);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid var(--ink);
+    outline-offset: 1px;
+    border-color: var(--ink);
+}
+
+/* RÓTULOS/STATUS: texto discreto com ponto, sem "badge" */
+
+.tipo {
+    background: none !important;
+    padding: 0 !important;
+    border-radius: 0;
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.tipo::before {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 0.45rem;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.tipo.status-aprovada, .tipo.status-concluida, .tipo.status-aberta, .tipo.status-confirmado { color: #2e7d32; }
+.tipo.status-pendente, .tipo.status-pausada { color: #b45309; }
+.tipo.status-recusada, .tipo.status-cancelada { color: #b91c1c; }
+.tipo.status-encerrada { color: var(--muted); }
+
+.stat-icone,
+.data-evento {
+    background: var(--soft) !important;
+    color: var(--ink) !important;
+    box-shadow: none;
+}
+
+/* RODAPÉ E BLOCOS ESCUROS: tinta, sem cor de marca */
+
+.rodape,
+.cta-final,
+.cta-doacoes,
+.info-contato,
+.assistente-box,
+.newsletter {
+    background-color: var(--ink);
+    color: #fff;
+}
+
+.rodape a,
+.rodape p,
+.rodape h4 {
+    color: #e5e5e5;
+}
+
+/* Modo escuro: mantém contraste dos novos tokens */
+
+body.modo-escuro {
+    --ink: #f5f5f5;
+    --muted: #b8b8b8;
+    --line: #333;
+    --soft: #1a1a1a;
+}
+
+body.modo-escuro header,
+body.modo-escuro .menu.navbar {
+    background-color: #181818;
+    border-color: #333;
+}
+
+body.modo-escuro p {
+    color: #d4d4d4;
+}
+
+body.modo-escuro .rodape,
+body.modo-escuro .cta-final,
+body.modo-escuro .cta-doacoes,
+body.modo-escuro .info-contato,
+body.modo-escuro .assistente-box,
+body.modo-escuro .newsletter {
+    background-color: #1e1e1e;
+}
+
+/* MODO ESCURO - superfícies claras do tema novo (geradas por ajuste_contraste) */
+
+body.modo-escuro .card,
+body.modo-escuro .vaga,
+body.modo-escuro .ong-card,
+body.modo-escuro .relato,
+body.modo-escuro .card-oportunidade,
+body.modo-escuro .stat-card,
+body.modo-escuro .card-evento,
+body.modo-escuro .card-valor,
+body.modo-escuro .funciona-card,
+body.modo-escuro .numero-card,
+body.modo-escuro .resultado-card,
+body.modo-escuro .depoimento-card,
+body.modo-escuro .lista-ajuda p,
+body.modo-escuro .itens-arrecadacao p,
+body.modo-escuro .item-ajuda,
+body.modo-escuro .card-login,
+body.modo-escuro .formulario-contato,
+body.modo-escuro .form-agendamento,
+body.modo-escuro .rede-item,
+body.modo-escuro .sidebar-lateral,
+body.modo-escuro .card-cadastro,
+body.modo-escuro .passo,
+body.modo-escuro .beneficio-item,
+body.modo-escuro .final-cadastro a,
+body.modo-escuro .conteudo-termos,
+body.modo-escuro .menu.navbar {
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+    border-color: #333;
+}
+
+
+/* MODO ESCURO - links, botão "Painel" e "Ver detalhes" (estavam em tinta sobre fundo escuro) */
+
+body.modo-escuro :is(main, section, form) a:not(.btn) {
+    color: #f5f5f5;
+}
+
+body.modo-escuro .menu .btn-outline-primary {
+    --bs-btn-color: #f5f5f5;
+    --bs-btn-border-color: #f5f5f5;
+    --bs-btn-hover-bg: #f5f5f5;
+    --bs-btn-hover-color: #121212;
+    --bs-btn-hover-border-color: #f5f5f5;
+}
+
+body.modo-escuro .detalhes {
+    background-color: transparent !important;
+    color: #f5f5f5 !important;
+    border: 1px solid #555 !important;
+}
+
+body.modo-escuro .detalhes:hover {
+    background-color: #f5f5f5 !important;
+    color: #121212 !important;
+}
+
+body.modo-escuro .abrir-termos {
+    color: #f5f5f5;
+}
+
+/* "Como funciona": o card é claro, o texto herdado era branco (ilegível no tema claro) */
+
+.passo h3,
+.passo p {
+    color: var(--ink);
+}
+
+/* MODO ESCURO - botões de tinta viram claros (senão somem no fundo escuro) */
+
+body.modo-escuro .ong-card button,
+body.modo-escuro .vaga button,
+body.modo-escuro .card-login button,
+body.modo-escuro .formulario-contato button,
+body.modo-escuro .form-agendamento button,
+body.modo-escuro .botoes button:not(.botao-doar):not(.botao-secundario) {
+    background-color: #f5f5f5;
+    color: #121212;
 }

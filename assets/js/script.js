@@ -12,11 +12,14 @@ function irPara(id, destino) {
     }
 }
 
+irPara("botaoHeroDoar", "paginas/doacoes.html");
 irPara("botaoHeroVoluntario", "paginas/cadastro-voluntario.html");
 irPara("botaoHeroOng", "paginas/cadastro-ong.html");
 irPara("botaoFinalVoluntario", "paginas/cadastro-voluntario.html");
 irPara("botaoFinalOng", "paginas/cadastro-ong.html");
 irPara("botaoCtaSobre", "cadastro.html");
+irPara("botaoCadastrarProjeto", "paginas/cadastro-ong.html");
+irPara("botaoCtaPerfil", "cadastro-voluntario.html");
 
 const botaoParceriaContato = document.getElementById("botaoParceriaContato");
 

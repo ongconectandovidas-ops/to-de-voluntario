@@ -13,6 +13,9 @@
 
     <link rel="preconnect" href="https://xeokfqlkhrynxzldwvup.supabase.co" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 </head>
 <body>
 
@@ -258,7 +261,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title h5" id="modalCandidatosTitulo">Candidatos</h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                <button type="button" class="btn btn-sm btn-outline-primary ms-auto me-2" id="botaoExportarVaga" disabled>
+                    <i class="bi bi-file-earmark-pdf" aria-hidden="true"></i> Exportar PDF
+                </button>
+                <button type="button" class="btn-close ms-0" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div class="modal-body" id="listaCandidatosVaga"></div>
         </div>
@@ -324,13 +330,13 @@ function esc(texto) {
 
 // ponytail: usa o "Salvar como PDF" do navegador (window.print), sem API/Puppeteer. Se precisar
 // de download direto do arquivo, mover para api/ como o gerar-certificado.
-function exportarCandidatosPdf() {
-    if (candidaturasCarregadas.length === 0) {
+function exportarCandidatosPdf(lista, nomeOportunidade) {
+    if (!lista || lista.length === 0) {
         alert("Nenhuma candidatura para exportar.");
         return;
     }
 
-    const linhas = candidaturasCarregadas.map(function (c) {
+    const linhas = lista.map(function (c) {
         const v = c.voluntarios || {};
         const p = v.perfis || {};
         return "<tr><td>" + esc(((p.nome || "") + " " + (p.sobrenome || "")).trim() || "-") + "</td>" +
@@ -358,7 +364,8 @@ function exportarCandidatosPdf() {
             tr { page-break-inside: avoid; } thead { display: table-header-group; }
         </style></head><body>
         <h1>Relatório de candidatos — ${esc(organizacaoAtualNome)}</h1>
-        <p>Gerado em ${new Date().toLocaleString("pt-BR")} · Total: ${candidaturasCarregadas.length}</p>
+        ${nomeOportunidade ? "<p><strong>Oportunidade: " + esc(nomeOportunidade) + "</strong></p>" : ""}
+        <p>Gerado em ${new Date().toLocaleString("pt-BR")} · Total: ${lista.length}</p>
         <table><thead><tr><th>Nome</th><th>E-mail</th><th>Telefone</th><th>Cidade</th><th>Oportunidade</th><th>Status</th></tr></thead>
         <tbody>${linhas}</tbody></table></body></html>`);
     janela.document.close();
@@ -366,7 +373,9 @@ function exportarCandidatosPdf() {
     janela.print();
 }
 
-document.getElementById("botaoExportarCandidatos").addEventListener("click", exportarCandidatosPdf);
+document.getElementById("botaoExportarCandidatos").addEventListener("click", function () {
+    exportarCandidatosPdf(candidaturasCarregadas);
+});
 
 // ========================================
 // CANDIDATOS DA OPORTUNIDADE (ícone de olho) + CONTATO
@@ -420,8 +429,20 @@ function entrarEmContato(perfil, vaga) {
     }
 }
 
+let candidatosModalAtual = [];
+let vagaModalAtual = null;
+
+document.getElementById("botaoExportarVaga").addEventListener("click", function () {
+    exportarCandidatosPdf(candidatosModalAtual, vagaModalAtual && vagaModalAtual.titulo);
+});
+
 async function abrirCandidatosVaga(vaga) {
     const modal = document.getElementById("modalCandidatos");
+    const botaoExportar = document.getElementById("botaoExportarVaga");
+
+    candidatosModalAtual = [];
+    vagaModalAtual = vaga;
+    botaoExportar.disabled = true;
     const corpo = document.getElementById("listaCandidatosVaga");
 
     document.getElementById("modalCandidatosTitulo").textContent = "Candidatos: " + vaga.titulo;
@@ -445,6 +466,11 @@ async function abrirCandidatosVaga(vaga) {
         corpo.innerHTML = '<p class="texto-ajuda">Ninguém se candidatou a esta oportunidade ainda.</p>';
         return;
     }
+
+    candidatosModalAtual = data.map(function (c) {
+        return Object.assign({}, c, { oportunidades: { titulo: vaga.titulo } });
+    });
+    botaoExportar.disabled = false;
 
     data.forEach(function (candidatura) {
         const voluntario = candidatura.voluntarios || {};
