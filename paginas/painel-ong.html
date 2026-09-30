@@ -252,6 +252,40 @@
 </section>
 
 
+<!-- MODAL: CANDIDATOS DA OPORTUNIDADE -->
+<div class="modal fade" id="modalCandidatos" tabindex="-1" aria-labelledby="modalCandidatosTitulo" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title h5" id="modalCandidatosTitulo">Candidatos</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body" id="listaCandidatosVaga"></div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL: ESCOLHER CANAL DE CONTATO (quando o candidato tem e-mail e telefone) -->
+<div class="modal fade" id="modalContato" tabindex="-1" aria-labelledby="modalContatoTitulo" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title h5" id="modalContatoTitulo">Entrar em contato</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body d-grid gap-2">
+                <p class="mb-1" id="modalContatoNome"></p>
+                <a class="btn btn-success" id="contatoWhatsapp" target="_blank" rel="noopener">
+                    <i class="bi bi-whatsapp" aria-hidden="true"></i> WhatsApp
+                </a>
+                <a class="btn btn-primary" id="contatoEmail">
+                    <i class="bi bi-envelope-fill" aria-hidden="true"></i> E-mail
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="../assets/js/script.js"></script>
@@ -334,6 +368,120 @@ function exportarCandidatosPdf() {
 
 document.getElementById("botaoExportarCandidatos").addEventListener("click", exportarCandidatosPdf);
 
+// ========================================
+// CANDIDATOS DA OPORTUNIDADE (ícone de olho) + CONTATO
+// ========================================
+
+// Telefone BR -> só dígitos com DDI 55. Menos de 10 dígitos = inválido (sem WhatsApp).
+function numeroWhatsapp(telefone) {
+    const d = String(telefone || "").replace(/\D/g, "");
+
+    if (d.length < 10) {
+        return null;
+    }
+
+    return d.startsWith("55") && d.length >= 12 ? d : "55" + d;
+}
+
+function linksDeContato(perfil, vaga) {
+    const mensagem = "Olá " + (perfil.nome || "") + ", aqui é da " + organizacaoAtualNome +
+        ". Vimos sua candidatura à oportunidade \"" + vaga.titulo + "\" no Tô de Voluntário.";
+    const numero = numeroWhatsapp(perfil.telefone);
+
+    return {
+        whatsapp: numero ? "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensagem) : null,
+        email: perfil.email
+            ? "mailto:" + perfil.email + "?subject=" + encodeURIComponent("Sua candidatura: " + vaga.titulo) + "&body=" + encodeURIComponent(mensagem)
+            : null
+    };
+}
+
+function entrarEmContato(perfil, vaga) {
+    const links = linksDeContato(perfil, vaga);
+
+    if (links.whatsapp && links.email) {
+        document.getElementById("modalContatoNome").textContent = ((perfil.nome || "") + " " + (perfil.sobrenome || "")).trim();
+        document.getElementById("contatoWhatsapp").href = links.whatsapp;
+        document.getElementById("contatoEmail").href = links.email;
+
+        // Bootstrap não empilha modais: fecha a lista e abre a escolha no lugar dela.
+        const modalLista = document.getElementById("modalCandidatos");
+        modalLista.addEventListener("hidden.bs.modal", function () {
+            bootstrap.Modal.getOrCreateInstance(document.getElementById("modalContato")).show();
+        }, { once: true });
+        bootstrap.Modal.getOrCreateInstance(modalLista).hide();
+        return;
+    }
+
+    if (links.whatsapp) {
+        window.open(links.whatsapp, "_blank", "noopener");
+    } else if (links.email) {
+        window.location.href = links.email;
+    }
+}
+
+async function abrirCandidatosVaga(vaga) {
+    const modal = document.getElementById("modalCandidatos");
+    const corpo = document.getElementById("listaCandidatosVaga");
+
+    document.getElementById("modalCandidatosTitulo").textContent = "Candidatos: " + vaga.titulo;
+    corpo.innerHTML = '<p class="texto-ajuda">Carregando...</p>';
+    bootstrap.Modal.getOrCreateInstance(modal).show();
+
+    const { data, error } = await supabaseClient
+        .from("candidaturas")
+        .select("id, status, voluntarios(cidade_atuacao, perfis(nome, sobrenome, email, telefone))")
+        .eq("oportunidade_id", vaga.id)
+        .order("criado_em", { ascending: false });
+
+    corpo.innerHTML = "";
+
+    if (error) {
+        corpo.innerHTML = '<p class="texto-ajuda">Não foi possível carregar os candidatos.</p>';
+        return;
+    }
+
+    if (!data || data.length === 0) {
+        corpo.innerHTML = '<p class="texto-ajuda">Ninguém se candidatou a esta oportunidade ainda.</p>';
+        return;
+    }
+
+    data.forEach(function (candidatura) {
+        const voluntario = candidatura.voluntarios || {};
+        const perfil = voluntario.perfis || {};
+
+        const linha = document.createElement("div");
+        linha.className = "d-flex justify-content-between align-items-center gap-2 border-bottom py-2";
+
+        const info = document.createElement("div");
+        const nome = document.createElement("strong");
+        nome.textContent = ((perfil.nome || "") + " " + (perfil.sobrenome || "")).trim() || "Voluntário(a)";
+        const detalhe = document.createElement("div");
+        detalhe.className = "small text-secondary";
+        detalhe.textContent = (rotulosStatusCandidaturaOng[candidatura.status] || candidatura.status) +
+            (voluntario.cidade_atuacao ? " · " + voluntario.cidade_atuacao : "");
+        info.append(nome, detalhe);
+
+        const links = linksDeContato(perfil, vaga);
+        const botao = document.createElement("button");
+        botao.type = "button";
+        botao.className = "btn btn-sm btn-outline-primary";
+
+        if (!links.whatsapp && !links.email) {
+            botao.textContent = "Sem contato";
+            botao.disabled = true;
+        } else {
+            botao.innerHTML = '<i class="bi bi-chat-dots-fill" aria-hidden="true"></i> Entrar em contato';
+            botao.addEventListener("click", function () {
+                entrarEmContato(perfil, vaga);
+            });
+        }
+
+        linha.append(info, botao);
+        corpo.appendChild(linha);
+    });
+}
+
 function criarCardVagaOng(vaga) {
     const card = document.createElement("div");
     card.className = "card-oportunidade";
@@ -381,7 +529,16 @@ function criarCardVagaOng(vaga) {
         carregarMinhasVagas();
     });
 
-    botoes.append(botaoAlternar, botaoEncerrar, botaoExcluir);
+    const botaoOlho = document.createElement("button");
+    botaoOlho.type = "button";
+    botaoOlho.title = "Ver candidatos";
+    botaoOlho.setAttribute("aria-label", "Ver candidatos de " + vaga.titulo);
+    botaoOlho.innerHTML = '<i class="bi bi-eye-fill" aria-hidden="true"></i>';
+    botaoOlho.addEventListener("click", function () {
+        abrirCandidatosVaga(vaga);
+    });
+
+    botoes.append(botaoOlho, botaoAlternar, botaoEncerrar, botaoExcluir);
     card.append(status, titulo, local, vagas, botoes);
 
     return card;
@@ -564,6 +721,11 @@ formNovaVaga.addEventListener("submit", async function (evento) {
         return;
     }
 
+    if (!organizacaoAtualId) {
+        mostrarMensagemNovaVaga("Sua conta não tem uma organização vinculada, então não dá para publicar. Cadastre a ONG com este usuário ou fale com o suporte.", "danger");
+        return;
+    }
+
     mostrarMensagemNovaVaga("Publicando...", "info");
 
     const { data: novaVaga, error } = await supabaseClient
@@ -682,6 +844,7 @@ document.getElementById("botaoSairMenu").addEventListener("click", sairDoPainel)
         ["listaMinhasVagas", "listaCandidaturas"].forEach(function (id) {
             document.getElementById(id).innerHTML = '<p class="texto-ajuda">Nenhuma organização vinculada a esta conta. Faça o cadastro de ONG com este usuário.</p>';
         });
+        mostrarMensagemNovaVaga("Nenhuma organização vinculada a esta conta: não é possível publicar oportunidades.", "warning");
         return;
     }
 

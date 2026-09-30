@@ -305,14 +305,10 @@
 
             <div class="info-local">
 
-                <p><i class="bi bi-geo-alt-fill" aria-hidden="true"></i> KAMILI ENVIAR</p>
                 <p><i class="bi bi-clock-fill" aria-hidden="true"></i> Segunda à sexta — 9h às 18h</p>
 
             </div>
 
-            <button id="botaoVerLocalizacao">
-                Ver localização
-            </button>
 
         </div>
 
@@ -480,9 +476,6 @@ alt="Ponto de arrecadação">
     document.getElementById("botaoQueroAjudar").addEventListener("click", rolarAteFormularioDoacao);
     document.getElementById("botaoFazerDoacao").addEventListener("click", rolarAteFormularioDoacao);
 
-    document.getElementById("botaoVerLocalizacao").addEventListener("click", function () {
-        window.open("https://www.google.com/maps/search/" + encodeURIComponent("KAMILI ENVIAR"), "_blank");
-    });
 
     // ========================================
     // FORMULÁRIO DE DOAÇÃO -> tabela doacoes

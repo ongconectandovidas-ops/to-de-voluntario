@@ -3408,6 +3408,43 @@ body.modo-escuro li {
     color: #f5f5f5;
 }
 
+/* MODAIS (Bootstrap) */
+
+body.modo-escuro .modal-content {
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+    border-color: #444;
+}
+
+body.modo-escuro .modal-header,
+body.modo-escuro .modal-footer,
+body.modo-escuro .modal-body .border-bottom {
+    border-color: #444 !important;
+}
+
+body.modo-escuro .modal-content .text-secondary {
+    color: #b8b8b8 !important;
+}
+
+body.modo-escuro .modal-content .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+body.modo-escuro .modal-content .btn-outline-primary {
+    color: #6ea8fe;
+    border-color: #6ea8fe;
+}
+
+body.modo-escuro .modal-content .btn-outline-primary:hover:not(:disabled) {
+    color: #121212;
+    background-color: #6ea8fe;
+}
+
+body.modo-escuro .modal-content .btn-outline-primary:disabled {
+    color: #9a9a9a;
+    border-color: #555;
+}
+
 /* CAMPOS */
 
 body.modo-escuro input,
