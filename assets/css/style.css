@@ -1657,9 +1657,17 @@ body{
     flex: 1;
 }
 
-.imagem-arrecadacao img{
+.imagem-arrecadacao iframe{
+    display: block;
     width: 100%;
-    border-radius: 10px;
+    height: 420px;
+    border: 0;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(15, 26, 51, 0.15);
+}
+
+.info-local p{
+    margin-bottom: 8px;
 }
 
 
