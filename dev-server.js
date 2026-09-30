@@ -19,7 +19,7 @@ if (fs.existsSync(envPath)) {
     });
 }
 
-const PORTA = 9018;
+const PORTA = process.env.PORTA || 9018;
 
 const TIPOS_MIME = {
     ".html": "text/html; charset=utf-8",
@@ -47,7 +47,12 @@ function lerCorpoJson(req) {
 }
 
 const servidor = http.createServer(async function (req, res) {
-    const urlPath = req.url.split("?")[0];
+    let urlPath = req.url.split("?")[0];
+
+    // Mesmo rewrite do vercel.json
+    if (urlPath === "/documento/validar") {
+        urlPath = "/paginas/validar-certificado.html";
+    }
 
     if (urlPath.startsWith("/api/")) {
         const nomeFuncao = urlPath.replace("/api/", "").replace(/\.js$/, "");

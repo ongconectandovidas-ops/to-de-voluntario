@@ -13,7 +13,7 @@ const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-function montarHtmlCertificado({ nomeVoluntario, tituloOportunidade, nomeOrganizacao, dataConclusao, codigo }) {
+function montarHtmlCertificado({ nomeVoluntario, tituloOportunidade, nomeOrganizacao, dataConclusao, codigo, urlValidacao }) {
     const dataFormatada = new Date(dataConclusao).toLocaleDateString("pt-BR", { year: "numeric", month: "long", day: "numeric" });
 
     return `
@@ -64,7 +64,7 @@ function montarHtmlCertificado({ nomeVoluntario, tituloOportunidade, nomeOrganiz
                 <strong>"${tituloOportunidade}"</strong>, promovida por <strong>${nomeOrganizacao}</strong>,
                 concluída em ${dataFormatada}.
             </p>
-            <div class="rodape">Código de verificação: ${codigo}</div>
+            <div class="rodape">Código de verificação: ${codigo}<br>Valide em: ${urlValidacao}</div>
         </div>
     </body>
     </html>
@@ -86,7 +86,7 @@ async function buscarUsuario(token) {
 async function buscarCandidatura(candidaturaId) {
     const resposta = await fetch(
         SUPABASE_URL + "/rest/v1/candidaturas?id=eq." + candidaturaId +
-        "&select=id,status,voluntario_id,atualizado_em,oportunidades(titulo,organizacoes(nome_fantasia)),voluntarios(perfis(nome,sobrenome))",
+        "&select=id,status,codigo_certificado,voluntario_id,atualizado_em,oportunidades(titulo,organizacoes(nome_fantasia)),voluntarios(perfis(nome,sobrenome))",
         { headers: { apikey: SUPABASE_SERVICE_ROLE_KEY, Authorization: "Bearer " + SUPABASE_SERVICE_ROLE_KEY } }
     );
 
@@ -136,6 +136,26 @@ module.exports = async function handler(req, res) {
         return;
     }
 
+    // Certificado concluído antes da migration: um update "vazio" faz o trigger do banco gerar o código.
+    if (!candidatura.codigo_certificado) {
+        await fetch(SUPABASE_URL + "/rest/v1/candidaturas?id=eq." + candidatura.id, {
+            method: "PATCH",
+            headers: {
+                apikey: SUPABASE_SERVICE_ROLE_KEY,
+                Authorization: "Bearer " + SUPABASE_SERVICE_ROLE_KEY,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ status: "concluida" })
+        });
+
+        candidatura.codigo_certificado = ((await buscarCandidatura(candidatura.id)) || {}).codigo_certificado;
+    }
+
+    if (!candidatura.codigo_certificado) {
+        res.status(500).json({ erro: "Certificado sem código de verificação (rode a migration 20260930000000)" });
+        return;
+    }
+
     const perfil = (candidatura.voluntarios || {}).perfis || {};
 
     const html = montarHtmlCertificado({
@@ -143,7 +163,8 @@ module.exports = async function handler(req, res) {
         tituloOportunidade: (candidatura.oportunidades || {}).titulo || "",
         nomeOrganizacao: ((candidatura.oportunidades || {}).organizacoes || {}).nome_fantasia || "",
         dataConclusao: candidatura.atualizado_em,
-        codigo: candidatura.id
+        codigo: candidatura.codigo_certificado,
+        urlValidacao: (req.headers["x-forwarded-proto"] || "http") + "://" + req.headers.host + "/documento/validar?codigo=" + candidatura.codigo_certificado
     });
 
     let navegador;

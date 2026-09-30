@@ -625,12 +625,21 @@ document.getElementById("botaoSairMenu").addEventListener("click", sairDoPainel)
 
     const usuarioId = sessaoData.session.user.id;
 
-    // Nome da ONG do cache (mostra na hora); a consulta abaixo atualiza.
-    const chaveCacheOng = "nomeOng:" + usuarioId;
-    const nomeEmCache = sessionStorage.getItem(chaveCacheOng);
+    // ONG (id + nome) do cache: mostra o nome e já dispara as listas, sem esperar perfil/organização.
+    // A consulta abaixo confirma; se o id mudou, recarrega as listas. RLS continua protegendo os dados.
+    const chaveCacheOng = "ong:" + usuarioId;
+    let ongEmCache = null;
 
-    if (nomeEmCache) {
-        document.getElementById("nomeOrganizacao").textContent = nomeEmCache;
+    try {
+        ongEmCache = JSON.parse(sessionStorage.getItem(chaveCacheOng));
+    } catch (e) { /* sem cache */ }
+
+    if (ongEmCache && ongEmCache.id) {
+        organizacaoAtualId = ongEmCache.id;
+        organizacaoAtualNome = ongEmCache.nome;
+        document.getElementById("nomeOrganizacao").textContent = ongEmCache.nome;
+        carregarMinhasVagas();
+        carregarCandidaturas();
     }
 
     // Tudo que não depende do resultado do perfil sai em paralelo (antes eram 3 round trips em fila).
@@ -671,13 +680,17 @@ document.getElementById("botaoSairMenu").addEventListener("click", sairDoPainel)
         return;
     }
 
+    const mudou = !ongEmCache || ongEmCache.id !== organizacao.id;
+
     organizacaoAtualId = organizacao.id;
     organizacaoAtualNome = organizacao.nome_fantasia;
     document.getElementById("nomeOrganizacao").textContent = organizacao.nome_fantasia;
-    sessionStorage.setItem(chaveCacheOng, organizacao.nome_fantasia);
+    sessionStorage.setItem(chaveCacheOng, JSON.stringify({ id: organizacao.id, nome: organizacao.nome_fantasia }));
 
-    carregarMinhasVagas();
-    carregarCandidaturas();
+    if (mudou) {
+        carregarMinhasVagas();
+        carregarCandidaturas();
+    }
 })();
 
 </script>
