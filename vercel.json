@@ -5,7 +5,7 @@
     { "source": "/paginas/:pagina", "destination": "/:pagina", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/documento/validar", "destination": "/paginas/validar-certificado.html" },
-    { "source": "/:pagina", "destination": "/paginas/:pagina.html" }
+    { "source": "/documento/validar", "destination": "/paginas/validar-certificado" },
+    { "source": "/:pagina", "destination": "/paginas/:pagina" }
   ]
 }
