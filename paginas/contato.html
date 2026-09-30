@@ -621,8 +621,18 @@
         mensagensAssistente.append(respostaEl);
         mensagensAssistente.scrollTop = mensagensAssistente.scrollHeight;
 
-        const textoResposta = document.createTextNode("");
+        const textoResposta = document.createElement("span");
+        textoResposta.style.whiteSpace = "pre-line";
         let primeiroPedaco = true;
+
+        // Escapa o HTML e transforma o link da vaga (vindo da IA) em <a>. Só links internos de vaga viram <a>.
+        function comLinks(texto) {
+            return texto
+                .replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; })
+                .replace(/\/paginas\/oportunidade-detalhes\.html\?id=[0-9a-f-]{36}/gi, function (link) {
+                    return '<a href="' + link + '">Ver vaga</a>';
+                });
+        }
 
         await responderAssistente(pergunta, function (texto) {
             if (primeiroPedaco) {
@@ -630,7 +640,7 @@
                 primeiroPedaco = false;
             }
 
-            textoResposta.data = texto;
+            textoResposta.innerHTML = comLinks(texto);
             mensagensAssistente.scrollTop = mensagensAssistente.scrollHeight;
         });
 

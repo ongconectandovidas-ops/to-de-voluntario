@@ -10,6 +10,7 @@ const SYSTEM_PROMPT = "Você é o assistente virtual do site 'Tô de Voluntário
     "Responda em português do Brasil, em no máximo 3 frases, SOMENTE com base nos fatos abaixo. " +
     "Se a resposta não estiver nos fatos ou a pergunta fugir do assunto, diga que não sabe e indique o formulário da página Contato. " +
     "Texto simples, sem markdown nem asteriscos. Nunca invente recursos, prazos, documentos ou recibos. Nunca peça nem repita dados pessoais. " +
+    "\"ONG\", \"empresa\", \"organização\" e \"instituição\" são sinônimos no site: quando perguntarem por empresas ou organizações, liste as ONGs cadastradas pelo nome. " +
     "FATOS: " +
     "Doações: página Doações; pagamento por Pix (QR Code ou copia-e-cola) ou boleto. " +
     "Cadastro: menu 'Cadastre-se' > 'Sou voluntário(a)' ou 'Sou ONG/empresa'; o acesso é liberado logo após o cadastro, sem confirmar e-mail. CNPJ da ONG é opcional, mas se informado precisa ser válido. " +
@@ -45,7 +46,7 @@ async function contextoDoSite() {
 
     const [oportunidades, organizacoes] = await Promise.all([
         consultar("oportunidades?status=eq.aberta&order=criado_em.desc&limit=25" +
-            "&select=titulo,cidade,estado,modalidade,periodo,dias_atuacao,vagas_disponiveis,causas(nome),organizacoes(nome_fantasia)"),
+            "&select=id,titulo,cidade,estado,modalidade,periodo,dias_atuacao,vagas_disponiveis,causas(nome),organizacoes(nome_fantasia)"),
         consultar("organizacoes?order=criado_em.desc&limit=25&select=nome_fantasia,cidade,estado,descricao")
     ]);
 
@@ -55,6 +56,7 @@ async function contextoDoSite() {
         oportunidades_abertas: oportunidades.map(function (o) {
             return {
                 titulo: o.titulo,
+                link: "/paginas/oportunidade-detalhes.html?id=" + o.id,
                 ong: o.organizacoes && o.organizacoes.nome_fantasia,
                 causa: o.causas && o.causas.nome,
                 local: [o.cidade, o.estado].filter(Boolean).join("/") || undefined,
@@ -73,7 +75,7 @@ async function contextoDoSite() {
         })
     };
 
-    const texto = " DADOS ATUAIS DO SITE (JSON; use para perguntas sobre vagas e ONGs; se nada corresponder, diga que no momento não há): " +
+    const texto = " DADOS ATUAIS DO SITE (JSON; use para perguntas sobre vagas e ONGs; se nada corresponder, diga que no momento não há). FORMATO para vagas: responda APENAS uma linha por vaga, exatamente 'Título — link', copiando o campo link sem alterar, sem detalhes (local, vagas, período) a menos que perguntem. Nunca responda em JSON nem mostre nomes de campos. Para ONGs, liste só os nomes: " +
         JSON.stringify(dados);
 
     contextoCache = { ate: Date.now() + 60000, texto };
