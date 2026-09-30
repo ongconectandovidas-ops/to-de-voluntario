@@ -16,7 +16,7 @@ const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const fs = require("fs");
 const path = require("path");
 
-const LOGO = "data:image/png;base64," + fs.readFileSync(path.join(__dirname, "..", "assets", "img", "logo-certificado.png")).toString("base64");
+const LOGO = "data:image/png;base64," + fs.readFileSync(path.join(__dirname, "..", "assets", "img", "logo.png")).toString("base64");
 
 function esc(t) {
     return String(t == null ? "" : t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));

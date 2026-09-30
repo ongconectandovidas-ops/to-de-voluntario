@@ -4062,3 +4062,20 @@ body.modo-escuro .botoes button:not(.botao-doar):not(.botao-secundario) {
     text-decoration: underline;
     font-size: 0.9rem;
 }
+
+
+/* LOGO (navbar, rodapé) - fundo branco arredondado para ler bem sobre o azul */
+.logo-marca{
+    height: 40px;
+    width: 40px;
+    background: #fff;
+    border-radius: 50%;
+    padding: 2px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+.logo-rodape{
+    height: 56px;
+    width: 56px;
+}
