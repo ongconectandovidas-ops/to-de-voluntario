@@ -547,7 +547,10 @@
             : "Ainda não tenho uma resposta pronta para isso. Envie sua pergunta pelo formulário de contato que nossa equipe responde rapidinho.";
     }
 
-    async function responderAssistente(pergunta) {
+    // Resposta em streaming (texto puro): aoReceber(textoAteAgora) é chamado a cada pedaço.
+    async function responderAssistente(pergunta, aoReceber) {
+        let total = "";
+
         try {
             const resposta = await fetch("/api/duvida-ia", {
                 method: "POST",
@@ -555,17 +558,32 @@
                 body: JSON.stringify({ pergunta })
             });
 
-            const resultado = await resposta.json();
-
-            if (!resposta.ok || !resultado.resposta) {
-                console.warn("IA indisponível, usando FAQ:", resposta.status, resultado.erro);
-                return responderPorPalavraChave(pergunta);
+            if (!resposta.ok) {
+                const erro = await resposta.json().catch(function () { return {}; });
+                console.warn("IA indisponível, usando FAQ:", resposta.status, erro.erro);
+                aoReceber(responderPorPalavraChave(pergunta));
+                return;
             }
 
-            return resultado.resposta;
+            const leitor = resposta.body.getReader();
+            const decodificador = new TextDecoder();
+
+            for (;;) {
+                const { done, value } = await leitor.read();
+
+                if (done) {
+                    break;
+                }
+
+                total += decodificador.decode(value, { stream: true });
+                aoReceber(total);
+            }
         } catch (erro) {
             console.warn("IA indisponível, usando FAQ:", erro.message);
-            return responderPorPalavraChave(pergunta);
+        }
+
+        if (!total.trim()) {
+            aoReceber(responderPorPalavraChave(pergunta));
         }
     }
 
@@ -603,9 +621,19 @@
         mensagensAssistente.append(respostaEl);
         mensagensAssistente.scrollTop = mensagensAssistente.scrollHeight;
 
-        const resposta = await responderAssistente(pergunta);
+        const textoResposta = document.createTextNode("");
+        let primeiroPedaco = true;
 
-        digitando.replaceWith(resposta);
+        await responderAssistente(pergunta, function (texto) {
+            if (primeiroPedaco) {
+                digitando.replaceWith(textoResposta);
+                primeiroPedaco = false;
+            }
+
+            textoResposta.data = texto;
+            mensagensAssistente.scrollTop = mensagensAssistente.scrollHeight;
+        });
+
         campoPergunta.disabled = false;
         botaoPergunta.disabled = false;
         campoPergunta.focus();
