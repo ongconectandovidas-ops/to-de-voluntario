@@ -13,9 +13,26 @@ const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-function montarHtmlCertificado({ nomeVoluntario, tituloOportunidade, nomeOrganizacao, dataConclusao, codigo, urlValidacao }) {
-    const dataFormatada = new Date(dataConclusao).toLocaleDateString("pt-BR", { year: "numeric", month: "long", day: "numeric" });
+const fs = require("fs");
+const path = require("path");
 
+const LOGO = "data:image/png;base64," + fs.readFileSync(path.join(__dirname, "..", "assets", "img", "logo-certificado.png")).toString("base64");
+
+function esc(t) {
+    return String(t == null ? "" : t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+}
+
+function dataBr(d) {
+    // "YYYY-MM-DD" (coluna date) é exibido como está; timestamps convertem para o fuso de SP
+    if (/^\d{4}-\d{2}-\d{2}$/.test(d)) {
+        return d.split("-").reverse().join("/");
+    }
+
+    return new Date(d).toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
+}
+
+// Modelo oficial: moldura dourada dupla, título espaçado, logo no rodapé.
+function montarHtmlCertificado(d) {
     return `
     <!DOCTYPE html>
     <html lang="pt-BR">
@@ -23,52 +40,47 @@ function montarHtmlCertificado({ nomeVoluntario, tituloOportunidade, nomeOrganiz
         <meta charset="UTF-8">
         <style>
             @page { size: A4 landscape; margin: 0; }
-            body {
-                margin: 0;
-                font-family: Georgia, 'Times New Roman', serif;
-                width: 297mm;
-                height: 210mm;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: #fdfcf7;
-            }
-            .moldura {
-                width: 267mm;
-                height: 180mm;
-                border: 3px solid #0d6efd;
-                outline: 1px solid #0d6efd;
-                outline-offset: -10px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                padding: 20mm;
-                box-sizing: border-box;
-            }
-            .marca { font-size: 16px; letter-spacing: 2px; text-transform: uppercase; color: #0d6efd; font-weight: bold; }
-            h1 { font-size: 34px; margin: 10mm 0 4mm; color: #222; }
-            .nome { font-size: 30px; margin: 6mm 0; color: #0d6efd; font-weight: bold; border-bottom: 1px solid #ccc; padding-bottom: 4mm; }
-            .texto { font-size: 16px; color: #333; max-width: 200mm; line-height: 1.6; }
-            .rodape { margin-top: 12mm; font-size: 11px; color: #888; }
+            * { box-sizing: border-box; }
+            body { margin: 0; width: 297mm; height: 210mm; background: #fff; font-family: Georgia, 'Times New Roman', serif; color: #2b2b2b; position: relative; }
+            .moldura { position: absolute; inset: 12mm; border: 1.2mm solid #c9a24b; }
+            .moldura::after { content: ""; position: absolute; inset: 1.2mm; border: 0.3mm solid #c9a24b; }
+            .conteudo { position: absolute; inset: 12mm; text-align: center; padding: 22mm 16mm 0; }
+            h1 { font-size: 27px; font-weight: 400; letter-spacing: 6px; line-height: 1.8; margin: 0; text-transform: uppercase; }
+            .certificamos { font-family: Arial, sans-serif; font-size: 13px; margin-top: 20mm; }
+            .nome { font-size: 34px; text-transform: uppercase; margin-top: 12mm; font-weight: 400; }
+            .linha { width: 140mm; height: 0.4mm; margin: 4mm auto 8mm; background: linear-gradient(90deg, transparent, #c9803a, transparent); }
+            .texto { font-family: Arial, sans-serif; font-size: 14.5px; line-height: 1.55; }
+            .org { font-family: Arial, sans-serif; font-size: 14.5px; margin-top: 2mm; }
+            .rodape { position: absolute; left: 0; right: 0; bottom: 26mm; display: flex; justify-content: space-between; align-items: flex-start; padding: 0 22mm; }
+            .rodape > div { width: 70mm; font-family: Arial, sans-serif; font-size: 8px; letter-spacing: 2px; line-height: 1.8; text-transform: uppercase; }
+            .rodape img { width: 22mm; }
+            .assinatura { border-top: 0.3mm solid #999; padding-top: 2mm; }
         </style>
     </head>
     <body>
-        <div class="moldura">
-            <div class="marca">Tô de Voluntário</div>
-            <h1>Certificado de Participação</h1>
-            <div class="nome">${nomeVoluntario}</div>
-            <p class="texto">
-                Certificamos que ${nomeVoluntario} atuou como voluntário(a) na ação
-                <strong>"${tituloOportunidade}"</strong>, promovida por <strong>${nomeOrganizacao}</strong>,
-                concluída em ${dataFormatada}.
-            </p>
-            <div class="rodape">Código de verificação: ${codigo}<br>Valide em: ${urlValidacao}</div>
+        <div class="moldura"></div>
+        <div class="conteudo">
+            <h1>Certificado de Participação<br>em Trabalho Voluntário</h1>
+            <div class="certificamos">Certificamos que</div>
+            <div class="nome">${esc(d.nomeVoluntario)}</div>
+            <div class="linha"></div>
+            <div class="texto">
+                participou de atividades de trabalho voluntário junto à ${esc(d.nomeOrganizacao)}<br>
+                no período de ${dataBr(d.dataInicial)} a ${dataBr(d.dataFinal)},${d.horas ? " totalizando " + d.horas + " horas de trabalho voluntário," : ""}<br>realizando atividades relacionadas a ${esc(d.atividade)}.<br>
+                Certificamos a participação do(a) voluntário(a) nas atividades descritas neste documento,<br>
+                para fins de comprovação de sua atuação voluntária.
+            </div>
+            <div class="org">
+                Organização responsável: ${esc(d.nomeOrganizacao)} &nbsp;|&nbsp; CNPJ: ${esc(d.cnpj || "não informado")} &nbsp;|&nbsp; Cidade/UF: ${esc(d.cidade)}${d.estado ? " – " + esc(d.estado) : ""}
+            </div>
+        </div>
+        <div class="rodape">
+            <div class="assinatura">Responsável pela organização<br><br>${esc(d.responsavel)}</div>
+            <img src="${LOGO}">
+            <div>Data de emissão: ${dataBr(new Date())}<br>Código de verificação:<br>${esc(d.codigo)}<br><span style="letter-spacing:0;text-transform:none;word-break:break-all;display:block">Valide em: ${esc(d.urlValidacao)}</span></div>
         </div>
     </body>
-    </html>
-    `;
+    </html>`;
 }
 
 async function buscarUsuario(token) {
@@ -86,7 +98,7 @@ async function buscarUsuario(token) {
 async function buscarCandidatura(candidaturaId) {
     const resposta = await fetch(
         SUPABASE_URL + "/rest/v1/candidaturas?id=eq." + candidaturaId +
-        "&select=id,status,codigo_certificado,voluntario_id,atualizado_em,oportunidades(titulo,organizacoes(nome_fantasia)),voluntarios(perfis(nome,sobrenome))",
+        "&select=id,status,codigo_certificado,voluntario_id,criado_em,atualizado_em,data_inicio,data_fim,horas,oportunidades(titulo,organizacoes(nome_fantasia,cnpj,cidade,estado,perfis(nome,sobrenome))),voluntarios(perfis(nome,sobrenome))",
         { headers: { apikey: SUPABASE_SERVICE_ROLE_KEY, Authorization: "Bearer " + SUPABASE_SERVICE_ROLE_KEY } }
     );
 
@@ -158,11 +170,21 @@ module.exports = async function handler(req, res) {
 
     const perfil = (candidatura.voluntarios || {}).perfis || {};
 
+    const oportunidade = candidatura.oportunidades || {};
+    const org = oportunidade.organizacoes || {};
+    const resp = org.perfis || {};
+
     const html = montarHtmlCertificado({
         nomeVoluntario: (perfil.nome || "") + (perfil.sobrenome ? " " + perfil.sobrenome : ""),
-        tituloOportunidade: (candidatura.oportunidades || {}).titulo || "",
-        nomeOrganizacao: ((candidatura.oportunidades || {}).organizacoes || {}).nome_fantasia || "",
-        dataConclusao: candidatura.atualizado_em,
+        atividade: oportunidade.titulo || "",
+        nomeOrganizacao: org.nome_fantasia || "",
+        cnpj: org.cnpj,
+        cidade: org.cidade || "",
+        estado: org.estado,
+        responsavel: (resp.nome || "") + (resp.sobrenome ? " " + resp.sobrenome : ""),
+        dataInicial: candidatura.data_inicio || candidatura.criado_em,
+        dataFinal: candidatura.data_fim || candidatura.atualizado_em,
+        horas: candidatura.horas,
         codigo: candidatura.codigo_certificado,
         urlValidacao: (req.headers["x-forwarded-proto"] || "http") + "://" + req.headers.host + "/documento/validar?codigo=" + candidatura.codigo_certificado
     });

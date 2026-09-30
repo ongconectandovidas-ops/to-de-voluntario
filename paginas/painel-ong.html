@@ -325,6 +325,28 @@
     </div>
 </div>
 
+<!-- MODAL: CONCLUIR PARTICIPAÇÃO (período e horas alimentam o certificado) -->
+<div class="modal fade" id="modalConcluir" tabindex="-1" aria-labelledby="modalConcluirTitulo" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <form class="modal-content" id="formConcluir">
+            <div class="modal-header">
+                <h2 class="modal-title h5" id="modalConcluirTitulo">Concluir participação</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body d-grid gap-2">
+                <label for="concluirInicio">Primeiro dia de atuação</label>
+                <input type="date" class="form-control" id="concluirInicio" required>
+                <label for="concluirFim">Último dia de atuação</label>
+                <input type="date" class="form-control" id="concluirFim" required>
+                <label for="concluirHoras">Total de horas</label>
+                <input type="number" class="form-control" id="concluirHoras" min="1" step="1" required>
+                <p class="text-danger mb-0" id="concluirErro" role="alert"></p>
+                <button type="submit" class="btn btn-primary">Concluir e liberar certificado</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.4/dist/jspdf.plugin.autotable.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -697,9 +719,8 @@ function criarCardCandidatura(candidatura) {
 
         const botaoConcluir = document.createElement("button");
         botaoConcluir.textContent = "Concluir participação";
-        botaoConcluir.addEventListener("click", async function () {
-            await supabaseClient.from("candidaturas").update({ status: "concluida" }).eq("id", candidatura.id);
-            carregarCandidaturas();
+        botaoConcluir.addEventListener("click", function () {
+            abrirModalConcluir(candidatura);
         });
 
         botoes.appendChild(botaoConcluir);
@@ -708,6 +729,42 @@ function criarCardCandidatura(candidatura) {
 
     return card;
 }
+
+let candidaturaConcluindo = null;
+
+function abrirModalConcluir(candidatura) {
+    candidaturaConcluindo = candidatura;
+    document.getElementById("concluirInicio").value = String(candidatura.criado_em || "").slice(0, 10);
+    document.getElementById("concluirFim").value = new Date().toISOString().slice(0, 10);
+    document.getElementById("concluirHoras").value = "";
+    document.getElementById("concluirErro").textContent = "";
+    bootstrap.Modal.getOrCreateInstance(document.getElementById("modalConcluir")).show();
+}
+
+document.getElementById("formConcluir").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const inicio = document.getElementById("concluirInicio").value;
+    const fim = document.getElementById("concluirFim").value;
+    const horas = parseInt(document.getElementById("concluirHoras").value, 10);
+    const erro = document.getElementById("concluirErro");
+
+    if (fim < inicio) {
+        erro.textContent = "O último dia não pode ser anterior ao primeiro.";
+        return;
+    }
+
+    const { error } = await supabaseClient.from("candidaturas")
+        .update({ status: "concluida", data_inicio: inicio, data_fim: fim, horas: horas })
+        .eq("id", candidaturaConcluindo.id);
+
+    if (error) {
+        erro.textContent = "Não foi possível concluir: " + error.message;
+        return;
+    }
+
+    bootstrap.Modal.getInstance(document.getElementById("modalConcluir")).hide();
+    carregarCandidaturas();
+});
 
 let candidaturasFiltradas = [];
 const CHAVE_FILTROS = "filtrosCandidaturas";
