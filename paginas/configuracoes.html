@@ -763,7 +763,10 @@ async function carregarMinhasOportunidades(voluntarioId) {
         .eq("id", usuarioId)
         .single();
 
+    // Conta no Auth sem linha em "perfis" (ex.: banco recriado): não deixa travado em "Carregando...".
     if (!perfil) {
+        document.getElementById("perfilNomeTopo").textContent = sessaoData.session.user.email;
+        document.getElementById("perfilSubtitulo").textContent = "Perfil não encontrado. Fale com o suporte.";
         return;
     }
 
