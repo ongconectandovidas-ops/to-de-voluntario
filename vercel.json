@@ -1,5 +1,8 @@
 {
   "cleanUrls": true,
+  "functions": {
+    "api/gerar-certificado.js": { "includeFiles": "assets/img/logo.png", "maxDuration": 30 }
+  },
   "redirects": [
     { "source": "/paginas/:pagina.html", "destination": "/:pagina", "permanent": true },
     { "source": "/paginas/:pagina", "destination": "/:pagina", "permanent": true }

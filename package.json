@@ -2,7 +2,8 @@
   "name": "to-de-voluntario",
   "private": true,
   "dependencies": {
+    "@sparticuz/chromium": "153.0.0",
     "nodemailer": "^9.0.5",
-    "puppeteer": "^25.11.0"
+    "puppeteer-core": "25.11.0"
   }
 }

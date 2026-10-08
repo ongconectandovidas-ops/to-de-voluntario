@@ -3,11 +3,12 @@
 // da candidatura, E a candidatura está com status "concluida" (a ONG marca isso no painel dela).
 // Ninguém edita o conteúdo do certificado - vem todo do banco.
 //
-// ponytail: usa "puppeteer" (Chromium embutido) - funciona local e em qualquer host Node normal.
-// Na Vercel (serverless, limite de tamanho de function) troque para "puppeteer-core" +
-// "@sparticuz/chromium" quando for para produção lá.
+// Na Vercel usa o Chromium do "@sparticuz/chromium" (o "puppeteer" normal não traz o Chrome
+// para dentro da function e derrubava ela no load: FUNCTION_INVOCATION_FAILED).
+// Local usa o Google Chrome instalado na máquina (ou CHROME_PATH).
+// ponytail: versões casadas - puppeteer-core 25.11.0 <-> @sparticuz/chromium 153 (Chrome 153).
 
-const puppeteer = require("puppeteer");
+const puppeteer = require("puppeteer-core");
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
@@ -110,6 +111,18 @@ async function buscarCandidatura(candidaturaId) {
     return linhas[0] || null;
 }
 
+async function abrirNavegador() {
+    if (process.env.VERCEL) {
+        const chromium = require("@sparticuz/chromium");
+        return puppeteer.launch({ args: chromium.args, executablePath: await chromium.executablePath(), headless: true });
+    }
+
+    // CHROME_PATH no .env se o Chrome/Edge não estiver no caminho padrão.
+    return puppeteer.launch(process.env.CHROME_PATH
+        ? { executablePath: process.env.CHROME_PATH, headless: true }
+        : { channel: "chrome", headless: true });
+}
+
 module.exports = async function handler(req, res) {
     if (req.method !== "POST") {
         res.status(405).json({ erro: "Método não permitido" });
@@ -192,7 +205,7 @@ module.exports = async function handler(req, res) {
     let navegador;
 
     try {
-        navegador = await puppeteer.launch({ headless: true, args: ["--no-sandbox"] });
+        navegador = await abrirNavegador();
         const pagina = await navegador.newPage();
         await pagina.setContent(html, { waitUntil: "networkidle0" });
         const pdf = await pagina.pdf({ format: "A4", landscape: true, printBackground: true });
