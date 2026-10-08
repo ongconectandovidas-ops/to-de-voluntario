@@ -309,15 +309,17 @@
 
     </div>
 
-    <div class="newsletter-form">
+    <form class="newsletter-form" id="formNewsletter">
 
-        <input type="email" placeholder="Digite seu e-mail">
+        <input type="email" id="newsletterEmail" placeholder="Digite seu e-mail" required aria-label="Seu e-mail">
 
-        <button>
+        <button type="submit">
             Quero receber
         </button>
 
-    </div>
+        <div id="mensagemNewsletter" class="w-100" role="status" aria-live="polite"></div>
+
+    </form>
 
 </section>
     <!-- RODAPÉ -->
@@ -377,5 +379,43 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="../assets/js/supabase-client.js"></script>
 <script src="../assets/js/acessibilidade.js"></script>
+<script>
+    // Newsletter -> mensagens_contato (assunto "Newsletter"); admin já vê no painel.
+    // ponytail: reaproveita mensagens_contato; criar tabela própria se precisar de descadastro/dedup.
+    document.getElementById("formNewsletter").addEventListener("submit", async function (evento) {
+        evento.preventDefault();
+
+        const email = document.getElementById("newsletterEmail").value.trim();
+        const aviso = document.getElementById("mensagemNewsletter");
+        const botao = this.querySelector("button");
+
+        function mostrar(texto, tipo) {
+            aviso.textContent = texto;
+            aviso.className = "w-100 mb-0 alert alert-" + tipo;
+        }
+
+        if (!supabaseClient) {
+            mostrar("Cadastro indisponível no momento.", "danger");
+            return;
+        }
+
+        botao.disabled = true;
+        const { error } = await supabaseClient.from("mensagens_contato").insert({
+            nome: email.split("@")[0],
+            email,
+            assunto: "Newsletter",
+            mensagem: "Quero receber novas oportunidades por e-mail."
+        });
+        botao.disabled = false;
+
+        if (error) {
+            mostrar("Não foi possível cadastrar: " + error.message, "danger");
+            return;
+        }
+
+        mostrar("Pronto! Você receberá novas oportunidades no seu e-mail.", "success");
+        this.reset();
+    });
+</script>
 </body>
 </html>
