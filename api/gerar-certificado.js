@@ -8,7 +8,7 @@
 // Local usa o Google Chrome instalado na máquina (ou CHROME_PATH).
 // ponytail: versões casadas - puppeteer-core 25.11.0 <-> @sparticuz/chromium 153 (Chrome 153).
 
-const puppeteer = require("puppeteer-core");
+// puppeteer-core e @sparticuz/chromium são ESM: require() deles quebra na Vercel (ERR_REQUIRE_ESM).
 
 const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
@@ -112,8 +112,10 @@ async function buscarCandidatura(candidaturaId) {
 }
 
 async function abrirNavegador() {
+    const puppeteer = (await import("puppeteer-core")).default;
+
     if (process.env.VERCEL) {
-        const chromium = require("@sparticuz/chromium");
+        const chromium = (await import("@sparticuz/chromium")).default;
         return puppeteer.launch({ args: chromium.args, executablePath: await chromium.executablePath(), headless: true });
     }
 
